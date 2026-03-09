@@ -10,19 +10,49 @@ const featuredPosts = (await getCollection('writing'))
   .slice(0, 3);
 
 const metrics = [
-  { value: '10+', label: 'Years Experience' },
-  { value: '50+', label: 'Data Pipelines' },
-  { value: '5', label: 'Open Source Projects' },
+  { value: '10+', label: 'Years in Engineering & Analytics' },
+  { value: '50+', label: 'Data Pipelines Shipped' },
+  { value: '3', label: 'Open Source Packages' },
+];
+
+const beliefs = [
+  {
+    title: 'Small Teams, Outsized Impact',
+    description:
+      'The best work comes from small, focused teams with full ownership. I build groups where every person is a force multiplier — not a cog.',
+  },
+  {
+    title: 'AI as a Core Competency',
+    description:
+      'AI coding agents, LLM-augmented workflows, and automated pipelines aren\'t nice-to-haves — they\'re how modern teams ship faster with fewer people.',
+  },
+  {
+    title: 'Autonomy Over Process',
+    description:
+      'I hire people I trust and give them room to run. Clear goals, short feedback loops, and the freedom to choose how to get there.',
+  },
+  {
+    title: 'Data as Infrastructure',
+    description:
+      'Reliable data platforms are the foundation. I\'ve built and led teams that treat data quality, observability, and reproducibility as first-class concerns.',
+  },
 ];
 ---
 
 <BaseLayout title="Joe Saia — Engineering and Analytics Leader">
+  <!-- Hero -->
   <section class="mb-16">
     <h1 class="text-4xl font-bold tracking-tight mb-4">
-      Engineering and Analytics Leader
+      I build small teams that punch above their weight.
     </h1>
-    <p class="text-xl text-gray-600 leading-relaxed mb-8">
-      I've been writing code, building data platforms, and leading analytics teams for over a decade.
+    <p class="text-xl text-gray-600 leading-relaxed mb-4">
+      Engineering and analytics leader with over a decade of experience building data platforms,
+      shipping production systems, and leading highly autonomous teams that leverage AI to move
+      fast with fewer people.
+    </p>
+    <p class="text-lg text-gray-500 leading-relaxed mb-8">
+      I focus on hiring sharp people, giving them real ownership, and using modern tooling —
+      including AI coding agents — to let a team of five do the work of fifteen.
     </p>
     <div class="flex flex-wrap gap-4">
       <a
@@ -42,11 +72,27 @@ const metrics = [
 
   <ProofBar metrics={metrics} />
 
+  <!-- What I Believe -->
+  <section class="mt-16">
+    <h2 class="text-xl font-semibold mb-8">What I Believe</h2>
+    <div class="grid gap-8 sm:grid-cols-2">
+      {beliefs.map((belief) => (
+        <div>
+          <h3 class="font-medium mb-2">{belief.title}</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">{belief.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Writing -->
   {featuredPosts.length > 0 && (
     <section class="mt-16">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-xl font-semibold">Featured Writing</h2>
-        <a href="/writing/" class="text-sm text-gray-500 hover:text-gray-900">View all →</a>
+        <a href="/writing/" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+          View all →
+        </a>
       </div>
       <div class="space-y-8">
         {featuredPosts.map((post) => (
@@ -61,4 +107,25 @@ const metrics = [
       </div>
     </section>
   )}
+
+  <!-- CTA -->
+  <section class="mt-16 border-t border-gray-100 pt-12">
+    <p class="text-gray-600 mb-4">
+      Looking for a leader who builds lean, AI-fluent engineering teams?
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a
+        href="/contact/"
+        class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors"
+      >
+        Let's Talk
+      </a>
+      <a
+        href="/projects/"
+        class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded hover:border-gray-400 transition-colors"
+      >
+        View Projects
+      </a>
+    </div>
+  </section>
 </BaseLayout>
