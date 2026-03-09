@@ -1,0 +1,23 @@
+{
+  "name": "temp-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "post:new": "node scripts/create-post.mjs",
+    "test": "node --test",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name joesaia-com --branch main",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.6",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "wrangler": "^4.71.0"
+  }
+}
