@@ -10,7 +10,7 @@ const { post } = Astro.props;
 const { title, date, summary, tags } = post.data;
 ---
 
-<BaseLayout title={title} description={summary}>
+<BaseLayout title={title} description={summary} type="article">
   <article class="prose prose-gray max-w-none">
     <header class="mb-8 not-prose">
       <time class="text-sm text-gray-500" datetime={date.toISOString()}>
