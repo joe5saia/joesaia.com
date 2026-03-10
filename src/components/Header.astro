@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname;
 <header
   class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100"
 >
-  <nav class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
+  <nav aria-label="Primary" class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="font-semibold text-lg tracking-tight">Joe Saia</a>
 
     <ul class="hidden md:flex items-center gap-6">
@@ -21,6 +21,7 @@ const currentPath = Astro.url.pathname;
           <li>
             <a
               href={item.href}
+              aria-current={currentPath === item.href ? "page" : undefined}
               class:list={[
                 "text-sm transition-colors",
                 currentPath === item.href
@@ -37,14 +38,19 @@ const currentPath = Astro.url.pathname;
 
     <button
       id="mobile-menu-toggle"
+      type="button"
       class="md:hidden p-2 -mr-2"
       aria-label="Toggle menu"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
     >
       <svg
         class="w-5 h-5"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
+        focusable="false"
       >
         <path
           stroke-linecap="round"
@@ -55,13 +61,14 @@ const currentPath = Astro.url.pathname;
     </button>
   </nav>
 
-  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100">
+  <div id="mobile-menu" hidden class="md:hidden border-t border-gray-100">
     <ul class="px-6 py-4 space-y-3">
       {
         navItems.map((item) => (
           <li>
             <a
               href={item.href}
+              aria-current={currentPath === item.href ? "page" : undefined}
               class:list={[
                 "block text-sm",
                 currentPath === item.href
@@ -79,10 +86,39 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-  const toggle = document.getElementById("mobile-menu-toggle");
-  const menu = document.getElementById("mobile-menu");
+  const toggle = document.getElementById(
+    "mobile-menu-toggle",
+  ) as HTMLButtonElement | null;
+  const menu = document.getElementById("mobile-menu") as HTMLElement | null;
+
+  function openMenu() {
+    if (!menu || !toggle) return;
+    menu.hidden = false;
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
+    const firstLink = menu.querySelector<HTMLAnchorElement>("a");
+    firstLink?.focus();
+  }
+
+  function closeMenu() {
+    if (!menu || !toggle) return;
+    menu.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Toggle menu");
+    toggle.focus();
+  }
 
   toggle?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
+    if (menu?.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu && !menu.hidden) {
+      closeMenu();
+    }
   });
 </script>
