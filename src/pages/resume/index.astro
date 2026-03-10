@@ -3,95 +3,167 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Resume — Joe Saia">
-  <h1 class="text-3xl font-bold mb-4">Resume</h1>
-  <p class="text-gray-600 mb-8">
-    Over a decade of building data platforms, shipping production systems, and
-    leading lean engineering teams that use AI and automation to move fast with
-    fewer people.
-  </p>
-
-  <div class="border border-gray-200 rounded-lg p-8 text-center">
-    <div class="mb-6">
-      <svg
-        class="w-16 h-16 mx-auto text-gray-300"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
+  <!-- Download bar -->
+  <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+    <h1 class="text-3xl font-bold">Resume</h1>
+    <div class="flex gap-3">
+      <a
+        href="/joe_saia_resume.pdf"
+        download
+        class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1"
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-        ></path>
-      </svg>
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        PDF
+      </a>
+      <a
+        href="/Joe Saia Engineering Leader Resume.docx"
+        download
+        class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded hover:bg-gray-50 transition-colors"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        DOCX
+      </a>
     </div>
-    <h2 class="text-lg font-medium mb-2">Resume.pdf</h2>
-    <p class="text-sm text-gray-500 mb-6">Updated December 2025</p>
-    <a
-      href="/joe_saia_resume.pdf"
-      download
-      class="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-medium rounded hover:bg-gray-800 transition-colors"
-    >
-      <svg
-        class="w-5 h-5 mr-2"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-        ></path>
-      </svg>
-      Download Resume
-    </a>
   </div>
 
-  <section class="mt-12">
-    <h2 class="text-xl font-semibold mb-6">Leadership Highlights</h2>
-    <ul class="space-y-4 text-gray-600">
-      <li class="flex items-start gap-3">
-        <span class="text-gray-300 mt-1">•</span>
-        <span
-          >Transformed legacy team which used waterfall development dressed up
-          as Scrum agile into a truely agile, high-agency team that was able to
-          respond to customer pain points immediately</span
-        >
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="text-gray-300 mt-1">•</span>
-        <span
-          >Drove adoption of AI coding agents and LLM-augmented workflows to
-          multiply team output, and allow focus on the actual hard problems at
-          hand</span
-        >
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="text-gray-300 mt-1">•</span>
-        <span
-          >Designed scalable data platforms with data quality, observability,
-          and reproducibility as first-class concerns</span
-        >
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="text-gray-300 mt-1">•</span>
-        <span
-          >Stood up modern data stack pipelines using Fivetran, Snowflake and
-          Sigma to let business leaders drive their insights without needing to
-          including data analysts or engineers for every question
-        </span>
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="text-gray-300 mt-1">•</span>
-        <span
-          >Designed and implemented measurable business operations workflows
-          using Salesforce and homegrown data services to allow for
-          experimentation, measurement and continous improvement
-        </span>
-      </li>
-    </ul>
-  </section>
+  <!-- Inline resume -->
+  <article class="prose prose-gray max-w-none">
+    <!-- Header -->
+    <div class="not-prose text-center border-b border-gray-200 pb-6 mb-8">
+      <h2 class="text-2xl font-bold tracking-tight uppercase">Joe Saia</h2>
+      <p class="text-gray-600 font-medium mt-1">Engineering Leader &amp; PhD Economist</p>
+      <p class="text-sm text-gray-500 mt-2">
+        West Orange, NJ · 518-530-8318 ·
+        <a href="mailto:joe5saia@gmail.com" class="underline hover:text-gray-900">joe5saia@gmail.com</a>
+      </p>
+      <p class="text-sm text-gray-500 mt-1">
+        <a href="https://github.com/joe5saia" class="underline hover:text-gray-900">github.com/joe5saia</a> ·
+        <a href="https://linkedin.com/in/joe-saia" class="underline hover:text-gray-900">linkedin.com/in/joe-saia</a> ·
+        <a href="https://joesaia.com" class="underline hover:text-gray-900">joesaia.com</a>
+      </p>
+    </div>
+
+    <!-- Summary -->
+    <p>
+      Engineering and analytics leader with 10+ years building data platforms,
+      production systems, and high-autonomy teams. Specializes in hiring and
+      developing high-agency team members and using AI tooling to deliver
+      outsized business impact.
+    </p>
+
+    <!-- Experience -->
+    <h2>Experience</h2>
+
+    <div class="not-prose space-y-8">
+      <!-- Rhythm – VP -->
+      <div>
+        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+          <h3 class="text-base font-semibold">Rhythm Management Group · VP of Engineering</h3>
+          <span class="text-sm text-gray-500 shrink-0">Apr 2025 – Mar 2026</span>
+        </div>
+        <ul class="mt-2 space-y-1 text-gray-700 text-[0.95rem] list-disc pl-5">
+          <li>Reporting to the CEO, built and led a 26-person org spanning product engineering, platform engineering, QA, IT, and Salesforce analysts</li>
+          <li>Co-owned the BI stack (Snowflake + Fivetran + Sigma) with VP of Finance; moved executive reporting to self-serve dashboards and established source-of-truth metrics</li>
+          <li>Implemented Salesforce Omnichannel routing; measured a 35% productivity lift</li>
+          <li>Hands-on contributor averaging 2–5 production PRs per week: built Python ETL for claims data into Salesforce and Snowflake, automating reconciliation and enabling claims funnel measurement</li>
+        </ul>
+      </div>
+
+      <!-- Rhythm – Director -->
+      <div>
+        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+          <h3 class="text-base font-semibold">Rhythm Management Group · Director of Engineering</h3>
+          <span class="text-sm text-gray-500 shrink-0">May 2024 – Apr 2025</span>
+        </div>
+        <ul class="mt-2 space-y-1 text-gray-700 text-[0.95rem] list-disc pl-5">
+          <li>Transformed a waterfall-in-disguise team into a high-agency agile org that shipped against customer pain points in days, not quarters</li>
+          <li>Drove 99%+ uptime, moved releases from quarterly to bi-weekly, and consolidated backend services for 30% lower cloud spend</li>
+          <li>Insourced key IT functions to improve reliability, security posture, and data governance</li>
+        </ul>
+      </div>
+
+      <!-- Perry – Senior Manager -->
+      <div>
+        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+          <h3 class="text-base font-semibold">Perry Health · Senior Manager of Data and Engineering</h3>
+          <span class="text-sm text-gray-500 shrink-0">May 2022 – May 2024</span>
+        </div>
+        <ul class="mt-2 space-y-1 text-gray-700 text-[0.95rem] list-disc pl-5">
+          <li>Reporting to the COO, owned the EHR web app and data infrastructure using Python and React; led a cross-functional team of engineers and data scientists across NY and EU</li>
+          <li>Built acquisition-to-enrollment funnel (Rudderstack, GA4, Tableau), instrumented events, and ran A/B tests to improve conversion</li>
+          <li>Built claims processing pipeline managing $1.5M per year enabling a two-person team; maintained industry-leading 74% collections rate</li>
+          <li>Shipped data integrations (Abbott, Dexcom, SureScripts) to improve clinical decision-making</li>
+        </ul>
+      </div>
+
+      <!-- Perry – Data Scientist -->
+      <div>
+        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+          <h3 class="text-base font-semibold">Perry Health · Data Scientist</h3>
+          <span class="text-sm text-gray-500 shrink-0">Dec 2021 – May 2022</span>
+        </div>
+        <ul class="mt-2 space-y-1 text-gray-700 text-[0.95rem] list-disc pl-5">
+          <li>Migrated Python ETLs to Fivetran and dbt SQL on Redshift, enabling faster iteration</li>
+          <li>Maintained comprehensive company-wide reporting on all business aspects using Looker, driving data-informed decision-making supporting $35 million Series A</li>
+        </ul>
+      </div>
+
+      <!-- Revelio Labs -->
+      <div>
+        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+          <h3 class="text-base font-semibold">Revelio Labs · Machine Learning Engineer</h3>
+          <span class="text-sm text-gray-500 shrink-0">May 2021 – Dec 2021</span>
+        </div>
+        <ul class="mt-2 space-y-1 text-gray-700 text-[0.95rem] list-disc pl-5">
+          <li>Engineered AWS EMR + PySpark pipeline to process one million LinkedIn profiles daily</li>
+          <li>Trained ensemble model to standardize employer names across the full universe of LinkedIn profiles</li>
+        </ul>
+      </div>
+
+      <!-- Federal Reserve -->
+      <div>
+        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+          <h3 class="text-base font-semibold">Federal Reserve Board of Governors · Senior Research Assistant</h3>
+          <span class="text-sm text-gray-500 shrink-0">Oct 2014 – Jul 2016</span>
+        </div>
+        <ul class="mt-2 space-y-1 text-gray-700 text-[0.95rem] list-disc pl-5">
+          <li>Designed 45 TB data lake housing NYSE exchange data augmented with internally developed indicators</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <h2>Education</h2>
+
+    <div class="not-prose space-y-3">
+      <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+        <p class="font-semibold text-[0.95rem]">PhD Economics · Columbia University</p>
+        <span class="text-sm text-gray-500 shrink-0">Aug 2016 – May 2021</span>
+      </div>
+      <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+        <p class="font-semibold text-[0.95rem]">MSc Economics · University College London</p>
+        <span class="text-sm text-gray-500 shrink-0">Sep 2013 – Sep 2014</span>
+      </div>
+      <div class="flex flex-wrap justify-between items-baseline gap-x-4">
+        <p class="font-semibold text-[0.95rem]">BS Physics and Economics · Rensselaer Polytechnic Institute</p>
+        <span class="text-sm text-gray-500 shrink-0">Aug 2009 – May 2013</span>
+      </div>
+    </div>
+
+    <!-- Technical Skills -->
+    <h2>Technical Skills</h2>
+
+    <div class="not-prose space-y-2 text-[0.95rem] text-gray-700">
+      <p><span class="font-semibold text-gray-900">Languages:</span> SQL, Python, R, Julia, Golang, TypeScript, Node.js, React</p>
+      <p><span class="font-semibold text-gray-900">Experimentation &amp; Inference:</span> A/B test design, power analysis, CUPED, stratification, uplift modeling, DML, causal forests</p>
+      <p><span class="font-semibold text-gray-900">AI Tools:</span> Claude Code, Codex, Amp, GitHub Copilot, Pi</p>
+      <p><span class="font-semibold text-gray-900">Data Platforms:</span> Snowflake, Redshift, dbt, Fivetran, AWS EMR, Spark, Lambda</p>
+      <p><span class="font-semibold text-gray-900">Visualization &amp; BI:</span> Tableau, Looker, Sigma, executive storytelling and self-serve dashboards</p>
+      <p><span class="font-semibold text-gray-900">Event &amp; Funnel Analytics:</span> attribution, conversion, retention, Google Analytics (GA4)</p>
+    </div>
+  </article>
 </BaseLayout>
