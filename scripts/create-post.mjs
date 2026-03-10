@@ -48,7 +48,7 @@ export function slugify(title) {
  * @returns {string}
  */
 export function escapeYamlString(value) {
-  return value.replace(/"/g, "\\\"");
+  return value.replace(/"/g, '\\"');
 }
 
 /**
@@ -198,7 +198,7 @@ export async function writePostFile(filePath, content) {
     await fs.writeFile(filePath, content, { encoding: "utf8", flag: "wx" });
   } catch (error) {
     if (error && error.code === "EEXIST") {
-      throw new Error(`File already exists: ${filePath}`);
+      throw new Error(`File already exists: ${filePath}`, { cause: error });
     }
 
     throw error;

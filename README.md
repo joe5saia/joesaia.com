@@ -15,15 +15,15 @@ Open [http://localhost:4321](http://localhost:4321)
 
 ## Commands
 
-| Command             | Action                                        |
-| :------------------ | :-------------------------------------------- |
-| `npm run dev`       | Start dev server                              |
-| `npm run build`     | Build for production (`dist/`)                |
-| `npm run preview`   | Preview production build locally              |
-| `npm run post:new`  | Scaffold a new blog post                      |
-| `npm test`          | Run unit tests                                |
-| `make clean`        | Remove build artifacts (`dist/`, `.astro/`)   |
-| `make lint`         | Type-check with `astro check`                 |
+| Command            | Action                                      |
+| :----------------- | :------------------------------------------ |
+| `npm run dev`      | Start dev server                            |
+| `npm run build`    | Build for production (`dist/`)              |
+| `npm run preview`  | Preview production build locally            |
+| `npm run post:new` | Scaffold a new blog post                    |
+| `npm test`         | Run unit tests                              |
+| `make clean`       | Remove build artifacts (`dist/`, `.astro/`) |
+| `make lint`        | Type-check with `astro check`               |
 
 A `Makefile` wraps all npm scripts for convenience — run `make <target>` as a shortcut.
 
@@ -66,7 +66,6 @@ summary: "Brief description."
 tags: ["Tag1", "Tag2"]
 featured: true
 ---
-
 Post content here...
 ```
 
@@ -84,7 +83,6 @@ highlights:
   - "Key feature or impact"
   - "Another highlight"
 ---
-
 Optional description...
 ```
 

@@ -38,6 +38,7 @@ public/             # Static assets (resume PDF, favicon.svg, robots.txt)
 ### Writing (`src/content/writing/`)
 
 Frontmatter schema:
+
 ```yaml
 title: string (required)
 date: date (required)
@@ -50,6 +51,7 @@ canonical: string (optional)
 ### Projects (`src/content/projects/`)
 
 Frontmatter schema:
+
 ```yaml
 name: string (required)
 type: string (required)

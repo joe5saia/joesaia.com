@@ -17,12 +17,11 @@ Managing updates is a universal pain point for technology teams. Each dependency
 **Package Resolution**
 We've all tried to install the latest version of a new package for some new feature, but its dependency conflicts with another dependency that has not yet been updated. Your application can only move as fast as your slowest dependency.
 
-An alternative that I am interested to see if it will gain traction is the idea of publishing specs that then a LLM can write the code for. 
-
+An alternative that I am interested to see if it will gain traction is the idea of publishing specs that then a LLM can write the code for.
 
 ## Benefits
 
-* Only need to pull in the exact functionality that you need
-* Your code is fully visible locally
-* The exact implementation of your dependency 
-* Minimal implementation for what your application needs; no more, no less
+- Only need to pull in the exact functionality that you need
+- Your code is fully visible locally
+- The exact implementation of your dependency
+- Minimal implementation for what your application needs; no more, no less

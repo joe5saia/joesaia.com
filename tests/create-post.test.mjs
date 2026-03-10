@@ -55,6 +55,6 @@ test("writePostFile writes content and blocks overwrite", async () => {
 
   await assert.rejects(
     () => writePostFile(filePath, content),
-    /already exists/
+    /already exists/,
   );
 });

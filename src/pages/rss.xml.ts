@@ -1,15 +1,16 @@
-import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
-import type { APIContext } from 'astro';
+import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
+import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
-  const posts = (await getCollection('writing')).sort(
+  const posts = (await getCollection("writing")).sort(
     (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
   );
 
   return rss({
-    title: 'Joe Saia — Writing',
-    description: 'Musings on data engineering, analytics, leadership, and technology.',
+    title: "Joe Saia — Writing",
+    description:
+      "Musings on data engineering, analytics, leadership, and technology.",
     site: context.site!,
     items: posts.map((post) => ({
       title: post.data.title,
