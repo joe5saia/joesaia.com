@@ -4,7 +4,7 @@ type: "MCP Server"
 stack: ["Python"]
 repo: "https://github.com/joe5saia/nyt-mcp"
 highlights:
-  - "MCP implemantion of NY Times APIs"
+  - "MCP implementation of NY Times APIs"
   - "Allows Claude and Codex to use the NY Times API"
 ---
 
