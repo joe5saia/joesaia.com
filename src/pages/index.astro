@@ -1,13 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProofBar from "../components/ProofBar.astro";
-import PostCard from "../components/PostCard.astro";
-import { getCollection } from "astro:content";
-
-const featuredPosts = (await getCollection("writing"))
-  .filter((post) => post.data.featured)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
 
 const metrics = [{ value: "10+", label: "Years in Engineering & Analytics" }];
 
@@ -85,34 +78,6 @@ const beliefs = [
       }
     </div>
   </section>
-
-  <!-- Featured Writing -->
-  {
-    featuredPosts.length > 0 && (
-      <section class="mt-16">
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-xl font-semibold">Featured Writing</h2>
-          <a
-            href="/writing/"
-            class="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-          >
-            View all →
-          </a>
-        </div>
-        <div class="space-y-8">
-          {featuredPosts.map((post) => (
-            <PostCard
-              title={post.data.title}
-              date={post.data.date}
-              summary={post.data.summary}
-              slug={post.slug}
-              featured={post.data.featured}
-            />
-          ))}
-        </div>
-      </section>
-    )
-  }
 
   <!-- CTA -->
   <section class="mt-16 border-t border-gray-100 pt-12">
