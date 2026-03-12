@@ -11,17 +11,17 @@ const { name, type, stack, repo, highlights } = Astro.props;
 ---
 
 <article
-  class="border border-gray-100 rounded-lg p-6 hover:border-gray-200 transition-colors"
+  class="border border-border rounded-lg p-6 hover:border-border-hover transition-colors"
 >
   <div class="flex items-start justify-between gap-4">
     <div>
-      <span class="text-xs text-gray-500 uppercase tracking-wide">{type}</span>
-      <h3 class="text-lg font-medium mt-1">{name}</h3>
+      <span class="text-xs text-accent uppercase tracking-wide">{type}</span>
+      <h3 class="text-lg font-medium mt-1 text-text-heading">{name}</h3>
     </div>
     <div class="flex gap-1">
       {
         stack.map((tech) => (
-          <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">
+          <span class="px-2 py-0.5 bg-accent-subtle text-accent text-xs rounded">
             {tech}
           </span>
         ))
@@ -32,8 +32,8 @@ const { name, type, stack, repo, highlights } = Astro.props;
   <ul class="mt-4 space-y-1">
     {
       highlights.map((highlight) => (
-        <li class="text-sm text-gray-600 flex items-start gap-2">
-          <span class="text-gray-300 mt-1">•</span>
+        <li class="text-sm text-text-secondary flex items-start gap-2">
+          <span class="text-text-muted mt-1">•</span>
           <span>{highlight}</span>
         </li>
       ))
@@ -45,7 +45,7 @@ const { name, type, stack, repo, highlights } = Astro.props;
     target="_blank"
     rel="noopener noreferrer"
     aria-label={`View ${name} on GitHub`}
-    class="inline-flex items-center gap-1 mt-4 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+    class="inline-flex items-center gap-1 mt-4 text-sm text-accent hover:text-accent-hover transition-colors"
   >
     View on GitHub
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">

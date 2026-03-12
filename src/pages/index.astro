@@ -31,29 +31,29 @@ const beliefs = [
 <BaseLayout title="Joe Saia — Engineering and Analytics Leader">
   <!-- Hero -->
   <section class="mb-16">
-    <h1 class="text-4xl font-bold tracking-tight mb-4">
+    <h1 class="text-4xl font-bold tracking-tight mb-4 text-text-heading">
       I build small teams that punch above their weight.
     </h1>
-    <p class="text-xl text-gray-600 leading-relaxed mb-4">
+    <p class="text-xl text-text-secondary leading-relaxed mb-4">
       Engineering and analytics leader with over a decade of experience building
       data platforms, shipping production systems, and leading highly autonomous
       teams that use AI to build leverage in order to move faster and
       efficiently.
     </p>
-    <p class="text-lg text-gray-500 leading-relaxed mb-8">
+    <p class="text-lg text-text-secondary leading-relaxed mb-8">
       I focus on hiring sharp people, giving them real ownership, and using
       modern tooling — including AI coding agents — to make org-wide impacts.
     </p>
     <div class="flex flex-wrap gap-4">
       <a
         href="/joe_saia_resume.pdf"
-        class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors"
+        class="inline-flex items-center px-4 py-2 bg-btn-bg text-text-heading text-sm font-medium rounded hover:bg-btn-bg-hover transition-colors"
       >
         Download Resume
       </a>
       <a
         href="/contact/"
-        class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded hover:border-gray-400 transition-colors"
+        class="inline-flex items-center px-4 py-2 border border-border text-sm font-medium rounded hover:border-border-hover transition-colors"
       >
         Get in Touch
       </a>
@@ -64,13 +64,13 @@ const beliefs = [
 
   <!-- What I Believe -->
   <section class="mt-16">
-    <h2 class="text-xl font-semibold mb-8">What I Believe</h2>
+    <h2 class="text-xl font-semibold mb-8 text-text-heading">What I Believe</h2>
     <div class="grid gap-8 sm:grid-cols-2">
       {
         beliefs.map((belief) => (
           <div>
-            <h3 class="font-medium mb-2">{belief.title}</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
+            <h3 class="font-medium mb-2 text-text-heading">{belief.title}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">
               {belief.description}
             </p>
           </div>
@@ -80,20 +80,20 @@ const beliefs = [
   </section>
 
   <!-- CTA -->
-  <section class="mt-16 border-t border-gray-100 pt-12">
-    <p class="text-gray-600 mb-4">
+  <section class="mt-16 border-t border-border pt-12">
+    <p class="text-text-secondary mb-4">
       Looking for a leader who builds lean, AI-fluent engineering teams?
     </p>
     <div class="flex flex-wrap gap-4">
       <a
         href="/contact/"
-        class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors"
+        class="inline-flex items-center px-4 py-2 bg-btn-bg text-text-heading text-sm font-medium rounded hover:bg-btn-bg-hover transition-colors"
       >
         Let's Talk
       </a>
       <a
         href="/projects/"
-        class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded hover:border-gray-400 transition-colors"
+        class="inline-flex items-center px-4 py-2 border border-border text-sm font-medium rounded hover:border-border-hover transition-colors"
       >
         View Projects
       </a>

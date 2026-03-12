@@ -14,7 +14,7 @@ const { title, date, summary, slug, featured } = Astro.props;
   <a href={`/writing/${slug}/`} class="block">
     <div class="flex items-start justify-between gap-4">
       <div>
-        <time class="text-sm text-gray-500" datetime={date.toISOString()}>
+        <time class="text-sm text-accent" datetime={date.toISOString()}>
           {
             date.toLocaleDateString("en-US", {
               year: "numeric",
@@ -24,15 +24,15 @@ const { title, date, summary, slug, featured } = Astro.props;
           }
         </time>
         <h3
-          class="text-lg font-medium mt-1 group-hover:text-gray-600 transition-colors"
+          class="text-lg font-medium mt-1 text-text-heading group-hover:text-accent transition-colors"
         >
           {title}
-          {featured && <span class="ml-2 text-xs text-gray-500">Featured</span>}
+          {featured && <span class="ml-2 text-xs text-accent">Featured</span>}
         </h3>
-        <p class="text-gray-500 text-sm mt-1 line-clamp-2">{summary}</p>
+        <p class="text-text-secondary text-sm mt-1 line-clamp-2">{summary}</p>
       </div>
       <svg
-        class="w-5 h-5 text-gray-300 group-hover:text-gray-500 transition-colors flex-shrink-0 mt-6"
+        class="w-5 h-5 text-text-muted group-hover:text-accent transition-colors flex-shrink-0 mt-6"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

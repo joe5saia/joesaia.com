@@ -12,7 +12,7 @@ const posts = (await getCollection("writing")).sort(
   title="Writing — Joe Saia"
   description="Articles on data engineering, analytics leadership, and AI-augmented development."
 >
-  <h1 class="text-3xl font-bold mb-4">Writing</h1>
+  <h1 class="text-3xl font-bold mb-4 text-text-heading">Writing</h1>
 
   {
     posts.length > 0 ? (
@@ -28,7 +28,7 @@ const posts = (await getCollection("writing")).sort(
         ))}
       </div>
     ) : (
-      <p class="text-gray-500">No posts yet. Check back soon.</p>
+      <p class="text-text-secondary">No posts yet. Check back soon.</p>
     )
   }
 </BaseLayout>
