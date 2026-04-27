@@ -1,7 +1,7 @@
 ---
 title: "Amp inspired Agents.md docs Pi Extension"
-date: 2025-04-22
-summary: "."
+date: 2026-04-22
+summary: "Import Amps scoped documentation functionality into Pi"
 tags: ["Workflows", "Pi"]
 featured: true
 ---
