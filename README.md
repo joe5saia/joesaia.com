@@ -7,25 +7,27 @@ Built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcs
 ## Quick Start
 
 ```bash
-npm install
-npm run dev
+task install
+task dev
 ```
 
 Open [http://localhost:4321](http://localhost:4321)
 
 ## Commands
 
-| Command            | Action                                      |
-| :----------------- | :------------------------------------------ |
-| `npm run dev`      | Start dev server                            |
-| `npm run build`    | Build for production (`dist/`)              |
-| `npm run preview`  | Preview production build locally            |
-| `npm run post:new` | Scaffold a new blog post                    |
-| `npm test`         | Run unit tests                              |
-| `make clean`       | Remove build artifacts (`dist/`, `.astro/`) |
-| `make lint`        | Type-check with `astro check`               |
+| Command                                 | Action                                      |
+| :-------------------------------------- | :------------------------------------------ |
+| `task install`                          | Install npm dependencies                    |
+| `task dev`                              | Start dev server                            |
+| `task build`                            | Build for production (`dist/`)              |
+| `task preview`                          | Preview production build locally            |
+| `task test`                             | Run unit tests                              |
+| `task post TITLE="Post Title" SUMMARY="Brief description."` | Scaffold a new blog post |
+| `task clean`                            | Remove build artifacts (`dist/`, `.astro/`) |
+| `task deploy`                           | Build and deploy to Cloudflare Pages        |
+| `task lint`                             | Type-check with `astro check`               |
 
-A `Makefile` wraps all npm scripts for convenience — run `make <target>` as a shortcut.
+Task commands are defined in `Taskfile.yml`.
 
 ## Project Structure
 
@@ -53,7 +55,7 @@ public/             # Static assets (resume PDF, favicon.svg, robots.txt)
 Use the scaffolding script:
 
 ```bash
-npm run post:new -- "Post Title" "Brief description."
+task post TITLE="Post Title" SUMMARY="Brief description."
 ```
 
 Or create `src/content/writing/YYYY-MM-DD-slug.md` manually:

@@ -7,11 +7,15 @@ Static portfolio site with blog, built with [Astro](https://astro.build) and [Ta
 ## Commands
 
 ```bash
-npm run dev         # Start dev server (http://localhost:4321)
-npm run build       # Build for production (output: dist/)
-npm run preview     # Preview production build locally
-npm run post:new    # Scaffold a new blog post (node scripts/create-post.mjs)
-npm test            # Run unit tests (node --test)
+task install        # Install npm dependencies
+task dev            # Start dev server (http://localhost:4321)
+task build          # Build for production (output: dist/)
+task preview        # Preview production build locally
+task test           # Run unit tests (node --test)
+task post TITLE="My Title" SUMMARY="A summary"  # Scaffold a new blog post
+task clean          # Remove build artifacts (dist/, .astro/)
+task deploy         # Build and deploy to Cloudflare Pages
+task lint           # Type-check the project with astro check
 ```
 
 ## Project Structure
