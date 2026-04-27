@@ -3,7 +3,7 @@ title: "I Made This"
 date: 2024-12-16
 summary: "Building this portfolio site with Astro, Tailwind, and a little help from AI."
 tags: ["Meta", "Web Development"]
-featured: true
+featured: false
 ---
 
 As someone that has started about a dozen websites and only published about three of them ever, I wanted to share my approach on this one and how I used ChatGPT and AMP to bootstrap a pretty decent website from scratch.

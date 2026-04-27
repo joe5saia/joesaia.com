@@ -3,7 +3,7 @@ title: "Mental Models for Coding Agents"
 date: 2025-01-02
 summary: "Different mental models for thinking about working with Coding Agents"
 tags: ["Meta", "AI Coding Agents"]
-featured: true
+featured: false
 ---
 
 Reading people's writing on working with coding agents you'll come across different metaphors. You'll also see plenty of arguments that boil down to style of work or different ways of thinking. In the spirit of all models are wrong, but some are useful, I want to lay out a few different mental models I have for processing other people's experience.
