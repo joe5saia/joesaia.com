@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # local tooling artifacts
 .amp/
+
+# scratch thoughts
+copy.md
