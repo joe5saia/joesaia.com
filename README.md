@@ -15,17 +15,17 @@ Open [http://localhost:4321](http://localhost:4321)
 
 ## Commands
 
-| Command                                 | Action                                      |
-| :-------------------------------------- | :------------------------------------------ |
-| `task install`                          | Install npm dependencies                    |
-| `task dev`                              | Start dev server                            |
-| `task build`                            | Build for production (`dist/`)              |
-| `task preview`                          | Preview production build locally            |
-| `task test`                             | Run unit tests                              |
-| `task post TITLE="Post Title" SUMMARY="Brief description."` | Scaffold a new blog post |
-| `task clean`                            | Remove build artifacts (`dist/`, `.astro/`) |
-| `task deploy`                           | Build and deploy to Cloudflare Pages        |
-| `task lint`                             | Type-check with `astro check`               |
+| Command                                                     | Action                                      |
+| :---------------------------------------------------------- | :------------------------------------------ |
+| `task install`                                              | Install npm dependencies                    |
+| `task dev`                                                  | Start dev server                            |
+| `task build`                                                | Build for production (`dist/`)              |
+| `task preview`                                              | Preview production build locally            |
+| `task test`                                                 | Run unit tests                              |
+| `task post TITLE="Post Title" SUMMARY="Brief description."` | Scaffold a new blog post                    |
+| `task clean`                                                | Remove build artifacts (`dist/`, `.astro/`) |
+| `task deploy`                                               | Build and deploy to Cloudflare Pages        |
+| `task lint`                                                 | Type-check with `astro check`               |
 
 Task commands are defined in `Taskfile.yml`.
 

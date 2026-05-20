@@ -27,7 +27,7 @@ tasks:
       - npm test
 
   post:
-    desc: "Scaffold a new blog post (usage: task post TITLE=\"My Title\" SUMMARY=\"A summary\")"
+    desc: 'Scaffold a new blog post (usage: task post TITLE="My Title" SUMMARY="A summary")'
     cmds:
       - npm run post:new -- "{{.TITLE}}" "{{.SUMMARY}}"
 

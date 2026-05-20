@@ -66,12 +66,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <slot name="head" />
   </head>
   <body class="bg-surface text-text-primary font-sans antialiased">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-surface focus:text-text-heading">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-surface focus:text-text-heading"
+    >
       Skip to content
     </a>
     <div class="min-h-screen flex flex-col">
       <Header />
-      <main id="main-content" class="flex-1 w-full max-w-3xl mx-auto px-6 py-12">
+      <main
+        id="main-content"
+        class="flex-1 w-full max-w-3xl mx-auto px-6 py-12"
+      >
         <slot />
       </main>
       <Footer />

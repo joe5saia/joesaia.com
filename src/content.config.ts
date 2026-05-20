@@ -1,5 +1,6 @@
 import { glob } from "astro/loaders";
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 
 const writing = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/writing" }),
@@ -19,7 +20,7 @@ const projects = defineCollection({
     name: z.string(),
     type: z.string(),
     stack: z.array(z.string()),
-    repo: z.string().url(),
+    repo: z.url(),
     highlights: z.array(z.string()),
   }),
 });
