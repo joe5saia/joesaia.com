@@ -15,7 +15,7 @@ const {
   title,
   description = "Data engineering and analytics leadership portfolio",
   type = "website",
-  image,
+  image = new URL("/social-card.svg", Astro.site).toString(),
   noindex,
 } = Astro.props;
 
