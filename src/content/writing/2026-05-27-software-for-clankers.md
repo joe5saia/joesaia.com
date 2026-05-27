@@ -1,0 +1,16 @@
+---
+title: "Software Design for Clankers"
+date: 2026-05-27
+summary: "Thoughts on well-designed software with ubiquitous coding agents"
+featured: true
+---
+
+I’ve been thinking about what good software design looks like in the world of coding agents. Historically, we’ve made trade-offs with the human developer in mind, particularly around bundling components together that are built up into a larger application. For example, in the Python world, you have projects like Django that aim to give you everything you need for a usable web application in one large package. In the Node world, there are dozens of web app frameworks, each with its own design language and each fairly expansive. A central design philosophy is to make the end-to-end application something that a developer can easily understand through a consistent language.
+
+We see some hints of what designing for agents looks like in something like the coding agent harness [Pi](https://pi.dev/), with a very clear lifecycle model, hooks for extensibility, and a clear vision of what is and is not in scope. A common response to a feature request is "Ask your agent to look at its own code and build it," and that works great! This degree of radical minimalism and large scope for extensibility is not something that I have seen in many other places. It’s something that lets Pi pop into a lot of other projects as a core component you can build around. What I have yet to see is a combination of two projects like Pi that are built up into a larger application but that are not specifically tied to one another.
+
+Historically, you have some microframeworks that have some elements of this, things like Flask and Flask-Login, where there are two separate modules with particular concerns that, in principle, you can integrate with other libraries but that, in practice, are built specifically to work together.
+
+I think pushing in this direction is probably the future. Having well-defined interfaces that thoughtfully capture the relevant integration points for a particular system should allow us to build better individual components. The historical friction is that integrating two such systems required writing a fair amount of adapter code that you had to maintain and make robust. Each adapter probably wouldn’t generalize to the other components, so the mental load on the developer of remembering how Component A interacts with Component B and how this is different from how Component A interacts with Component C was high. I suspect that, for coding agents, this is easy because if the components are well designed, the context should be local.
+
+This echoes the way that good service-based architectures have been built. AWS is a giant pile of services that can be built up into useful applications as you see fit. You are leaving potential integration optimizations on the table with this design, and actually doing the integration can be non-trivial, but the flexibility is a large part of the AWS value prop. Turning back to library design, I think the difference is that a good service is scoped to be roughly what a five-person engineering team can collectively keep in their head, while coding agents appear to have a fundamental limit on their context that is much tighter, which should push this architecture lower down the application stack.
