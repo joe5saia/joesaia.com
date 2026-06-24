@@ -4,95 +4,187 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Joe Saia"
-  description="Engineering and data leader. PhD economist, ex-Federal Reserve. 15 years building software, data, and the teams behind them in healthtech and startups."
+  description="Engineering and data leader. PhD economist. 15 years building software, data, and the teams behind them in healthtech and startups."
+  image={new URL("/images/joe-saia-headshot.jpg", Astro.site).toString()}
+  wide
 >
-  <section class="space-y-10">
-    <div class="space-y-4">
-      <h1
-        class="text-4xl font-bold tracking-tight text-text-heading sm:text-5xl"
+  <section class="space-y-16">
+    <div class="grid items-center gap-10 lg:grid-cols-[1fr_320px]">
+      <div class="space-y-6">
+        <div class="space-y-4">
+          <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+            Engineering and data leadership
+          </p>
+          <h1
+            class="text-4xl font-bold tracking-tight text-text-heading sm:text-5xl"
+          >
+            Joe Saia
+          </h1>
+        </div>
+
+        <div class="space-y-5">
+          <p class="text-xl leading-relaxed text-text-primary">
+            Engineering and data leader building software, data systems, and
+            teams for high-stakes, high-growth environments.
+          </p>
+          <p class="max-w-2xl text-lg leading-relaxed text-text-secondary">
+            I'm a PhD economist who has spent 15 years building across startups,
+            healthtech, AI, and data infrastructure. I'm interested in teams
+            that combine intellectual depth, practical execution, and meaningful
+            impact.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a
+            href="/writing/"
+            class="inline-flex items-center rounded bg-btn-bg px-4 py-2 text-sm font-medium text-text-heading transition-colors hover:bg-btn-bg-hover"
+          >
+            Read the Blog
+          </a>
+          <a
+            href="/contact/"
+            class="inline-flex items-center rounded border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-border-hover"
+          >
+            Get in Touch
+          </a>
+          <a
+            href="/resume/"
+            class="inline-flex items-center rounded px-1 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-text-heading"
+          >
+            View Resume
+          </a>
+        </div>
+      </div>
+
+      <figure class="rounded-2xl border border-border bg-surface-raised p-2">
+        <img
+          src="/images/joe-saia-headshot.jpg"
+          alt="Joe Saia"
+          width="900"
+          height="1125"
+          class="aspect-4/5 w-full rounded-xl object-cover"
+        />
+      </figure>
+    </div>
+
+    <dl
+      class="grid gap-5 border-y border-border py-6 sm:grid-cols-2 lg:grid-cols-5"
+    >
+      <div>
+        <dt class="text-2xl font-semibold text-text-heading">15 years</dt>
+        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
+          Building software and data systems
+        </dd>
+      </div>
+      <div>
+        <dt class="text-2xl font-semibold text-text-heading">PhD</dt>
+        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
+          Columbia economist
+        </dd>
+      </div>
+      <div>
+        <dt class="text-2xl font-semibold text-text-heading">Research</dt>
+        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
+          Economic modeling, Bayesian methods, and causal inference
+        </dd>
+      </div>
+      <div>
+        <dt class="text-2xl font-semibold text-text-heading">25 people</dt>
+        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
+          Engineering and data org leadership
+        </dd>
+      </div>
+      <div>
+        <dt class="text-2xl font-semibold text-text-heading">AI + data</dt>
+        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
+          Production systems in healthtech and startups
+        </dd>
+      </div>
+    </dl>
+
+    <div class="space-y-8">
+      <div class="max-w-2xl space-y-3">
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Working thesis
+        </p>
+        <h2 class="text-2xl font-semibold tracking-tight text-text-heading">
+          What I look for in the work, and the teams doing it.
+        </h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="rounded-lg border border-border p-6">
+          <p class="text-sm font-medium text-accent">01</p>
+          <h3 class="mt-3 text-lg font-medium text-text-heading">
+            Teams with real leverage
+          </h3>
+          <p class="mt-3 leading-relaxed text-text-secondary">
+            Great teams become more than the sum of their parts through hiring,
+            ways of working, and the trust that lets people argue and ship
+            anyway. I've led a 25-person engineering and data org, worked inside
+            a global four-person team punching far above its weight, and served
+            on a corporate Senior Leadership Team.
+          </p>
+        </article>
+
+        <article class="rounded-lg border border-border p-6">
+          <p class="text-sm font-medium text-accent">02</p>
+          <h3 class="mt-3 text-lg font-medium text-text-heading">
+            Work that matters
+          </h3>
+          <p class="mt-3 leading-relaxed text-text-secondary">
+            I want to help build things that improve the world. That has meant
+            public-sector research, work on systems-level economic questions,
+            and healthtech products that improve individual lives.
+          </p>
+        </article>
+
+        <article class="rounded-lg border border-border p-6">
+          <p class="text-sm font-medium text-accent">03</p>
+          <h3 class="mt-3 text-lg font-medium text-text-heading">
+            Colleagues with depth and range
+          </h3>
+          <p class="mt-3 leading-relaxed text-text-secondary">
+            I've gone deep on theory through a Columbia PhD, Bayesian research,
+            and causal inference, then wide on practice by building data
+            infrastructure, ML pipelines, and engineering teams across seed,
+            Series A, and growth-stage companies.
+          </p>
+        </article>
+
+        <article class="rounded-lg border border-border p-6">
+          <p class="text-sm font-medium text-accent">04</p>
+          <h3 class="mt-3 text-lg font-medium text-text-heading">
+            Pragmatic AI
+          </h3>
+          <p class="mt-3 leading-relaxed text-text-secondary">
+            I've built AI tools embedded in production applications, including
+            triage assistants, and I'm excited by the shift underway. I'm also
+            realistic about today's limits and interested in how teams reshape
+            work around what should be automated and what should stay human.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <div
+      class="rounded-2xl border border-border bg-surface-raised px-6 py-8 sm:px-8"
+    >
+      <div
+        class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
       >
-        Joe Saia
-      </h1>
-      <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-        Engineering and data leadership · Federal Reserve to PhD economist to
-        Seed/Series A/Growth Stage startups
-      </p>
-    </div>
-
-    <div class="space-y-6 text-lg leading-relaxed text-text-secondary">
-      <p>
-        Hi, I'm Joe Saia. For 15 years I've built software, data systems, and
-        the teams that ship them — sometimes as a senior engineer, sometimes as
-        the person leading the team. That includes an economics PhD at Columbia,
-        research at the Federal Reserve Board of Governors, and work across
-        seed, Series A, and growth-stage companies, most recently in healthtech.
-        If you want to know why we should work together, the four points below
-        are a start. If you'd rather see what I've been thinking, the <a
-          href="/writing/"
-          class="underline decoration-border underline-offset-4 transition-colors hover:text-text-heading hover:decoration-border-hover"
-          >blog is here</a
-        >.
-      </p>
-    </div>
-
-    <div class="space-y-8 text-lg leading-relaxed text-text-secondary">
-      <p>
-        First, I build high-performance teams both as a leader and as a member.
-        A good team creates leverage for every member and ends up more than the
-        sum of its parts; creating that is deliberate work: hiring, ways of
-        working, and the trust that lets people argue and ship anyway. I've led
-        a 25-person engineering and data org across two continents, worked
-        inside a global four-person team punching far above its weight, and have
-        been a member of a corporate Senior Leadership Team. I think about each
-        of those shapes seriously.
-      </p>
-      <p>
-        Second, I want to be part of building something impactful that improves
-        the world. I've worked as a public servant in the Federal Reserve,
-        contributing to monetary policy that drives the world's largest economy,
-        and in healthtech, building the technology that improves individual
-        lives.
-      </p>
-      <p>
-        Third, I want colleagues who push me. I've gone deep on theory — a
-        Columbia PhD in economics, Bayesian and causal-inference research at the
-        Federal Reserve — and wide on practice, building data infrastructure, ML
-        pipelines, and engineering teams across seed, Series A, and growth-stage
-        companies. I'm looking for peers who bring their own depth-and-breadth
-        combinations.
-      </p>
-      <p>
-        Fourth, I'm pragmatic about AI. I've built AI tools embedded in
-        production applications such as triage assistants, and I think we're at
-        the start of a shift comparable to the second Industrial Revolution. I'm
-        also realistic that today's models have real limits, and that we haven't
-        yet figured out how to reshape work around them. I am excited to work
-        that out: what to automate, what to keep human, and how teams change
-        shape.
-      </p>
-      <p>
-        Those are the four points. If they describe a team you're building — or
-        one you'd want to put me in touch with — <a
+        <p class="max-w-2xl text-lg leading-relaxed text-text-primary">
+          If that describes a team you're building — or one you'd want to put me
+          in touch with — let's talk.
+        </p>
+        <a
           href="/contact/"
-          class="underline decoration-border underline-offset-4 transition-colors hover:text-text-heading hover:decoration-border-hover"
-          >let's talk</a
-        >.
-      </p>
-    </div>
-
-    <div class="flex flex-wrap gap-4 pt-2">
-      <a
-        href="/writing/"
-        class="inline-flex items-center rounded bg-btn-bg px-4 py-2 text-sm font-medium text-text-heading transition-colors hover:bg-btn-bg-hover"
-      >
-        Read the Blog
-      </a>
-      <a
-        href="/contact/"
-        class="inline-flex items-center rounded border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-border-hover"
-      >
-        Get in Touch
-      </a>
+          class="inline-flex shrink-0 items-center justify-center rounded bg-btn-bg px-4 py-2 text-sm font-medium text-text-heading transition-colors hover:bg-btn-bg-hover"
+        >
+          Get in Touch
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

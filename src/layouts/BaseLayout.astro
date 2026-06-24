@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   type?: "website" | "article";
   image?: string;
+  wide?: boolean;
   noindex?: boolean;
 }
 
@@ -16,6 +17,7 @@ const {
   description = "Data engineering and analytics leadership portfolio",
   type = "website",
   image = new URL("/social-card.svg", Astro.site).toString(),
+  wide = false,
   noindex,
 } = Astro.props;
 
@@ -76,7 +78,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       <Header />
       <main
         id="main-content"
-        class="flex-1 w-full max-w-3xl mx-auto px-6 py-12"
+        class:list={[
+          "flex-1 w-full mx-auto px-6 py-12",
+          wide ? "max-w-5xl" : "max-w-3xl",
+        ]}
       >
         <slot />
       </main>
