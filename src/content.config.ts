@@ -10,7 +10,9 @@ const writing = defineCollection({
     summary: z.string(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional().default(false),
+    draft: z.boolean().optional().default(false),
     canonical: z.string().optional(),
+    visualization: z.literal("survival-to-80").optional(),
   }),
 });
 

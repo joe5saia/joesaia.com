@@ -3,9 +3,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("writing")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const posts = (
+  await getCollection(
+    "writing",
+    ({ data }) => import.meta.env.DEV || !data.draft,
+  )
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <BaseLayout

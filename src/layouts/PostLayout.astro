@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import SurvivalTo80Chart from "../components/SurvivalTo80Chart.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, date, summary, tags } = post.data;
+const { title, date, summary, tags, visualization } = post.data;
 
 const articleJsonLd = {
   "@context": "https://schema.org",
@@ -42,6 +43,7 @@ const articleJsonLd = {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: "UTC",
           })
         }
       </time>
@@ -58,6 +60,14 @@ const articleJsonLd = {
         )
       }
     </header>
+    {
+      visualization && (
+        <p class="not-prose mb-8 text-lg leading-relaxed text-text-secondary">
+          {summary}
+        </p>
+      )
+    }
+    {visualization === "survival-to-80" && <SurvivalTo80Chart />}
     <slot />
   </article>
 </BaseLayout>

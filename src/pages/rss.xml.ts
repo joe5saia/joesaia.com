@@ -3,9 +3,12 @@ import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 
 export async function GET(context: APIContext) {
-  const posts = (await getCollection("writing")).sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-  );
+  const posts = (
+    await getCollection(
+      "writing",
+      ({ data }) => import.meta.env.DEV || !data.draft,
+    )
+  ).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return rss({
     title: "Joe Saia — Writing",
