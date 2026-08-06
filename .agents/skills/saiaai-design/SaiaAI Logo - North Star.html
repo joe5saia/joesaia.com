@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SaiaAI — North Star logo</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-sans, "Hanken Grotesk", sans-serif); color: var(--color-ink, #16263d); background: #e9e6dd; }
+  .canvas { width: max-content; min-width: 100%; min-height: 100vh; padding: 48px; }
+  .intro { position: sticky; left: 48px; width: 720px; margin-bottom: 34px; }
+  .intro .eye { margin: 0 0 12px; color: var(--color-gold, #c2a45f); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
+  .intro h1 { margin: 0 0 10px; font-family: var(--font-serif, "Cormorant Garamond", serif); font-weight: 500; font-size: 2.6rem; letter-spacing: -0.02em; }
+  .intro p { margin: 0; max-width: 600px; color: var(--color-muted, #5e6b7c); line-height: 1.55; }
+
+  .row { display: flex; gap: 26px; align-items: flex-start; }
+  .frame { flex: none; }
+  .flabel { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-muted, #5e6b7c); margin-bottom: 12px; }
+  .card { background: var(--color-cream, #f4f2ec); border: 1px solid var(--color-line, #e2ddd0); border-radius: 2px; box-shadow: 0 24px 60px rgba(22,38,61,0.10); overflow: hidden; }
+
+  .pad { padding: 40px; display: flex; align-items: center; justify-content: center; }
+  .dark { background: var(--color-ink, #16263d); }
+  .cream2 { background: var(--color-cream-2, #faf8f2); }
+  .mark { color: var(--color-ink, #16263d); }
+  .dark .mark, .dark .wm { color: var(--color-cream-2, #faf8f2); }
+
+  .wm { font-family: var(--font-serif, "Cormorant Garamond", serif); font-weight: 600; letter-spacing: 0.14em; line-height: 1; color: var(--color-ink, #16263d); }
+  .wm .ai { color: var(--color-gold, #c2a45f); }
+
+  .lock { display: flex; align-items: center; gap: 18px; }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .divider { border-top: 1px solid var(--color-line, #e2ddd0); }
+  .dark + .divider { border: 0; }
+
+  .favrow { display: flex; align-items: flex-end; gap: 20px; padding: 30px 40px; }
+  .fav { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .fav small { font-size: 0.68rem; color: var(--color-muted, #5e6b7c); font-family: var(--font-mono, monospace); }
+  .chip { display: flex; align-items: center; justify-content: center; border-radius: 22%; background: var(--color-ink, #16263d); color: var(--color-cream-2,#faf8f2); }
+  .b48 { width: 48px; height: 48px; }
+  .b32 { width: 32px; height: 32px; }
+  .b16 { width: 16px; height: 16px; }
+
+  .swatchrow { display: flex; gap: 0; padding: 0; }
+  .sw { width: 110px; height: 110px; display: flex; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="intro">
+    <p class="eye">Refined direction · North Star</p>
+    <h1>The guiding star.</h1>
+    <p>A four-point star with a single twinkle — the navigator's star you steer by. It carries the wayfinding idea without a literal compass, stays warm and editorial, and reduces cleanly to one star for the favicon. Gold is the star; the wordmark stays quiet beside it.</p>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <!-- full mark: guiding star + twinkle -->
+    <symbol id="star" viewBox="0 0 64 64">
+      <path d="M45.5 8 L47 13.6 L52.6 15 L47 16.4 L45.5 22 L44 16.4 L38.4 15 L44 13.6 Z" fill="#c2a45f" opacity="0.92"/>
+      <path d="M30 6 L33 30 L57 33 L33 36 L30 60 L27 36 L3 33 L27 30 Z" fill="#c2a45f"/>
+    </symbol>
+    <!-- favicon: single centered star -->
+    <symbol id="star-solo" viewBox="0 0 64 64">
+      <path d="M32 3 L35.2 28.8 L61 32 L35.2 35.2 L32 61 L28.8 35.2 L3 32 L28.8 28.8 Z" fill="#c2a45f"/>
+    </symbol>
+    <!-- mono star (uses currentColor) for stamps -->
+    <symbol id="star-mono" viewBox="0 0 64 64">
+      <path d="M45.5 8 L47 13.6 L52.6 15 L47 16.4 L45.5 22 L44 16.4 L38.4 15 L44 13.6 Z" fill="currentColor" opacity="0.6"/>
+      <path d="M30 6 L33 30 L57 33 L33 36 L30 60 L27 36 L3 33 L27 30 Z" fill="currentColor"/>
+    </symbol>
+  </defs></svg>
+
+  <div class="row">
+    <!-- Primary mark -->
+    <div class="frame">
+      <div class="flabel">Primary mark</div>
+      <div class="card">
+        <div class="pad cream2"><svg class="mark" width="150" height="150" viewBox="0 0 64 64"><use href="#star"/></svg></div>
+        <div class="divider"></div>
+        <div class="pad dark"><svg class="mark" width="150" height="150" viewBox="0 0 64 64"><use href="#star"/></svg></div>
+      </div>
+    </div>
+
+    <!-- Lockups -->
+    <div class="frame" style="width:480px">
+      <div class="flabel">Horizontal &amp; stacked lockup</div>
+      <div class="card">
+        <div class="pad cream2" style="justify-content:flex-start;padding:46px 50px">
+          <div class="lock"><svg class="mark" width="58" height="58" viewBox="0 0 64 64"><use href="#star"/></svg><span class="wm" style="font-size:2.5rem">Saia<span class="ai">AI</span></span></div>
+        </div>
+        <div class="divider"></div>
+        <div class="pad dark" style="padding:46px 50px">
+          <div class="stack"><svg class="mark" width="66" height="66" viewBox="0 0 64 64"><use href="#star"/></svg><span class="wm" style="font-size:2.3rem">Saia<span class="ai">AI</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Favicon -->
+    <div class="frame">
+      <div class="flabel">Favicon · single star</div>
+      <div class="card">
+        <div class="favrow cream2">
+          <div class="fav"><div class="chip b48"><svg width="34" viewBox="0 0 64 64"><use href="#star-solo"/></svg></div><small>48</small></div>
+          <div class="fav"><div class="chip b32"><svg width="23" viewBox="0 0 64 64"><use href="#star-solo"/></svg></div><small>32</small></div>
+          <div class="fav"><div class="chip b16"><svg width="12" viewBox="0 0 64 64"><use href="#star-solo"/></svg></div><small>16</small></div>
+        </div>
+        <div class="divider"></div>
+        <!-- monochrome stamps -->
+        <div class="favrow cream2" style="align-items:center">
+          <svg class="mark" width="46" viewBox="0 0 64 64"><use href="#star-mono"/></svg>
+          <div style="background:var(--color-ink);border-radius:6px;padding:14px;display:flex;color:var(--color-cream-2)"><svg width="46" viewBox="0 0 64 64"><use href="#star-mono"/></svg></div>
+          <small style="font-family:var(--font-mono);color:var(--color-muted)">mono · 1-color stamps</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

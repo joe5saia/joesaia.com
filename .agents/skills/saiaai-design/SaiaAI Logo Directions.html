@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SaiaAI — Logo Directions</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans, "Hanken Grotesk", sans-serif);
+    color: var(--color-ink, #16263d);
+    background: #e9e6dd;
+  }
+  /* canvas: gray extends with scroll */
+  .canvas {
+    width: max-content;
+    min-width: 100%;
+    min-height: 100vh;
+    padding: 48px;
+    box-sizing: border-box;
+  }
+  .intro {
+    position: sticky;
+    left: 48px;
+    width: 760px;
+    margin-bottom: 36px;
+  }
+  .intro .eye {
+    margin: 0 0 12px;
+    color: var(--color-gold, #c2a45f);
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.28em; text-transform: uppercase;
+  }
+  .intro h1 {
+    margin: 0 0 10px;
+    font-family: var(--font-serif, "Cormorant Garamond", serif);
+    font-weight: 500; font-size: 2.6rem; letter-spacing: -0.02em; line-height: 1.04;
+  }
+  .intro p { margin: 0; max-width: 620px; color: var(--color-muted, #5e6b7c); font-size: 0.98rem; line-height: 1.55; }
+
+  .row { display: flex; gap: 26px; align-items: flex-start; }
+
+  .frame { flex: none; width: 384px; }
+  .frame > .label { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+  .frame > .label b { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; }
+  .frame > .label span { font-size: 0.78rem; color: var(--color-muted, #5e6b7c); }
+
+  .card {
+    background: var(--color-cream, #f4f2ec);
+    border: 1px solid var(--color-line, #e2ddd0);
+    border-radius: 2px;
+    box-shadow: 0 24px 60px rgba(22,38,61,0.10);
+    overflow: hidden;
+  }
+  .hero {
+    display: flex; align-items: center; justify-content: center;
+    height: 200px; background: var(--color-cream-2, #faf8f2);
+  }
+  .hero .mark { color: var(--color-ink, #16263d); }
+  .lock {
+    display: flex; align-items: center; gap: 16px;
+    padding: 26px 28px;
+    border-top: 1px solid var(--color-line, #e2ddd0);
+  }
+  .lock.dark { background: var(--color-ink, #16263d); border-top-color: rgba(255,255,255,0.08); }
+  .lock .mark { color: var(--color-ink, #16263d); flex: none; }
+  .lock.dark .mark { color: var(--color-cream-2, #faf8f2); }
+
+  .wm { font-family: var(--font-serif, "Cormorant Garamond", serif); font-weight: 600; font-size: 1.9rem; letter-spacing: 0.14em; line-height: 1; color: var(--color-ink, #16263d); }
+  .lock.dark .wm { color: var(--color-cream-2, #faf8f2); }
+  .wm .ai { color: var(--color-gold, #c2a45f); }
+
+  /* favicon strip */
+  .fav { display: flex; align-items: center; gap: 18px; padding: 18px 28px; border-top: 1px solid var(--color-line, #e2ddd0); }
+  .fav .cap { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted, #5e6b7c); margin-right: auto; }
+  .chip { display: flex; align-items: center; justify-content: center; border-radius: 5px; }
+  .chip.light { background: var(--color-cream-2, #faf8f2); border: 1px solid var(--color-line, #e2ddd0); color: var(--color-ink, #16263d); }
+  .chip.dark { background: var(--color-ink, #16263d); color: var(--color-cream-2, #faf8f2); }
+  .chip.s32 { width: 44px; height: 44px; }
+  .chip.s16 { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="intro">
+    <p class="eye">Logo exploration · compass / wayfinding</p>
+    <h1>Six marks for SaiaAI.</h1>
+    <p>Each is a symbol that stands alone (favicon, app tile, signature) plus a lockup with the Cormorant wordmark — shown on cream and ink, and at favicon size. The ink reads navy on light and cream on dark; gold stays the single accent. Tell me which direction to refine.</p>
+  </div>
+
+  <!-- ===================== SVG symbol library ===================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- 1 · The Seal -->
+      <symbol id="m1" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="30" fill="currentColor"/>
+        <circle cx="32" cy="32" r="25" fill="none" stroke="#c2a45f" stroke-width="1" opacity="0.45"/>
+        <path d="M32 11 L35.4 28.6 L53 32 L35.4 35.4 L32 53 L28.6 35.4 L11 32 L28.6 28.6 Z" fill="#c2a45f"/>
+      </symbol>
+      <!-- 2 · The Needle -->
+      <symbol id="m2" viewBox="0 0 64 64">
+        <path d="M32 5 L39 34 L25 34 Z" fill="#c2a45f"/>
+        <path d="M25 34 L39 34 L32 59 Z" fill="currentColor"/>
+        <circle cx="32" cy="34" r="3.6" fill="currentColor"/>
+        <circle cx="32" cy="34" r="1.7" fill="#c2a45f"/>
+      </symbol>
+      <!-- 3 · The Rose -->
+      <symbol id="m3" viewBox="0 0 64 64">
+        <g transform="rotate(45 32 32)">
+          <path d="M32 13 L33.5 30.5 L51 32 L33.5 33.5 L32 51 L30.5 33.5 L13 32 L30.5 30.5 Z" fill="#c2a45f"/>
+        </g>
+        <path d="M32 3 L34.4 29.6 L61 32 L34.4 34.4 L32 61 L29.6 34.4 L3 32 L29.6 29.6 Z" fill="currentColor"/>
+      </symbol>
+      <!-- 4 · North Star -->
+      <symbol id="m4" viewBox="0 0 64 64">
+        <path d="M48 9 L49.4 15.6 L56 17 L49.4 18.4 L48 25 L46.6 18.4 L40 17 L46.6 15.6 Z" fill="currentColor" opacity="0.5"/>
+        <path d="M30 8 L33 30 L55 33 L33 36 L30 58 L27 36 L5 33 L27 30 Z" fill="#c2a45f"/>
+      </symbol>
+      <!-- 5 · The Bearing -->
+      <symbol id="m5" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="3.4"/>
+        <path d="M32 2 L37.5 15 L26.5 15 Z" fill="#c2a45f"/>
+        <circle cx="32" cy="32" r="3.2" fill="#c2a45f"/>
+      </symbol>
+      <!-- 6 · The Keystone -->
+      <symbol id="m6" viewBox="0 0 64 64">
+        <rect x="3" y="3" width="58" height="58" rx="15" fill="currentColor"/>
+        <path d="M32 12 L34.6 29.4 L52 32 L34.6 34.6 L32 52 L29.4 34.6 L12 32 L29.4 29.4 Z" fill="#c2a45f"/>
+        <circle cx="32" cy="32" r="2.4" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="row" id="frames"></div>
+</div>
+
+<script>
+  const DIRECTIONS = [
+    ["01", "The Seal", "Maker's-mark roundel", "m1"],
+    ["02", "The Needle", "Bicolor compass needle", "m2"],
+    ["03", "The Rose", "Engraved 8-point rose", "m3"],
+    ["04", "North Star", "Guiding-star sparkle", "m4"],
+    ["05", "The Bearing", "Ring + north tick", "m5"],
+    ["06", "The Keystone", "App-tile compass", "m6"],
+  ];
+  const sym = (id, px) => `<svg class="mark" width="${px}" height="${px}" viewBox="0 0 64 64"><use href="#${id}"/></svg>`;
+  const wm = `<span class="wm">Saia<span class="ai">AI</span></span>`;
+  document.getElementById("frames").innerHTML = DIRECTIONS.map(([n, name, desc, id]) => `
+    <div class="frame">
+      <div class="label"><b>${n} · ${name}</b><span>${desc}</span></div>
+      <div class="card">
+        <div class="hero">${sym(id, 96)}</div>
+        <div class="lock">${sym(id, 46)}${wm}</div>
+        <div class="lock dark">${sym(id, 46)}${wm}</div>
+        <div class="fav">
+          <span class="cap">Favicon</span>
+          <div class="chip light s32">${sym(id, 26)}</div>
+          <div class="chip light s16">${sym(id, 15)}</div>
+          <div class="chip dark s32">${sym(id, 26)}</div>
+          <div class="chip dark s16">${sym(id, 15)}</div>
+        </div>
+      </div>
+    </div>`).join("");
+</script>
+</body>
+</html>

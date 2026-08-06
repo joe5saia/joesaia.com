@@ -1,0 +1,61 @@
+<!-- @dsCard group="Website" viewport="1280x760" name="SaiaAI Homepage" subtitle="Full marketing homepage recreation" -->
+<!-- @startingPoint section="Website" subtitle="SaiaAI marketing homepage" viewport="1280x900" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SaiaAI — Practical software for Essex County businesses</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316263d'/%3E%3Cpath d='M32 8 L34.6 29.4 L56 32 L34.6 34.6 L32 56 L29.4 34.6 L8 32 L29.4 29.4 Z' fill='%23c2a45f'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    body {
+      margin: 0;
+      color: var(--color-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      background:
+        radial-gradient(140% 90% at 12% 2%, rgba(0,0,0,0.018), transparent 50%),
+        radial-gradient(120% 80% at 95% 30%, rgba(22,38,61,0.045), transparent 55%),
+        linear-gradient(118deg, transparent 40%, rgba(0,0,0,0.022) 41%, transparent 43%),
+        var(--color-cream);
+    }
+  </style>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#f4f2ec">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#f4f2ec"/>
+      <path d="M560 250 L585 380 L715 405 L585 430 L560 560 L535 430 L405 405 L535 380 Z" fill="#c2a45f"/>
+      <path d="M690 235 L700 270 L735 280 L700 290 L690 325 L680 290 L645 280 L680 270 Z" fill="#c2a45f" opacity="0.9"/>
+    </svg>
+  </template>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel" src="Header.jsx"></script>
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="Services.jsx"></script>
+  <script type="text/babel" src="Footer.jsx"></script>
+  <script type="text/babel">
+    function Home() {
+      return (
+        <React.Fragment>
+          <Header />
+          <main>
+            <Hero />
+            <Services />
+            <Process />
+            <CTA />
+          </main>
+          <Footer />
+        </React.Fragment>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<Home />);
+  </script>
+</body>
+</html>

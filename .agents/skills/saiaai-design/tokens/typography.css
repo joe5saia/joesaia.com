@@ -1,0 +1,32 @@
+:root {
+  /* ----- Families ----- */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* ----- Display / heading scale (serif, fluid) ----- */
+  --text-display: clamp(3.3rem, 8vw, 7rem);   /* h1 hero */
+  --text-h1: clamp(3rem, 7vw, 5.8rem);        /* page hero h1 */
+  --text-h2: clamp(2.15rem, 4.8vw, 4rem);
+  --text-h3: clamp(1.4rem, 2.3vw, 2rem);
+
+  /* ----- Body (sans) ----- */
+  --text-lead: clamp(1.05rem, 2vw, 1.25rem);
+  --text-base: 1rem;
+  --text-sm: 0.9rem;
+  --text-xs: 0.77rem;
+
+  /* ----- Eyebrow / label ----- */
+  --eyebrow-size: 0.77rem;
+  --eyebrow-tracking: 0.28em;
+
+  /* ----- Weights ----- */
+  --weight-regular: 400;
+  --weight-medium: 500;   /* default serif heading weight */
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ----- Line heights ----- */
+  --leading-display: 1.02;
+  --leading-body: 1.6;
+}

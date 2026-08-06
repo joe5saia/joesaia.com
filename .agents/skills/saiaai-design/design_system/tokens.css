@@ -1,0 +1,90 @@
+/* ============================================================
+   SaiaAI Design Tokens
+   Single source of truth for color, type, spacing, radii, shadows.
+   Drop into the Hugo site and reference the semantic aliases.
+   ============================================================ */
+
+/* Hanken Grotesk (sans) + Cormorant Garamond (serif-display) from Google Fonts.
+   Swap for local @font-face rules if self-hosting is required. */
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap");
+
+:root {
+  /* ---------- Color — one ink, one gold, warm cream ---------- */
+  --color-ink: #16263d;        /* the single navy: text AND dark surfaces */
+  --color-cream: #f4f2ec;      /* page canvas */
+  --color-cream-2: #faf8f2;    /* raised surfaces / cards */
+  --color-white: #ffffff;
+  --color-gold: #c2a45f;       /* the single accent */
+  --color-muted: #5e6b7c;      /* secondary text on cream */
+  --color-line: #e2ddd0;       /* hairline borders */
+  --color-mist: #a8b2c2;       /* muted text on dark */
+
+  /* Semantic aliases — use THESE in components */
+  --bg-page: var(--color-cream);
+  --surface-card: var(--color-cream-2);
+  --surface-card-translucent: rgba(250, 248, 242, 0.92);
+  --surface-dark: var(--color-ink);
+  --text-body: var(--color-ink);
+  --text-muted: var(--color-muted);
+  --text-on-dark: var(--color-cream-2);
+  --text-muted-on-dark: var(--color-mist);
+  --accent: var(--color-gold);
+  --border-hairline: var(--color-line);
+
+  /* Restrained gold washes — accents only, never large fills */
+  --gold-wash-08: rgba(194, 164, 95, 0.08);
+  --gold-wash-12: rgba(194, 164, 95, 0.12);
+  --gold-border-24: rgba(194, 164, 95, 0.24);
+  --gold-border-34: rgba(194, 164, 95, 0.34);
+  --gold-rule: rgba(194, 164, 95, 0.72);
+
+  /* ---------- Type ---------- */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --text-display: clamp(3.3rem, 8vw, 7rem);   /* hero h1 */
+  --text-h1: clamp(3rem, 7vw, 5.8rem);
+  --text-h2: clamp(2.15rem, 4.8vw, 4rem);
+  --text-h3: clamp(1.4rem, 2.3vw, 2rem);
+  --text-lead: clamp(1.05rem, 2vw, 1.25rem);
+  --text-base: 1rem;
+  --text-sm: 0.9rem;
+  --text-xs: 0.77rem;
+  --eyebrow-size: 0.77rem;
+  --eyebrow-tracking: 0.28em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;   /* default serif heading weight */
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-display: 1.02;
+  --leading-body: 1.6;
+
+  /* ---------- Radii ---------- */
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+  --radius-button: 0px;   /* buttons are intentionally square */
+
+  /* ---------- Shadows ---------- */
+  --shadow-soft: 0 24px 70px rgba(22, 38, 61, 0.11);
+  --shadow-button: 0 16px 36px rgba(22, 38, 61, 0.18);
+  --shadow-header: 0 10px 30px rgba(22, 38, 61, 0.08);
+
+  /* ---------- Spacing ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* ---------- Layout ---------- */
+  --section-pad: clamp(4rem, 8vw, 7rem);
+  --container-w: 1120px;
+  --narrow-w: 780px;
+}
