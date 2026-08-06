@@ -1,72 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">Joe Saia social card</title>
-  <desc id="description">A dark, refined social preview card with Amp-inspired code motifs and subtle cat-like geometry.</desc>
+  <title id="title">Joe Saia — Engineering and data leadership</title>
+  <desc id="description">A charcoal social card with copper details, a JS monogram, and typography describing Joe Saia's work in software, systems, and teams.</desc>
   <defs>
-    <radialGradient id="glow" cx="72%" cy="28%" r="62%">
-      <stop offset="0" stop-color="#6df7c8" stop-opacity="0.42" />
-      <stop offset="0.4" stop-color="#5f7cff" stop-opacity="0.18" />
+    <radialGradient id="copper-glow" cx="78%" cy="43%" r="49%">
+      <stop offset="0" stop-color="#c78c4e" stop-opacity="0.18" />
+      <stop offset="0.58" stop-color="#c78c4e" stop-opacity="0.04" />
       <stop offset="1" stop-color="#0f1117" stop-opacity="0" />
     </radialGradient>
-    <linearGradient id="panel" x1="160" x2="1040" y1="98" y2="532" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#171b25" />
-      <stop offset="1" stop-color="#0f1117" />
-    </linearGradient>
-    <linearGradient id="accent" x1="252" x2="948" y1="438" y2="438" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#6df7c8" />
-      <stop offset="0.52" stop-color="#b8a4ff" />
-      <stop offset="1" stop-color="#ffcf70" />
-    </linearGradient>
-    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="26" stdDeviation="34" flood-color="#02040a" flood-opacity="0.48" />
-    </filter>
+    <pattern id="dot-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.5" fill="#e8e6e3" opacity="0.08" />
+    </pattern>
+    <radialGradient id="grid-fade" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="white" />
+      <stop offset="0.68" stop-color="white" stop-opacity="0.72" />
+      <stop offset="1" stop-color="black" />
+    </radialGradient>
+    <mask id="grid-mask">
+      <rect x="716" y="52" width="420" height="440" fill="url(#grid-fade)" />
+    </mask>
+    <clipPath id="monogram-clip">
+      <circle cx="922" cy="282" r="143" />
+    </clipPath>
   </defs>
 
   <rect width="1200" height="630" fill="#0f1117" />
-  <rect width="1200" height="630" fill="url(#glow)" />
+  <rect width="1200" height="630" fill="url(#copper-glow)" />
+  <path d="M716 52H1136V492H716Z" fill="url(#dot-grid)" mask="url(#grid-mask)" opacity="0.75" />
 
-  <g opacity="0.28" stroke="#2d3446" stroke-width="1">
-    <path d="M60 122H1140" />
-    <path d="M60 206H1140" />
-    <path d="M60 290H1140" />
-    <path d="M60 374H1140" />
-    <path d="M60 458H1140" />
-    <path d="M204 54V576" />
-    <path d="M408 54V576" />
-    <path d="M612 54V576" />
-    <path d="M816 54V576" />
-    <path d="M1020 54V576" />
+  <rect x="45.5" y="45.5" width="1109" height="539" rx="19.5" fill="none" stroke="#2a2d37" />
+  <path d="M76 45.5H161M1039 584.5H1124" stroke="#c78c4e" stroke-width="2" />
+
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+    <circle cx="101" cy="101" r="5" fill="#c78c4e" />
+    <text x="119" y="108" fill="#c78c4e" font-size="19" font-weight="600" letter-spacing="4.2">JOE SAIA</text>
+    <text x="1099" y="108" fill="#9ca3af" font-size="17" font-weight="500" letter-spacing="0.8" text-anchor="end">joesaia.com</text>
+
+    <path d="M101 144H1099" stroke="#2a2d37" />
+    <path d="M101 190V327" stroke="#c78c4e" stroke-width="3" />
+
+    <text x="132" y="237" fill="#f5f5f5" font-size="66" font-weight="600" letter-spacing="-2.2">Engineering &amp; data</text>
+    <text x="132" y="315" fill="#f5f5f5" font-size="66" font-weight="600" letter-spacing="-2.2">leadership</text>
+
+    <text x="132" y="380" fill="#9ca3af" font-size="23" font-weight="400" letter-spacing="0.1">Software, systems, and teams for high-stakes,</text>
+    <text x="132" y="415" fill="#9ca3af" font-size="23" font-weight="400" letter-spacing="0.1">high-growth environments.</text>
+
+    <path d="M101 498H1099" stroke="#2a2d37" />
+    <text x="101" y="545" fill="#e8e6e3" font-size="16" font-weight="500" letter-spacing="2.5">SOFTWARE</text>
+    <circle cx="238" cy="539" r="2.5" fill="#c78c4e" />
+    <text x="257" y="545" fill="#e8e6e3" font-size="16" font-weight="500" letter-spacing="2.5">DATA SYSTEMS</text>
+    <circle cx="440" cy="539" r="2.5" fill="#c78c4e" />
+    <text x="459" y="545" fill="#e8e6e3" font-size="16" font-weight="500" letter-spacing="2.5">TEAMS</text>
   </g>
 
-  <g filter="url(#soft-shadow)">
-    <rect x="132" y="82" width="936" height="466" rx="34" fill="url(#panel)" stroke="#303747" />
-    <rect x="158" y="108" width="884" height="414" rx="24" fill="#11151f" stroke="#252b3a" />
+  <g clip-path="url(#monogram-clip)">
+    <circle cx="922" cy="282" r="143" fill="#12151d" />
+    <path d="M320.25 142 L183 142.25 L183.25 150.75 L189.25 151 L199 152.75 L206 155.75 L211 160 L213.75 164 L216 168.75 L217.75 175 L219 182.75 L219.75 197.75 L219.75 383.25 L218.75 404.75 L216 425.5 L214 434.25 L209.75 445 L205.25 452 L200 457.25 L192.25 461.75 L184.75 463.75 L176.25 464 L170.75 463 L164.5 459.5 L160.75 455.75 L157.75 450 L156 441.5 L156.5 421.75 L154.75 413.75 L151.75 408 L147.25 403.25 L140 399.25 L135 398.25 L127.5 398.25 L120.75 400 L116.5 402.25 L112.75 405.25 L107.5 412.25 L105 418.5 L104.25 422.75 L104 430.25 L105.25 438.25 L108 445.25 L110.25 449.25 L114.25 454.75 L119.5 460 L125.75 464.5 L131.75 467.75 L141.75 471.75 L149.75 473.75 L160.75 475.5 L182.25 476.25 L192.25 475.5 L207.5 472.75 L223 467.5 L229.25 464.5 L237 459.75 L243.75 454.75 L250.25 448.75 L255.25 443 L261.5 434.25 L266.75 424.25 L270.75 413.5 L273.5 402.75 L275.75 389.5 L276.75 373.25 L276.75 221 L278 209.75 L279.75 200.5 L284.75 184.5 L289 175.5 L293.75 167.75 L300.5 159 L306.75 152.75 L315.5 145.75 L320 143 Z M425 138 L414.5 137.25 L395 137.25 L378.75 139.25 L369 141.25 L354 146 L341.5 152 L328.25 161 L319 170 L315.25 174.5 L309.25 183.75 L306 190 L302 200.75 L300.25 207.75 L298.5 220.5 L298.25 230 L299.25 240 L301 249 L303.25 256.5 L307 265.25 L311.25 272.75 L318 281.75 L331.75 295.25 L350.75 308.75 L368.75 318.75 L406.75 337.75 L420.75 345.75 L432.75 353.75 L442.75 362.75 L449 370.75 L454 380.25 L457 390 L458 396.25 L458.25 406.5 L457.75 412.5 L456 421.25 L453 429.25 L449.75 435.25 L444 443 L439 448 L435.25 451 L427.25 455.75 L416 460 L405.75 462 L399.25 462.5 L382.75 462 L369.5 459 L358 454 L347.25 447 L336.5 436.75 L327 424.25 L322.75 417.25 L316.75 405.25 L309.75 386 L305.75 367.5 L298.5 367.25 L297 392 L294 409.25 L292 416.75 L288 428 L281.75 441 L285.75 444.5 L291.75 448.5 L302.5 454.75 L320 462.75 L333.5 467.5 L349.5 471.75 L376.25 475.75 L392.25 476.5 L411 475.75 L424.75 473.75 L437.5 470.75 L454 464.5 L465.25 458.5 L473.75 452.75 L480 447.5 L490.5 436.5 L496.5 428 L501.5 419 L505.75 408 L508.5 397.25 L509.75 387.5 L509.75 371.5 L508.75 363.25 L506.5 353.75 L503.5 345 L499.5 336.75 L494.5 329 L487.75 320.5 L480.5 313.5 L470.25 305 L458.25 297.25 L438 286.25 L395.5 265.75 L375.75 254 L365.5 246 L359 239.25 L352.75 230.5 L348 219.25 L346.75 214 L346 206.5 L346.75 194.25 L350.75 181.25 L354 175 L358.75 168.75 L366 162 L370.75 158.75 L381.5 153.75 L395.5 150.75 L410 150.75 L421 152.75 L429.25 155.75 L440.25 162 L450.5 170.75 L461 183.75 L468 195.5 L472 203.75 L477 217 L480.25 230 L488.25 230.25 L489.25 229.75 L489.25 156 L488 155 L476 150 L457.75 144 L444.75 141 Z" fill="#f5f5f5" transform="translate(774 132) scale(.48)" />
   </g>
-
-  <g transform="translate(802 137)" opacity="0.9">
-    <path d="M80 22 120 76 172 54 154 130 92 156 30 130 12 54 64 76Z" fill="#151b26" stroke="#7f8ca8" stroke-width="3" />
-    <path d="M59 111H63M121 111H125" stroke="#e8edf8" stroke-width="8" stroke-linecap="round" />
-    <path d="M92 119 82 130H102Z" fill="#ffcf70" opacity="0.84" />
-    <path d="M70 141C82 151 102 151 114 141" fill="none" stroke="#7f8ca8" stroke-width="4" stroke-linecap="round" />
-    <path d="M42 128 0 116M42 142 4 148M142 128 184 116M142 142 180 148" stroke="#6df7c8" stroke-width="3" stroke-linecap="round" opacity="0.62" />
-  </g>
-
-  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
-    <text x="252" y="202" fill="#6df7c8" font-size="22" font-weight="700" letter-spacing="7">JOE SAIA</text>
-    <text x="250" y="286" fill="#f6f2e8" font-size="66" font-weight="750" letter-spacing="-2">Engineering, data,</text>
-    <text x="250" y="358" fill="#f6f2e8" font-size="66" font-weight="750" letter-spacing="-2">and AI systems</text>
-    <text x="252" y="417" fill="#a9b2c6" font-size="27" font-weight="500">Quietly building practical software with sharp teams.</text>
-    <rect x="252" y="462" width="696" height="4" rx="2" fill="url(#accent)" />
-  </g>
-
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.72">
-    <path d="M202 184 164 220 202 256" stroke="#7f8ca8" stroke-width="9" />
-    <path d="M998 374 1036 410 998 446" stroke="#7f8ca8" stroke-width="9" />
-    <path d="M222 476C302 432 340 432 420 476S538 520 618 476" stroke="#6df7c8" stroke-width="5" opacity="0.42" />
-  </g>
-
-  <g fill="#6df7c8" opacity="0.82">
-    <circle cx="735" cy="177" r="5" />
-    <circle cx="759" cy="177" r="5" />
-    <circle cx="783" cy="177" r="5" />
-  </g>
+  <circle cx="922" cy="282" r="143" fill="none" stroke="#3f4250" />
+  <path d="M820 182A143 143 0 0 1 1028 186" fill="none" stroke="#c78c4e" stroke-width="3" stroke-linecap="round" />
 </svg>
