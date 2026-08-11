@@ -6,7 +6,6 @@ tags: ["AI", "AI Coding Agents"]
 featured: true
 ---
 
-
 # Good Software Design Is a Fad
 
 We're living through a moment of rapid change in how software is designed and written using AI agents. These agents are increasingly good and fast at writing large amounts of high-quality code. They're not perfect yet, but in the more routine areas of software engineering, e.g., building a CRUD app with a simple domain model, they can largely one-shot this. There's a lot of focus on the code that they output and its quality. The biggest complaint is how verbose it can be and that it is not nearly as lean as well-written human code, which I agree with, but I increasingly think that this is irrelevant. Similar to how [Good Engineering Management is a Fad](https://lethain.com/good-eng-mgmt-is-a-fad/), I think that good software design is a fad.
@@ -19,17 +18,13 @@ Looking at software over time, you see different patterns, emphases, and ways of
 
 This was first the era of programming, and everything happened on a single computer. Companies would purchase **a** computer for the business. This was a capital expenditure, and the goal was to wring as much value out of it before it depreciated. Programs at this time were hard to write and were often written for a single purpose and then thrown away. This was simple software designed to do a repeatable task and maximize the usage of the mainframe. The concept of a software product was not really a thing yet.
 
-
 ### Era 2: The Physical Distribution Era (roughly 1980–2000)
 
 This era was defined by the personal computer. Businesses no longer had a single computer; rather, each employee would have their own computer. This is when software products became a thing because now you could write specialized software that multiple individuals could use for a specific type of work. The other defining constraint was that software delivery was done through a physical medium. You purchased software as a CD, often a single CD per computer, and installed it that way. Software was something that was built once and then shipped and potentially never updated. Network connections were either too slow, too expensive, or absent for reliable digital delivery. This was the height of the waterfall era, where requirements were sorted out up front, an application was designed technically up front, and then programmers implemented it. Directionally, code was written, tested, and finalized roughly once and then never edited again. Because the work was front-loaded and the code was never meant to be a living thing, large enterprise patterns became a useful abstraction. A "Repository Service Layer" was helpful shorthand that described a whole batch of functionality, and everyone knew what that meant. Because it was written once, the fact that it was not flexible to adapt did not really matter. Time to market was also not as important as designing something robust that would be approximately correct when it was released.
 
-
 ### Era 3: SaaS and continuous delivery (roughly 2000-2025)
 
 This era was defined by the internet and the rise of digital delivery. For the first time, you could ship thousands of versions of a piece of software over its lifetime, or even "Continuous Delivery." This meant that you could ship something, learn what did and did not work with end users, and then ship updates to it. Code became much more of a living thing that was meant to evolve as you learned more about the product requirements. Lean software meant that it was easy to hop in and make changes, both big and small, and enterprise patterns were challenging to work with when requirements were always in flux and speed was more important. The rise of digital distribution meant that there were large rewards to being early in a market. Being able to ship an MVP and capture a small share of the market was valuable in a way that it was not in the physical distribution era. The value of being able to design large codebases up front with enterprise pattern shorthands was eliminated as well.
-
-
 
 ### Era 4: The agentic era (emerging)
 

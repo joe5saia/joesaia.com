@@ -28,7 +28,7 @@ Finally, performance is great. Orbs start quickly, resume quickly, and have all 
 
 The closest comparison is moving CI from a giant shared Jenkins machine to GitHub Actions. With local agents, much of your mental energy goes into managing local state so they do not step on one another's toes. I have tried hard to make worktrees work consistently for me, but I always forget something. No matter how much I add to my `AGENTS.md`, something eventually goes wrong over the course of the day.
 
-An Orb starts isolated and consistent. I can run many agents in parallel without treating my laptop as a scarce shared resource. That moves agents from the *pet* category into the *cattle* category. If I need ten investigations, I can start ten investigations.
+An Orb starts isolated and consistent. I can run many agents in parallel without treating my laptop as a scarce shared resource. That moves agents from the _pet_ category into the _cattle_ category. If I need ten investigations, I can start ten investigations.
 
 The setup story has been particularly good. Amp's own [Agents in Orbs write-up](https://ampcode.com/news/agents-in-orbs) was enough context for me to ask an agent what lessons it implied for my project. It examined the article, proposed improvements to the setup script, and made them. The result is easily the best development-server setup I have ever used, with or without an agent. The agents just rip: they spin up the app, take screenshots, and send me questions with notes. It is a delightful experience.
 
