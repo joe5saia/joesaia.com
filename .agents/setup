@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export PATH="$HOME/.local/bin:$PATH"
+
+node_version="22.23.2"
+
+printf 'Checking Node.js toolchain...\n'
+if ! command -v node >/dev/null 2>&1 || ! node -e '
+  const [major, minor] = process.versions.node.split(".").map(Number);
+  process.exit(major > 22 || (major === 22 && minor >= 12) ? 0 : 1);
+'; then
+  printf 'Installing Node.js %s...\n' "$node_version"
+  mkdir -p "$HOME/.local"
+  time npm install --global --prefix "$HOME/.local" "node@$node_version"
+  hash -r
+fi
+
+profile_marker="# joesaia.com orb toolchain"
+if ! grep -Fqx "$profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
+  cat >> "$HOME/.bash_profile" <<'EOF'
+
+# joesaia.com orb toolchain
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac
+EOF
+fi
+
+printf 'Using Node.js %s and npm %s.\n' "$(node --version)" "$(npm --version)"
+
+dependency_stamp="node_modules/.amp-dependency-fingerprint"
+dependency_fingerprint="$({
+  node --version
+  sha256sum package.json package-lock.json
+} | sha256sum | cut -d' ' -f1)"
+
+if [[ ! -f "$dependency_stamp" ]] || [[ "$(cat "$dependency_stamp")" != "$dependency_fingerprint" ]]; then
+  printf 'Installing project dependencies...\n'
+  time npm ci --no-audit --no-fund
+  printf '%s\n' "$dependency_fingerprint" > "$dependency_stamp"
+else
+  printf 'Project dependencies already match the lockfile.\n'
+fi
+
+printf 'Orb setup complete.\n'

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${AMP_ORB:-}" == "1" ]]; then
+  printf 'Ensuring declared orb services are available...\n'
+  amp orb services ensure
+else
+  printf 'No orb services to resume outside an Amp orb.\n'
+fi

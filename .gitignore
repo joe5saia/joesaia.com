@@ -24,7 +24,8 @@ pnpm-debug.log*
 .idea/
 
 # local tooling artifacts
-.amp/
+.amp/*
+!.amp/services.yaml
 
 # scratch thoughts
 copy.md
