@@ -3,7 +3,7 @@ title: "Agents as New Consultants"
 date: 2026-08-17
 summary: ""
 featured: false
-draft: true
+draft: false
 ---
 
 I was listening to the latest episode of [State of Agentic Coding](https://www.soac.dev/episodes/9) with Armin and Ben, and I was interested in their discussion of how agents are being trained and the optimizations going into reinforcement learning. Working with these agents and seeing what is highlighted in their release notes, it's obvious that OpenAI and Anthropic are focused on [long-running](https://developers.openai.com/blog/run-long-horizon-tasks-with-codex), [autonomous agents](https://www.anthropic.com/research/measuring-agent-autonomy) that can complete tasks independently, like those measured by [METR's task-completion time-horizon benchmark](https://metr.org/time-horizons). Last year, the benchmarks that mattered most were software engineering benchmarks such as [SWE-bench](https://www.swebench.com). This year, it's METR's long-task benchmark. It seems like the frontier labs are betting on building a very determined, innately intelligent, newly minted consultant; think Harvard undergrad to Harvard MBA to McKinsey. This would be someone who lacks specific domain knowledge but has the ability to hunt down facts, use them to solve problems from first principles, and try multiple approaches to find a working solution within a set of constraints.
