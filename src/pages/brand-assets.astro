@@ -1,0 +1,371 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import articleImage from "../content/writing/i_made_this_meme.jpg";
+
+const assets = [
+  {
+    name: "Default social card",
+    path: "/social-card.png",
+    details: "PNG · 1200 × 630 · 865 KB",
+    usage: "Open Graph and X/Twitter image on every page and article",
+  },
+  {
+    name: "Site icon",
+    path: "/favicon.svg",
+    details: "SVG · 614 × 614 · 3 KB",
+    usage: "Browser tab favicon",
+  },
+  {
+    name: "Joe Saia headshot",
+    path: "/images/joe-saia-headshot.jpg",
+    details: "JPEG · 900 × 1125 · 138 KB",
+    usage: "Homepage hero portrait",
+  },
+  {
+    name: "“I made this” article image",
+    path: articleImage.src,
+    displayPath: "src/content/writing/i_made_this_meme.jpg",
+    details: "JPEG · 500 × 1089 · 62 KB",
+    usage: "Inline image in the “I made this” article",
+  },
+];
+---
+
+<BaseLayout
+  title="Brand asset review — Joe Saia"
+  description="Private working page for reviewing Joe Saia website imagery and sharing assets."
+  image=""
+  noindex
+  wide
+>
+  <div class="space-y-16">
+    <header class="max-w-3xl space-y-5">
+      <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+        Internal review page
+      </p>
+      <div class="space-y-3">
+        <h1
+          class="text-4xl font-bold tracking-tight text-text-heading sm:text-5xl"
+        >
+          Brand asset review
+        </h1>
+        <p class="max-w-2xl text-lg leading-relaxed text-text-secondary">
+          Every image currently used by the site, shown in context. This page is
+          unlinked, excluded from search indexing, and omitted from the sitemap.
+        </p>
+      </div>
+      <dl
+        class="flex flex-wrap gap-x-8 gap-y-3 border-y border-border py-4 text-sm"
+      >
+        <div>
+          <dt class="text-text-muted">Assets</dt>
+          <dd class="mt-1 font-medium text-text-heading">{assets.length}</dd>
+        </div>
+        <div>
+          <dt class="text-text-muted">Default share image</dt>
+          <dd class="mt-1 font-medium text-text-heading">1200 × 630</dd>
+        </div>
+        <div>
+          <dt class="text-text-muted">Last reviewed</dt>
+          <dd class="mt-1 font-medium text-text-heading">August 21, 2026</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section aria-labelledby="sharing-heading" class="space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Sharing
+        </p>
+        <h2
+          id="sharing-heading"
+          class="text-2xl font-semibold text-text-heading"
+        >
+          Default link preview
+        </h2>
+        <p class="leading-relaxed text-text-secondary">
+          <code class="text-text-primary">social-card.png</code> is the image currently
+          sent to Open Graph and X/Twitter for every page, including articles.
+        </p>
+      </div>
+
+      <figure
+        class="overflow-hidden rounded-xl border border-border bg-surface-raised"
+      >
+        <img
+          src="/social-card.png"
+          alt="Joe Saia social card with a mahogany library and sitting chair"
+          width="1200"
+          height="630"
+          class="block aspect-[1200/630] w-full"
+        />
+        <figcaption
+          class="flex flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-4 text-sm"
+        >
+          <span class="text-text-secondary">Production PNG · 1.91:1</span>
+          <a
+            class="font-medium text-accent hover:text-accent-hover"
+            href="/social-card.png"
+            download
+          >
+            Download PNG
+          </a>
+        </figcaption>
+      </figure>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <figure
+          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
+        >
+          <div class="border-b border-border bg-white p-3">
+            <img
+              src="/social-card.png"
+              alt="Wide social card preview"
+              width="1200"
+              height="630"
+              class="aspect-[1.91/1] w-full object-cover"
+            />
+            <div
+              class="space-y-1 border border-t-0 border-gray-200 bg-white p-4 font-sans"
+            >
+              <p class="text-xs uppercase tracking-wide text-gray-500">
+                joesaia.com
+              </p>
+              <p class="font-semibold text-gray-900">Joe Saia</p>
+              <p class="line-clamp-2 text-sm text-gray-600">
+                Engineering and data leader building software, data systems, and
+                teams.
+              </p>
+            </div>
+          </div>
+          <figcaption class="px-5 py-4 text-sm text-text-secondary">
+            Typical wide Open Graph treatment
+          </figcaption>
+        </figure>
+
+        <figure
+          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
+        >
+          <div class="flex justify-center bg-white p-3">
+            <div
+              class="w-full max-w-[18rem] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm"
+            >
+              <img
+                src="/social-card.png"
+                alt="Square-cropped social card preview"
+                width="1200"
+                height="630"
+                class="aspect-square w-full object-cover"
+              />
+              <div class="space-y-1 p-4 font-sans">
+                <p class="text-xs uppercase tracking-wide text-gray-500">
+                  joesaia.com
+                </p>
+                <p class="font-semibold text-gray-900">Joe Saia</p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="px-5 py-4 text-sm text-text-secondary">
+            Stress test: centered square crop
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="identity-heading" class="space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Identity
+        </p>
+        <h2
+          id="identity-heading"
+          class="text-2xl font-semibold text-text-heading"
+        >
+          Favicon and monogram
+        </h2>
+        <p class="leading-relaxed text-text-secondary">
+          The JS monogram is currently the only standalone identity mark. These
+          sizes approximate a browser tab, bookmark, and account avatar.
+        </p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <figure class="rounded-xl border border-border bg-white p-8">
+          <div class="flex min-h-40 items-end justify-center gap-8">
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 16 pixels"
+              width="16"
+              height="16"
+            />
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 32 pixels"
+              width="32"
+              height="32"
+            />
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 64 pixels"
+              width="64"
+              height="64"
+            />
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 112 pixels"
+              width="112"
+              height="112"
+            />
+          </div>
+          <figcaption class="mt-6 text-center text-sm text-gray-600">
+            16 · 32 · 64 · 112 px on light
+          </figcaption>
+        </figure>
+        <figure class="rounded-xl border border-border bg-surface-raised p-8">
+          <div class="flex min-h-40 items-end justify-center gap-8">
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 16 pixels on dark"
+              width="16"
+              height="16"
+            />
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 32 pixels on dark"
+              width="32"
+              height="32"
+            />
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 64 pixels on dark"
+              width="64"
+              height="64"
+            />
+            <img
+              src="/favicon.svg"
+              alt="JS monogram at 112 pixels on dark"
+              width="112"
+              height="112"
+            />
+          </div>
+          <figcaption class="mt-6 text-center text-sm text-text-secondary">
+            16 · 32 · 64 · 112 px on dark
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="photography-heading" class="space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Photography and editorial
+        </p>
+        <h2
+          id="photography-heading"
+          class="text-2xl font-semibold text-text-heading"
+        >
+          Site imagery
+        </h2>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article
+          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
+        >
+          <div class="grid grid-cols-2 gap-px bg-border">
+            <img
+              src="/images/joe-saia-headshot.jpg"
+              alt="Joe Saia portrait in its native four-by-five crop"
+              width="900"
+              height="1125"
+              class="aspect-4/5 h-full w-full bg-surface object-cover"
+            />
+            <img
+              src="/images/joe-saia-headshot.jpg"
+              alt="Joe Saia portrait stress-tested in a square crop"
+              width="900"
+              height="1125"
+              class="aspect-square w-full bg-surface object-cover"
+            />
+          </div>
+          <div class="space-y-2 p-5">
+            <h3 class="font-medium text-text-heading">Joe Saia headshot</h3>
+            <p class="text-sm leading-relaxed text-text-secondary">
+              Homepage hero · native 4:5 at left · square crop at right
+            </p>
+          </div>
+        </article>
+
+        <article
+          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
+        >
+          <div
+            class="flex h-[26rem] items-start justify-center overflow-auto bg-surface-overlay p-4"
+          >
+            <img
+              src={articleImage.src}
+              alt="I made this meme from the article of the same name"
+              width={articleImage.width}
+              height={articleImage.height}
+              class="h-auto max-w-full"
+            />
+          </div>
+          <div class="space-y-2 p-5">
+            <h3 class="font-medium text-text-heading">
+              “I made this” article image
+            </h3>
+            <p class="text-sm leading-relaxed text-text-secondary">
+              Inline editorial image · portrait 500 × 1089 · scroll to inspect
+              full height
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="inventory-heading" class="space-y-6">
+      <div class="max-w-3xl space-y-2">
+        <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Inventory
+        </p>
+        <h2
+          id="inventory-heading"
+          class="text-2xl font-semibold text-text-heading"
+        >
+          All current image files
+        </h2>
+      </div>
+
+      <div class="overflow-hidden rounded-xl border border-border">
+        <div class="divide-y divide-border">
+          {
+            assets.map((asset) => (
+              <article class="grid gap-4 bg-surface-raised p-5 sm:grid-cols-[64px_1fr] sm:items-center">
+                <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded border border-border bg-surface-overlay">
+                  <img
+                    src={asset.path}
+                    alt=""
+                    class="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="grid gap-2 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+                  <div>
+                    <h3 class="font-medium text-text-heading">{asset.name}</h3>
+                    <p class="mt-1 break-all font-mono text-xs text-text-muted">
+                      {asset.displayPath ?? asset.path}
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-text-primary">{asset.usage}</p>
+                    <p class="mt-1 text-xs text-text-muted">{asset.details}</p>
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

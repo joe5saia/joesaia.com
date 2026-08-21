@@ -7,7 +7,11 @@ import { env } from "node:process";
 // https://astro.build/config
 export default defineConfig({
   site: "https://joesaia.com",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.endsWith("/brand-assets/"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
     server: {
