@@ -6,8 +6,6 @@ tags: ["AI", "AI Coding Agents"]
 featured: true
 ---
 
-# Good Software Design Is a Fad
-
 We're living through a moment of rapid change in how software is designed and written using AI agents. These agents are increasingly good and fast at writing large amounts of high-quality code. They're not perfect yet, but in the more routine areas of software engineering, e.g., building a CRUD app with a simple domain model, they can largely one-shot this. There's a lot of focus on the code that they output and its quality. The biggest complaint is how verbose it can be and that it is not nearly as lean as well-written human code, which I agree with, but I increasingly think that this is irrelevant. Similar to how [Good Engineering Management is a Fad](https://lethain.com/good-eng-mgmt-is-a-fad/), I think that good software design is a fad.
 
 ## What “good software design” has meant at different moments

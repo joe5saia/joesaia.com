@@ -7,6 +7,9 @@ import { env } from "node:process";
 // https://astro.build/config
 export default defineConfig({
   site: "https://joesaia.com",
+  build: {
+    inlineStylesheets: "always",
+  },
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith("/brand-assets/"),

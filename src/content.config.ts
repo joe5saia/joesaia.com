@@ -7,7 +7,7 @@ const writing = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
-    summary: z.string(),
+    summary: z.string().trim().min(1),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional().default(false),
     draft: z.boolean().optional().default(false),

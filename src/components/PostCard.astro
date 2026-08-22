@@ -24,12 +24,12 @@ const { title, date, summary, slug, featured } = Astro.props;
             })
           }
         </time>
-        <h3
+        <h2
           class="text-lg font-medium mt-1 text-text-heading group-hover:text-accent transition-colors"
         >
           {title}
           {featured && <span class="ml-2 text-xs text-accent">Featured</span>}
-        </h3>
+        </h2>
         <p class="text-text-secondary text-sm mt-1 line-clamp-2">{summary}</p>
       </div>
       <svg

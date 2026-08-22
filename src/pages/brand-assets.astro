@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import articleImage from "../content/writing/i_made_this_meme.jpg";
+import headshot from "../assets/joe-saia-headshot.jpg";
 
 const assets = [
   {
@@ -17,7 +18,8 @@ const assets = [
   },
   {
     name: "Joe Saia headshot",
-    path: "/images/joe-saia-headshot.jpg",
+    path: headshot.src,
+    displayPath: "src/assets/joe-saia-headshot.jpg",
     details: "JPEG · 900 × 1125 · 138 KB",
     usage: "Homepage hero portrait",
   },
@@ -274,17 +276,17 @@ const assets = [
         >
           <div class="grid grid-cols-2 gap-px bg-border">
             <img
-              src="/images/joe-saia-headshot.jpg"
+              src={headshot.src}
               alt="Joe Saia portrait in its native four-by-five crop"
-              width="900"
-              height="1125"
+              width={headshot.width}
+              height={headshot.height}
               class="aspect-4/5 h-full w-full bg-surface object-cover"
             />
             <img
-              src="/images/joe-saia-headshot.jpg"
+              src={headshot.src}
               alt="Joe Saia portrait stress-tested in a square crop"
-              width="900"
-              height="1125"
+              width={headshot.width}
+              height={headshot.height}
               class="aspect-square w-full bg-surface object-cover"
             />
           </div>

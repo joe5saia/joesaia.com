@@ -1,7 +1,7 @@
 ---
 title: "Agents as New Consultants"
 date: 2026-08-17
-summary: ""
+summary: "Frontier labs are training AI agents to work like long-running consultants, favoring general-purpose autonomy over deeper software specialization."
 featured: false
 draft: false
 ---
@@ -14,4 +14,4 @@ The latest [Sol models](https://ampcode.com/manual#models) are where I feel the 
 
 I understand why the labs are chasing this scent. It feels like the best shot at reaching some general threshold of "good" across many different tasks as quickly as possible. As someone who uses these models primarily for software engineering, it's a little frustrating that they are not working toward a more straightforward "write better code" direction. Intuitively, it also feels like the models would be more efficient if they had a better sense of what good code looks like, but I'm not sure that's true. With Gemini, Google seemed to bet on putting as much knowledge as possible into the model. Gemini 3 Pro stood out to me for factual recall—an area where it [led Google's FACTS benchmark suite](https://deepmind.google/blog/facts-benchmark-suite-systematically-evaluating-the-factuality-of-large-language-models/)—but in my experience, that factual fluency did not translate into equally strong reasoning, and the model was disappointing overall and allegedly so was Gemini 3.5 Pro.
 
-Overall, this really leans into a declaritve style of prompting, where you give the agent a goal and constraints and let it optimize within that space. 
+Overall, this really leans into a declaritve style of prompting, where you give the agent a goal and constraints and let it optimize within that space.

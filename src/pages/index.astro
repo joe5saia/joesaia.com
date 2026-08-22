@@ -1,12 +1,51 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Picture } from "astro:assets";
+import headshot from "../assets/joe-saia-headshot.jpg";
+
+const siteUrl = new URL("/", Astro.site).toString();
+const personId = `${siteUrl}#person`;
+const homepageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: "Joe Saia",
+      url: siteUrl,
+      jobTitle: "Engineering and data leader",
+      sameAs: [
+        "https://github.com/joe5saia/",
+        "https://www.linkedin.com/in/joe-saia/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: "Joe Saia",
+      description:
+        "Engineering and data leadership portfolio and writing by Joe Saia.",
+      inLanguage: "en-US",
+      publisher: { "@id": personId },
+    },
+  ],
+};
 ---
 
 <BaseLayout
-  title="Joe Saia"
+  title="Joe Saia — Engineering & Data Leader"
   description="Engineering and data leader. PhD economist. 15 years building software, data, and the teams behind them in healthtech and startups."
   wide
 >
+  <Fragment slot="head">
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(homepageJsonLd)}
+    />
+  </Fragment>
+
   <section class="space-y-16">
     <div class="grid items-center gap-10 lg:grid-cols-[1fr_320px]">
       <div class="space-y-6">
@@ -57,11 +96,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <figure class="rounded-2xl border border-border bg-surface-raised p-2">
-        <img
-          src="/images/joe-saia-headshot.jpg"
+        <Picture
+          src={headshot}
           alt="Joe Saia"
-          width="900"
-          height="1125"
+          formats={["avif", "webp"]}
+          widths={[320, 640, 900]}
+          sizes="(min-width: 1024px) 320px, calc(100vw - 3rem)"
+          width={900}
+          height={1125}
+          loading="eager"
+          fetchpriority="high"
           class="aspect-4/5 w-full rounded-xl object-cover"
         />
       </figure>
