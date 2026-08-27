@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
+import Eyebrow from "../../../design-system/components/Eyebrow.astro";
 import { getCollection } from "astro:content";
 
 const posts = (
@@ -17,7 +18,7 @@ const posts = (
   wide
 >
   <section class="page-intro" aria-labelledby="writing-title">
-    <p class="page-eyebrow"><span>03</span> Field notes</p>
+    <Eyebrow index="03">Field notes</Eyebrow>
     <div>
       <h1 class="page-title" id="writing-title">Writing</h1>
       <p class="page-dek">

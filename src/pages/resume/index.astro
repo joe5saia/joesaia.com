@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../../design-system/components/Button.astro";
+import Eyebrow from "../../../design-system/components/Eyebrow.astro";
 
 const experience = [
   {
@@ -116,7 +118,7 @@ const skills = [
   wide
 >
   <section class="page-intro" aria-labelledby="resume-title">
-    <p class="page-eyebrow"><span>04</span> Career record</p>
+    <Eyebrow index="04">Career record</Eyebrow>
     <div>
       <h1 class="page-title" id="resume-title">Résumé</h1>
       <p class="page-dek">
@@ -126,16 +128,14 @@ const skills = [
         outsized business impact.
       </p>
       <div class="resume-actions" role="group" aria-label="Download résumé">
-        <a
-          href="/joe_saia_resume.pdf"
-          download
-          class="theme-button theme-button--solid"
-        >
-          PDF <span aria-hidden="true">↓</span>
-        </a>
-        <a href="/joe_saia_resume.docx" download class="theme-button">
-          DOCX <span aria-hidden="true">↓</span>
-        </a>
+        <Button href="/joe_saia_resume.pdf" download variant="primary">
+          PDF
+          <span slot="icon">↓</span>
+        </Button>
+        <Button href="/joe_saia_resume.docx" download>
+          DOCX
+          <span slot="icon">↓</span>
+        </Button>
       </div>
     </div>
   </section>

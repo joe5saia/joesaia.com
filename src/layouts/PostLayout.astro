@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import SurvivalTo80Chart from "../components/SurvivalTo80Chart.astro";
+import Badge from "../../design-system/components/Badge.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -77,7 +78,7 @@ const articleJsonLd = {
           tags && tags.length > 0 && (
             <div class="article-tags" aria-label="Topics">
               {tags.map((tag: string) => (
-                <span class="theme-tag">{tag}</span>
+                <Badge>{tag}</Badge>
               ))}
             </div>
           )

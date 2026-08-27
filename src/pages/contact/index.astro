@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../../design-system/components/Button.astro";
+import Eyebrow from "../../../design-system/components/Eyebrow.astro";
 ---
 
 <BaseLayout
@@ -8,7 +10,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   wide
 >
   <section class="page-intro" aria-labelledby="contact-title">
-    <p class="page-eyebrow"><span>05</span> Open channel</p>
+    <Eyebrow index="05">Open channel</Eyebrow>
     <div>
       <h1 class="page-title" id="contact-title">Contact</h1>
       <p class="page-dek">
@@ -27,12 +29,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         Email is the most direct route. Tell me what you're working on, what
         feels difficult, and where you think I might be useful.
       </p>
-      <a
-        class="theme-button theme-button--solid"
-        href="mailto:joe5saia@gmail.com"
-      >
-        Write to Joe <span aria-hidden="true">↗</span>
-      </a>
+      <div class="contact-action">
+        <Button href="mailto:joe5saia@gmail.com" variant="primary">
+          Write to Joe
+          <span slot="icon">↗</span>
+        </Button>
+      </div>
     </div>
 
     <div class="contact-routes">
@@ -114,7 +116,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     line-height: 1.75;
   }
 
-  .contact-prompt .theme-button {
+  .contact-action {
     margin-top: 2.25rem;
   }
 

@@ -1,0 +1,41 @@
+---
+type Orientation = "horizontal" | "vertical";
+
+interface Props {
+  class?: string;
+  decorative?: boolean;
+  orientation?: Orientation;
+}
+
+const {
+  class: className,
+  decorative = true,
+  orientation = "horizontal",
+} = Astro.props;
+---
+
+<div
+  class:list={["ds-divider", `ds-divider--${orientation}`, className]}
+  role={decorative ? undefined : "separator"}
+  aria-hidden={decorative ? "true" : undefined}
+  aria-orientation={decorative ? undefined : orientation}
+>
+</div>
+
+<style>
+  .ds-divider {
+    flex: none;
+    background: var(--color-border);
+  }
+
+  .ds-divider--horizontal {
+    width: 100%;
+    height: var(--line-width);
+  }
+
+  .ds-divider--vertical {
+    width: var(--line-width);
+    min-height: 100%;
+    align-self: stretch;
+  }
+</style>

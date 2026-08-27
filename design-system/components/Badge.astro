@@ -1,0 +1,70 @@
+---
+type Tone = "accent" | "neutral";
+type Size = "small" | "medium";
+
+interface Props {
+  class?: string;
+  size?: Size;
+  tone?: Tone;
+}
+
+const { class: className, size = "small", tone = "accent" } = Astro.props;
+const hasContent = Astro.slots.has("default");
+const hasIcon = Astro.slots.has("icon");
+---
+
+{
+  hasContent && (
+    <span
+      class:list={[
+        "ds-badge",
+        `ds-badge--${tone}`,
+        `ds-badge--${size}`,
+        className,
+      ]}
+    >
+      {hasIcon && (
+        <span class="ds-badge__icon" aria-hidden="true">
+          <slot name="icon" />
+        </span>
+      )}
+      <slot />
+    </span>
+  )
+}
+
+<style>
+  .ds-badge {
+    display: inline-flex;
+    border: var(--line-width) solid
+      color-mix(in srgb, var(--color-accent) 30%, transparent);
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .ds-badge--small {
+    padding: 0.28rem 0.5rem;
+    font-size: 0.58rem;
+  }
+
+  .ds-badge--medium {
+    padding: 0.4rem 0.625rem;
+    font-size: 0.65rem;
+  }
+
+  .ds-badge--neutral {
+    border-color: var(--color-border-hover);
+    color: var(--color-text-secondary);
+  }
+
+  .ds-badge__icon {
+    display: inline-flex;
+    font-size: 0.9em;
+  }
+</style>

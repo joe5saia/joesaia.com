@@ -1,0 +1,149 @@
+/*
+ * Joe Saia design tokens
+ *
+ * This is the visual source of truth for joesaia.com. Components should use
+ * semantic tokens. The short aliases at the end preserve the vocabulary used
+ * by the existing site while it is incrementally migrated.
+ */
+
+/* Raw values are private inputs for framework mappings. */
+:root {
+  /* Surfaces */
+  --ds-color-surface: #070d10;
+  --ds-color-surface-raised: #0b161d;
+  --ds-color-surface-overlay: #11222a;
+
+  /* Borders */
+  --ds-color-border: rgba(238, 230, 216, 0.17);
+  --ds-color-border-hover: rgba(238, 230, 216, 0.34);
+
+  /* Text */
+  --ds-color-text-primary: #eee6d8;
+  --ds-color-text-heading: #f6efe3;
+  --ds-color-text-secondary: #a9b2b3;
+  --ds-color-text-muted: #778487;
+
+  /* Brand accent */
+  --ds-color-accent: #d47a3b;
+  --ds-color-accent-hover: #f2a44f;
+  --ds-color-accent-subtle: rgba(212, 122, 59, 0.12);
+
+  /* Controls */
+  --ds-color-btn-bg: #11222a;
+  --ds-color-btn-bg-hover: #17303a;
+
+  /* Type families */
+  --ds-font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --ds-font-serif:
+    "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Public semantic colors */
+  --color-surface: var(--ds-color-surface);
+  --color-surface-raised: var(--ds-color-surface-raised);
+  --color-surface-overlay: var(--ds-color-surface-overlay);
+  --color-border: var(--ds-color-border);
+  --color-border-hover: var(--ds-color-border-hover);
+  --color-text-primary: var(--ds-color-text-primary);
+  --color-text-heading: var(--ds-color-text-heading);
+  --color-text-secondary: var(--ds-color-text-secondary);
+  --color-text-muted: var(--ds-color-text-muted);
+  --color-accent: var(--ds-color-accent);
+  --color-accent-hover: var(--ds-color-accent-hover);
+  --color-accent-subtle: var(--ds-color-accent-subtle);
+  --color-btn-bg: var(--ds-color-btn-bg);
+  --color-btn-bg-hover: var(--ds-color-btn-bg-hover);
+
+  /* Typography */
+  --font-sans: var(--ds-font-sans);
+  --font-serif: var(--ds-font-serif);
+  --font-display: var(--ds-font-serif);
+  --font-body: var(--ds-font-sans);
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  --text-display: clamp(4rem, 9vw, 8.8rem);
+  --text-heading-1: clamp(3.8rem, 8vw, 7rem);
+  --text-heading-2: clamp(2.9rem, 6.6vw, 5.5rem);
+  --text-heading-3: clamp(1.75rem, 3.4vw, 3rem);
+  --text-lead: clamp(1.05rem, 1.7vw, 1.28rem);
+  --text-body: 1rem;
+  --text-small: 0.8rem;
+  --text-label: 0.68rem;
+  --leading-display: 0.92;
+  --leading-heading: 1.05;
+  --leading-body: 1.65;
+  --tracking-display: -0.055em;
+  --tracking-label: 0.16em;
+
+  /* Spacing: a four-pixel base with a restrained editorial extension. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* Layout */
+  --gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --page-width: 92rem;
+  --content-width: 78rem;
+  --reading-width: 43rem;
+
+  /* Shape and line */
+  --radius-none: 0;
+  --radius-focus: 2px;
+  --radius-small: 0.25rem;
+  --radius-medium: 0.75rem;
+  --radius-pill: 999px;
+  --line-width: 1px;
+
+  /* Elevation: hierarchy comes from surface and line before shadow. */
+  --shadow-header: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.22);
+  --shadow-focus: 0 0 0 0.25rem rgba(242, 164, 79, 0.18);
+  --z-below: -1;
+  --z-base: 0;
+  --z-content: 1;
+  --z-header: 50;
+  --z-skip-link: 100;
+
+  /* Motion */
+  --duration-fast: 160ms;
+  --duration-medium: 240ms;
+  --duration-ambient: 14.5s;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
+
+  /* Focus */
+  --focus-color: var(--color-accent-hover);
+  --focus-width: 3px;
+  --focus-offset: 5px;
+
+  /* Existing site aliases. Do not introduce new aliases in components. */
+  --ink: var(--color-surface);
+  --ink-blue: var(--color-surface-raised);
+  --ink-lift: var(--color-surface-overlay);
+  --bone: var(--color-text-primary);
+  --bone-bright: var(--color-text-heading);
+  --mist: var(--color-text-secondary);
+  --mist-dim: var(--color-text-muted);
+  --copper: var(--color-accent);
+  --amber: var(--color-accent-hover);
+  --line: var(--color-border);
+  --line-bright: var(--color-border-hover);
+}
+
+@media (max-width: 44rem) {
+  :root {
+    --gutter: 1.25rem;
+  }
+}

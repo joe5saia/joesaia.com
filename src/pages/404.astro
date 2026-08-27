@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../../design-system/components/Button.astro";
 ---
 
 <BaseLayout
@@ -24,8 +25,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h1 id="error-title">This route drifted out of the field.</h1>
       <p>The page you're looking for doesn't exist or has been moved.</p>
       <div class="error-actions">
-        <a href="/" class="theme-button theme-button--solid">Return home</a>
-        <a href="/writing/" class="theme-button">Browse writing</a>
+        <Button href="/" variant="primary">Return home</Button>
+        <Button href="/writing/">Browse writing</Button>
       </div>
     </div>
   </section>

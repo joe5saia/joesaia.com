@@ -1,0 +1,42 @@
+---
+type Element = "p" | "span";
+
+interface Props {
+  as?: Element;
+  class?: string;
+  index?: string;
+}
+
+const { as = "p", class: className, index } = Astro.props as Props;
+const Tag = as;
+---
+
+<Tag class:list={["ds-eyebrow", className]}>
+  {index && <span aria-hidden="true">{index}</span>}
+  <slot />
+</Tag>
+
+<style>
+  .ds-eyebrow {
+    margin: 0;
+    padding-top: 0.75rem;
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .ds-eyebrow span {
+    margin-right: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 44rem) {
+    .ds-eyebrow {
+      padding-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,959 @@
+---
+import Badge from "./components/Badge.astro";
+import Button from "./components/Button.astro";
+import Divider from "./components/Divider.astro";
+import Eyebrow from "./components/Eyebrow.astro";
+
+const colors = [
+  {
+    name: "Canvas",
+    token: "--color-surface",
+    value: "#070d10",
+  },
+  {
+    name: "Raised",
+    token: "--color-surface-raised",
+    value: "#0b161d",
+  },
+  {
+    name: "Overlay",
+    token: "--color-surface-overlay",
+    value: "#11222a",
+  },
+  {
+    name: "Primary text",
+    token: "--color-text-primary",
+    value: "#eee6d8",
+  },
+  {
+    name: "Secondary text",
+    token: "--color-text-secondary",
+    value: "#a9b2b3",
+  },
+  {
+    name: "Muted text",
+    token: "--color-text-muted",
+    value: "#778487",
+  },
+  {
+    name: "Structural accent",
+    token: "--color-accent",
+    value: "#d47a3b",
+  },
+  {
+    name: "Interactive accent",
+    token: "--color-accent-hover",
+    value: "#f2a44f",
+  },
+];
+
+const spacing = [
+  ["01", "0.25rem", "--space-1"],
+  ["02", "0.5rem", "--space-2"],
+  ["03", "0.75rem", "--space-3"],
+  ["04", "1rem", "--space-4"],
+  ["05", "1.5rem", "--space-5"],
+  ["06", "2rem", "--space-6"],
+  ["07", "3rem", "--space-7"],
+  ["08", "4rem", "--space-8"],
+];
+---
+
+<div class="ds-catalog">
+  <header class="ds-catalog__hero">
+    <Eyebrow index="00">System reference</Eyebrow>
+    <div class="ds-catalog__intro">
+      <h1>The system behind the work.</h1>
+      <p>
+        A site-scoped language for presenting technical ideas with editorial
+        clarity, measured warmth, and the least interface necessary.
+      </p>
+    </div>
+    <dl class="ds-catalog__status">
+      <div>
+        <dt>Version</dt>
+        <dd>1.0.0</dd>
+      </div>
+      <div>
+        <dt>Checklist</dt>
+        <dd>230 items audited</dd>
+      </div>
+      <div>
+        <dt>Accessibility</dt>
+        <dd>WCAG 2.2 AA target</dd>
+      </div>
+    </dl>
+  </header>
+
+  <nav class="ds-catalog__nav" aria-label="Design system sections">
+    <a href="#color"><span>01</span> Color</a>
+    <a href="#type"><span>02</span> Type</a>
+    <a href="#layout"><span>03</span> Layout</a>
+    <a href="#components"><span>04</span> Components</a>
+    <a href="#content"><span>05</span> Content</a>
+  </nav>
+
+  <section class="ds-section" id="color" aria-labelledby="color-title">
+    <header class="ds-section__heading">
+      <Eyebrow index="01">Foundation</Eyebrow>
+      <div>
+        <h2 id="color-title">Color is signal, not scenery.</h2>
+        <p>
+          Ink carries the canvas. Bone carries the argument. Copper gives the
+          structure a pulse; amber appears when the reader can act.
+        </p>
+      </div>
+    </header>
+
+    <ul class="ds-swatches" aria-label="Color tokens">
+      {
+        colors.map((color) => (
+          <li>
+            <div
+              class="ds-swatch"
+              style={`--swatch-color: var(${color.token})`}
+              aria-hidden="true"
+            />
+            <div>
+              <h3>{color.name}</h3>
+              <code>{color.token}</code>
+              <span>{color.value}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="ds-section" id="type" aria-labelledby="type-title">
+    <header class="ds-section__heading">
+      <Eyebrow index="02">Foundation</Eyebrow>
+      <div>
+        <h2 id="type-title">Editorial range. System discipline.</h2>
+        <p>
+          The display stack carries perspective and cadence. The sans stack
+          carries facts, navigation, and sustained reading.
+        </p>
+      </div>
+    </header>
+
+    <div class="ds-type-specimens">
+      <article class="ds-type-specimen ds-type-specimen--display">
+        <p class="ds-type-meta">Display · `--font-display`</p>
+        <p class="ds-type-display">
+          Ideas should move through the whole system.
+        </p>
+        <p class="ds-type-note">
+          Fluid scale · regular weight · tight tracking
+        </p>
+      </article>
+      <article class="ds-type-specimen ds-type-specimen--body">
+        <p class="ds-type-meta">Body · `--font-body`</p>
+        <p class="ds-type-body">
+          Economics taught me to make assumptions explicit and separate signal
+          from noise. Engineering taught me that a correct model only matters if
+          it can survive contact with a real product, organization, and user.
+        </p>
+        <p class="ds-type-note">1rem · 1.65 line height · 43rem max measure</p>
+      </article>
+      <article class="ds-type-specimen ds-type-specimen--labels">
+        <p class="ds-type-meta">Label · `--text-label`</p>
+        <p class="ds-type-label">03 · Working thesis</p>
+        <p class="ds-type-note">Uppercase · bold · wide tracking</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="ds-section" id="layout" aria-labelledby="layout-title">
+    <header class="ds-section__heading">
+      <Eyebrow index="03">Foundation</Eyebrow>
+      <div>
+        <h2 id="layout-title">A measured field.</h2>
+        <p>
+          A four-pixel base scale sets local rhythm. Fluid gutters and a
+          twelve-column field create range without tying the system to devices.
+        </p>
+      </div>
+    </header>
+
+    <div class="ds-layout-grid">
+      <article class="ds-spacing-card">
+        <div class="ds-card-heading">
+          <h3>Spacing scale</h3>
+          <span>4px base</span>
+        </div>
+        <ol>
+          {
+            spacing.map(([label, value, token]) => (
+              <li>
+                <span>{label}</span>
+                <div
+                  style={`--spacing-width: var(${token})`}
+                  aria-hidden="true"
+                />
+                <code>{value}</code>
+              </li>
+            ))
+          }
+        </ol>
+      </article>
+
+      <article class="ds-grid-card">
+        <div class="ds-card-heading">
+          <h3>Twelve-column grid</h3>
+          <span>Collapses by content</span>
+        </div>
+        <div class="ds-grid-visual" aria-hidden="true">
+          {Array.from({ length: 12 }).map(() => <span />)}
+        </div>
+        <dl>
+          <div><dt>Page</dt><dd>92rem</dd></div>
+          <div><dt>Content</dt><dd>78rem</dd></div>
+          <div><dt>Reading</dt><dd>43rem</dd></div>
+        </dl>
+      </article>
+    </div>
+  </section>
+
+  <section
+    class="ds-section"
+    id="components"
+    aria-labelledby="components-title"
+  >
+    <header class="ds-section__heading">
+      <Eyebrow index="04">Components</Eyebrow>
+      <div>
+        <h2 id="components-title">Only the interface the work needs.</h2>
+        <p>
+          Small semantic primitives support navigation and metadata. Site-level
+          compositions stay close to the content they present.
+        </p>
+      </div>
+    </header>
+
+    <div class="ds-component-list">
+      <article class="ds-component">
+        <header class="ds-component__heading">
+          <div>
+            <p>01</p>
+            <h3>Button</h3>
+          </div>
+          <code>Button.astro</code>
+        </header>
+        <div class="ds-component__body">
+          <div class="ds-component__row">
+            <Button variant="primary">
+              Primary action
+              <span slot="icon">↗</span>
+            </Button>
+            <Button>
+              Secondary action
+              <span slot="icon">→</span>
+            </Button>
+            <Button variant="quiet">Quiet action</Button>
+          </div>
+          <div class="ds-component__row">
+            <Button size="small">Small</Button>
+            <Button disabled>Disabled</Button>
+            <Button loading>Saving</Button>
+          </div>
+        </div>
+      </article>
+
+      <article class="ds-component">
+        <header class="ds-component__heading">
+          <div>
+            <p>02</p>
+            <h3>Badge</h3>
+          </div>
+          <code>Badge.astro</code>
+        </header>
+        <div class="ds-component__body ds-component__row">
+          <Badge>Technical leadership</Badge>
+          <Badge tone="neutral">Field note</Badge>
+          <Badge size="medium">
+            <span slot="icon">◆</span>
+            Featured
+          </Badge>
+        </div>
+      </article>
+
+      <article class="ds-component">
+        <header class="ds-component__heading">
+          <div>
+            <p>03</p>
+            <h3>Eyebrow and divider</h3>
+          </div>
+          <code>Eyebrow.astro · Divider.astro</code>
+        </header>
+        <div class="ds-component__body ds-structural-sample">
+          <Eyebrow index="03">Working thesis</Eyebrow>
+          <Divider decorative={false} />
+          <p>
+            Section labels establish location. Dividers establish rhythm.
+            Neither should compete with the content that follows.
+          </p>
+        </div>
+      </article>
+
+      <article class="ds-component">
+        <header class="ds-component__heading">
+          <div>
+            <p>04</p>
+            <h3>Editorial card</h3>
+          </div>
+          <code>PostCard.astro</code>
+        </header>
+        <div class="ds-post-sample">
+          <p class="ds-post-number">01</p>
+          <p class="ds-post-meta">Aug 27, 2026<br /><span>Featured</span></p>
+          <div>
+            <h4>Build the smallest system that clarifies the work.</h4>
+            <p>
+              A card is a composition of title, context, summary, and
+              destination—not a rounded rectangle applied to arbitrary content.
+            </p>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="ds-section" id="content" aria-labelledby="content-title">
+    <header class="ds-section__heading">
+      <Eyebrow index="05">Content</Eyebrow>
+      <div>
+        <h2 id="content-title">Concrete, calm, and honest.</h2>
+        <p>
+          The voice respects the reader's time. It names the work and its limits
+          without flattening the ideas behind it.
+        </p>
+      </div>
+    </header>
+
+    <div class="ds-content-guidance">
+      <article>
+        <p class="ds-content-label">Use</p>
+        <blockquote>
+          “Building software, data systems, and teams for high-stakes,
+          high-growth environments.”
+        </blockquote>
+        <p>Specific domain, concrete verbs, measured confidence.</p>
+      </article>
+      <article>
+        <p class="ds-content-label ds-content-label--avoid">Avoid</p>
+        <blockquote>
+          “Revolutionizing the future with game-changing AI solutions!”
+        </blockquote>
+        <p>
+          Generic claims, inflated language, and punctuation doing the work.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="ds-catalog__footer">
+    <Eyebrow>Joe Saia design system</Eyebrow>
+    <p>Version 1.0.0 · Built for the work, maintained with the site.</p>
+  </footer>
+</div>
+
+<style>
+  .ds-catalog {
+    --catalog-rule: var(--color-border-hover);
+  }
+
+  .ds-catalog__hero {
+    display: grid;
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+    grid-template-columns: minmax(9rem, 0.38fr) minmax(0, 1.62fr);
+    gap: var(--space-6) clamp(2rem, 7vw, 7rem);
+    border-bottom: var(--line-width) solid var(--catalog-rule);
+  }
+
+  .ds-catalog__intro h1,
+  .ds-catalog__intro p,
+  .ds-section__heading h2,
+  .ds-section__heading p {
+    margin: 0;
+  }
+
+  .ds-catalog__intro h1 {
+    max-width: 61rem;
+    color: var(--color-text-heading);
+    font-size: var(--text-display);
+    letter-spacing: -0.065em;
+    line-height: 0.84;
+  }
+
+  .ds-catalog__intro > p {
+    max-width: var(--reading-width);
+    margin-top: var(--space-6);
+    color: var(--color-text-secondary);
+    font-size: var(--text-lead);
+  }
+
+  .ds-catalog__status {
+    display: grid;
+    margin: var(--space-7) 0 0;
+    grid-column: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .ds-catalog__status div {
+    padding-top: var(--space-3);
+    border-top: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-catalog__status dt,
+  .ds-catalog__status dd {
+    margin: 0;
+  }
+
+  .ds-catalog__status dt {
+    color: var(--color-text-muted);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  .ds-catalog__status dd {
+    margin-top: var(--space-2);
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+  }
+
+  .ds-catalog__nav {
+    display: flex;
+    padding: var(--space-5) 0;
+    justify-content: space-between;
+    gap: var(--space-5);
+    border-bottom: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-catalog__nav a {
+    color: var(--color-text-secondary);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .ds-catalog__nav a span {
+    margin-right: var(--space-2);
+    color: var(--color-accent);
+  }
+
+  .ds-catalog__nav a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .ds-section {
+    padding: clamp(5rem, 10vw, 10rem) 0;
+    scroll-margin-top: 6rem;
+  }
+
+  .ds-section + .ds-section {
+    border-top: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-section__heading {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.38fr) minmax(0, 1.62fr);
+    gap: var(--space-6) clamp(2rem, 7vw, 7rem);
+  }
+
+  .ds-section__heading h2 {
+    max-width: 61rem;
+    color: var(--color-text-heading);
+    font-size: var(--text-heading-2);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+
+  .ds-section__heading div > p {
+    max-width: 38rem;
+    margin-top: var(--space-5);
+    color: var(--color-text-secondary);
+  }
+
+  .ds-swatches {
+    display: grid;
+    margin: var(--space-8) 0 0;
+    padding: 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6) var(--space-4);
+    list-style: none;
+  }
+
+  .ds-swatches li {
+    min-width: 0;
+  }
+
+  .ds-swatch {
+    height: clamp(6rem, 10vw, 9rem);
+    border: var(--line-width) solid var(--color-border);
+    background: var(--swatch-color);
+  }
+
+  .ds-swatches h3 {
+    margin: var(--space-3) 0 0;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .ds-swatches code,
+  .ds-swatches span {
+    display: block;
+    overflow: hidden;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    line-height: 1.6;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ds-type-specimens {
+    margin-top: var(--space-8);
+    border-top: var(--line-width) solid var(--catalog-rule);
+  }
+
+  .ds-type-specimen {
+    display: grid;
+    padding: clamp(2.5rem, 5vw, 5rem) 0;
+    grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1.3fr) minmax(
+        9rem,
+        0.35fr
+      );
+    align-items: start;
+    gap: var(--space-6);
+    border-bottom: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-type-specimen p {
+    margin: 0;
+  }
+
+  .ds-type-meta,
+  .ds-type-note {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    line-height: 1.6;
+  }
+
+  .ds-type-display {
+    color: var(--color-text-heading);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 6rem);
+    letter-spacing: -0.05em;
+    line-height: 0.96;
+  }
+
+  .ds-type-body {
+    max-width: var(--reading-width);
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: var(--leading-body);
+  }
+
+  .ds-type-label {
+    color: var(--color-accent);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .ds-layout-grid {
+    display: grid;
+    margin-top: var(--space-8);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .ds-spacing-card,
+  .ds-grid-card {
+    border: var(--line-width) solid var(--color-border);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-raised) 72%,
+      transparent
+    );
+  }
+
+  .ds-card-heading {
+    display: flex;
+    padding-bottom: var(--space-4);
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    border-bottom: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-card-heading h3,
+  .ds-card-heading span {
+    margin: 0;
+  }
+
+  .ds-card-heading h3 {
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    font-weight: 400;
+  }
+
+  .ds-card-heading span {
+    color: var(--color-text-muted);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ds-spacing-card ol {
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ds-spacing-card li {
+    display: grid;
+    min-height: 2rem;
+    grid-template-columns: 2rem 1fr 4rem;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+  }
+
+  .ds-spacing-card li div {
+    width: var(--spacing-width);
+    height: var(--space-2);
+    background: var(--color-accent);
+  }
+
+  .ds-grid-visual {
+    display: grid;
+    height: 13rem;
+    margin-top: var(--space-5);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .ds-grid-visual span {
+    background: var(--color-accent-subtle);
+    box-shadow: inset 0 0 0 var(--line-width)
+      color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+
+  .ds-grid-card dl {
+    display: grid;
+    margin: var(--space-5) 0 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  .ds-grid-card dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+  }
+
+  .ds-grid-card dd {
+    margin: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .ds-component-list {
+    margin-top: var(--space-8);
+    border-top: var(--line-width) solid var(--catalog-rule);
+  }
+
+  .ds-component {
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    border-bottom: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-component__heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .ds-component__heading > div {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+
+  .ds-component__heading p,
+  .ds-component__heading h3 {
+    margin: 0;
+  }
+
+  .ds-component__heading p {
+    color: var(--color-accent);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .ds-component__heading h3 {
+    color: var(--color-text-heading);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+  }
+
+  .ds-component__heading code {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+  }
+
+  .ds-component__body {
+    margin-top: var(--space-7);
+  }
+
+  .ds-component__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .ds-component__row + .ds-component__row {
+    margin-top: var(--space-5);
+  }
+
+  .ds-structural-sample {
+    display: grid;
+    max-width: 58rem;
+    grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1.65fr);
+    gap: var(--space-5) var(--space-7);
+  }
+
+  .ds-structural-sample :global(.ds-divider) {
+    grid-column: 1 / -1;
+  }
+
+  .ds-structural-sample > p {
+    max-width: 34rem;
+    margin: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .ds-post-sample {
+    display: grid;
+    margin-top: var(--space-7);
+    padding: var(--space-6) 0;
+    grid-template-columns: 3rem minmax(8rem, 0.4fr) minmax(0, 1.4fr) 2rem;
+    align-items: start;
+    gap: clamp(1rem, 3vw, 3rem);
+    border-top: var(--line-width) solid var(--color-border-hover);
+    border-bottom: var(--line-width) solid var(--color-border);
+  }
+
+  .ds-post-sample p,
+  .ds-post-sample h4 {
+    margin: 0;
+  }
+
+  .ds-post-number,
+  .ds-post-meta {
+    color: var(--color-text-muted);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ds-post-number,
+  .ds-post-meta span,
+  .ds-post-sample > span {
+    color: var(--color-accent);
+  }
+
+  .ds-post-sample h4 {
+    color: var(--color-text-heading);
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 3.4vw, 3rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+
+  .ds-post-sample div p {
+    max-width: 43rem;
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: 0.93rem;
+  }
+
+  .ds-content-guidance {
+    display: grid;
+    margin-top: var(--space-8);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .ds-content-guidance article {
+    border-top: var(--line-width) solid var(--catalog-rule);
+    padding-top: var(--space-5);
+  }
+
+  .ds-content-label {
+    margin: 0;
+    color: var(--color-accent-hover);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  .ds-content-label--avoid {
+    color: var(--color-text-muted);
+  }
+
+  .ds-content-guidance blockquote {
+    min-height: 9rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-heading);
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.3vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .ds-content-guidance article > p:last-child {
+    max-width: 29rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  .ds-catalog__footer {
+    display: flex;
+    padding: var(--space-7) 0 0;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-5);
+    border-top: var(--line-width) solid var(--catalog-rule);
+  }
+
+  .ds-catalog__footer p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.68rem;
+  }
+
+  @media (max-width: 64rem) {
+    .ds-swatches {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ds-type-specimen {
+      grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1.65fr);
+    }
+
+    .ds-type-note {
+      grid-column: 2;
+    }
+
+    .ds-layout-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .ds-catalog__hero,
+    .ds-section__heading {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    .ds-catalog__status {
+      grid-column: 1;
+      grid-template-columns: 1fr;
+    }
+
+    .ds-catalog__nav {
+      overflow-x: auto;
+      justify-content: flex-start;
+    }
+
+    .ds-catalog__nav a {
+      white-space: nowrap;
+    }
+
+    .ds-swatches {
+      grid-template-columns: 1fr;
+    }
+
+    .ds-type-specimen {
+      grid-template-columns: 1fr;
+    }
+
+    .ds-type-note {
+      grid-column: 1;
+    }
+
+    .ds-grid-card dl {
+      grid-template-columns: 1fr;
+    }
+
+    .ds-component__heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .ds-structural-sample {
+      grid-template-columns: 1fr;
+    }
+
+    .ds-post-sample {
+      grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem;
+      gap: var(--space-3);
+    }
+
+    .ds-post-meta {
+      grid-column: 2;
+    }
+
+    .ds-post-sample div {
+      grid-column: 2 / -1;
+    }
+
+    .ds-post-sample > span {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .ds-content-guidance {
+      grid-template-columns: 1fr;
+    }
+
+    .ds-content-guidance blockquote {
+      min-height: 0;
+    }
+
+    .ds-catalog__footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

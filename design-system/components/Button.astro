@@ -1,0 +1,234 @@
+---
+type Variant = "primary" | "secondary" | "quiet";
+type Size = "small" | "medium";
+type ButtonType = "button" | "submit" | "reset";
+
+interface Props {
+  ariaLabel?: string;
+  class?: string;
+  disabled?: boolean;
+  download?: boolean | string;
+  form?: string;
+  href?: string;
+  id?: string;
+  loading?: boolean;
+  loadingLabel?: string;
+  name?: string;
+  rel?: string;
+  size?: Size;
+  target?: string;
+  type?: ButtonType;
+  value?: string;
+  variant?: Variant;
+}
+
+const {
+  ariaLabel,
+  class: className,
+  disabled = false,
+  download,
+  form,
+  href,
+  id,
+  loading = false,
+  loadingLabel = "Loading",
+  name,
+  rel,
+  size = "medium",
+  target,
+  type = "button",
+  value,
+  variant = "secondary",
+} = Astro.props;
+
+const isDisabled = disabled || loading;
+const hasIcon = Astro.slots.has("icon");
+const safeRel = target === "_blank" ? (rel ?? "noopener") : rel;
+const classes = [
+  "ds-button",
+  `ds-button--${variant}`,
+  `ds-button--${size}`,
+  className,
+];
+---
+
+{
+  href ? (
+    <a
+      id={id}
+      class:list={classes}
+      href={isDisabled ? undefined : href}
+      target={target}
+      rel={safeRel}
+      download={isDisabled ? undefined : download}
+      aria-label={ariaLabel}
+      aria-disabled={isDisabled ? "true" : undefined}
+      aria-busy={loading ? "true" : undefined}
+      tabindex={isDisabled ? -1 : undefined}
+      data-loading={loading ? "true" : undefined}
+    >
+      <span class="ds-button__label">
+        <slot />
+      </span>
+      {hasIcon && (
+        <span class="ds-button__icon" aria-hidden="true">
+          <slot name="icon" />
+        </span>
+      )}
+      {loading && <span class="ds-button__loader" aria-hidden="true" />}
+      {loading && <span class="ds-button__sr-only">{loadingLabel}</span>}
+    </a>
+  ) : (
+    <button
+      id={id}
+      class:list={classes}
+      type={type}
+      name={name}
+      value={value}
+      form={form}
+      disabled={isDisabled}
+      aria-label={ariaLabel}
+      aria-busy={loading ? "true" : undefined}
+      data-loading={loading ? "true" : undefined}
+    >
+      <span class="ds-button__label">
+        <slot />
+      </span>
+      {hasIcon && (
+        <span class="ds-button__icon" aria-hidden="true">
+          <slot name="icon" />
+        </span>
+      )}
+      {loading && <span class="ds-button__loader" aria-hidden="true" />}
+      {loading && <span class="ds-button__sr-only">{loadingLabel}</span>}
+    </button>
+  )
+}
+
+<style>
+  .ds-button {
+    display: inline-flex;
+    min-width: 0;
+    min-height: 3rem;
+    border: var(--line-width) solid var(--color-border-hover);
+    border-radius: var(--radius-none);
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background: transparent;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      border-color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .ds-button--medium {
+    padding: 0.75rem 1rem;
+  }
+
+  .ds-button--small {
+    min-height: 2.75rem;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.62rem;
+  }
+
+  .ds-button--primary {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-surface);
+  }
+
+  .ds-button--quiet {
+    border-color: transparent;
+  }
+
+  .ds-button:not([aria-disabled="true"]):not(:disabled):hover {
+    border-color: var(--color-accent-hover);
+    color: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .ds-button--primary:not([aria-disabled="true"]):not(:disabled):hover {
+    background: var(--color-accent-hover);
+    color: var(--color-surface);
+  }
+
+  .ds-button:not([aria-disabled="true"]):not(:disabled):active {
+    transform: translateY(0);
+  }
+
+  .ds-button:focus-visible {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+  }
+
+  .ds-button[aria-disabled="true"],
+  .ds-button:disabled {
+    opacity: 0.46;
+    cursor: not-allowed;
+  }
+
+  .ds-button__label,
+  .ds-button__icon {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .ds-button__icon {
+    font-size: 1rem;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .ds-button:not([aria-disabled="true"]):not(:disabled):hover .ds-button__icon {
+    transform: translate(0.12rem, -0.12rem);
+  }
+
+  .ds-button__loader {
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 1px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--radius-pill);
+    animation: ds-button-spin 800ms linear infinite;
+  }
+
+  .ds-button__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @keyframes ds-button-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-button,
+    .ds-button__icon {
+      transition-duration: 0.01ms;
+    }
+
+    .ds-button__loader {
+      animation: none;
+      border-right-color: currentColor;
+      opacity: 0.58;
+    }
+  }
+</style>

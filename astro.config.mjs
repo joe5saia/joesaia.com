@@ -12,7 +12,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.endsWith("/brand-assets/"),
+      filter: (page) =>
+        !page.endsWith("/brand-assets/") && !page.endsWith("/design-system/"),
     }),
   ],
   vite: {
