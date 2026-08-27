@@ -1,5 +1,6 @@
 ---
 import "../../design-system/tokens.css";
+import Header from "../components/Header.astro";
 
 const currentYear = new Date().getFullYear();
 const title = "Joe Saia — Engineering & Data Leader";
@@ -34,12 +35,6 @@ const homepageJsonLd = {
     },
   ],
 };
-
-const headerNav = [
-  { href: "/writing/", label: "Writing" },
-  { href: "/resume/", label: "Résumé" },
-  { href: "/contact/", label: "Contact" },
-];
 
 const careerTimeline = [
   {
@@ -160,25 +155,7 @@ const careerTimeline = [
       </svg>
     </div>
 
-    <header class="site-header">
-      <div class="header-inner">
-        <a class="wordmark" href="/" aria-label="Joe Saia, home">
-          <span class="wordmark-name">Joe Saia</span>
-        </a>
-
-        <nav aria-label="Primary">
-          <ul class="header-nav">
-            {
-              headerNav.map((item) => (
-                <li>
-                  <a href={item.href}>{item.label}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <Header />
 
     <main id="main-content">
       <section class="hero" aria-labelledby="hero-title">
@@ -554,76 +531,10 @@ const careerTimeline = [
     filter: drop-shadow(0 0 7px rgba(242, 164, 79, 0.72));
   }
 
-  .site-header,
   main,
   .site-footer {
     position: relative;
     z-index: 1;
-  }
-
-  .site-header {
-    border-bottom: 1px solid var(--line);
-    background: rgba(7, 13, 16, 0.72);
-    backdrop-filter: blur(16px);
-  }
-
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(2rem, 5vw, 5rem);
-    width: min(100%, var(--page-width));
-    min-height: 5rem;
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
-
-  .wordmark {
-    display: inline-flex;
-    justify-self: start;
-  }
-
-  .wordmark-name {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
-  }
-
-  .header-nav {
-    display: flex;
-    gap: clamp(1.1rem, 2.7vw, 2.5rem);
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .header-nav a {
-    display: block;
-    padding: 0.55rem 0;
-    color: var(--mist);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition:
-      border-color 160ms ease,
-      color 160ms ease;
-  }
-
-  .header-nav a:hover {
-    color: var(--amber);
-  }
-
-  .header-nav li:last-child a {
-    border: 1px solid rgba(212, 122, 59, 0.48);
-    padding: 0.65rem 0.85rem;
-    color: var(--bone);
-  }
-
-  .header-nav li:last-child a:hover {
-    border-color: var(--amber);
-    color: var(--amber);
   }
 
   main {
@@ -1282,29 +1193,6 @@ const careerTimeline = [
   }
 
   @media (max-width: 44rem) {
-    .site-header {
-      position: relative;
-    }
-
-    .header-inner {
-      gap: 1rem;
-      min-height: 4.75rem;
-    }
-
-    .header-nav {
-      gap: clamp(0.65rem, 3vw, 1rem);
-    }
-
-    .header-nav a {
-      padding: 0.5rem 0;
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-    }
-
-    .header-nav li:last-child a {
-      padding: 0.5rem 0.6rem;
-    }
-
     .hero {
       display: flex;
       flex-direction: column;
