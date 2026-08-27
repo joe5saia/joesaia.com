@@ -33,13 +33,13 @@ Task commands are defined in `Taskfile.yml`.
 
 ```
 src/
-  components/       # Header, Footer, PostCard, ProjectCard, ProofBar
+  components/       # Header, Footer, PostCard, ProofBar
   content/
     config.ts       # Content collection schemas (writing, projects)
     writing/        # Blog posts (Markdown, YYYY-MM-DD-slug.md)
-    projects/       # Project entries (Markdown)
+    projects/       # Archived project entries (not exposed as a route)
   layouts/          # BaseLayout, PostLayout
-  pages/            # Routes: /, /writing/, /projects/, /resume/, /contact/
+  pages/            # Routes: /, /writing/, /resume/, /contact/
   styles/           # global.css (Tailwind v4)
 scripts/
   create-post.mjs   # CLI helper to scaffold new blog posts
@@ -69,23 +69,6 @@ tags: ["Tag1", "Tag2"]
 featured: true
 ---
 Post content here...
-```
-
-### New project
-
-Create `src/content/projects/project-name.md`:
-
-```yaml
----
-name: "Project Name"
-type: "Open Source Package"
-stack: ["Python", "SQL"]
-repo: "https://github.com/username/repo"
-highlights:
-  - "Key feature or impact"
-  - "Another highlight"
----
-Optional description...
 ```
 
 ## Deployment

@@ -37,7 +37,7 @@ const imageAlt = isDefaultImage
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#0f1117" />
+    <meta name="theme-color" content="#070d10" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -68,21 +68,27 @@ const imageAlt = isDefaultImage
     <title>{title}</title>
     <slot name="head" />
   </head>
-  <body class="bg-surface text-text-primary font-sans antialiased">
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-surface focus:text-text-heading"
-    >
-      Skip to content
-    </a>
-    <div class="min-h-screen flex flex-col">
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <div class="site-ambient" aria-hidden="true">
+      <svg viewBox="0 0 1440 1200" preserveAspectRatio="none" focusable="false">
+        <path
+          class="site-current site-current--dim"
+          d="M-80 214C204 58 365 375 634 270C871 178 931-6 1207 88C1434 165 1324 376 1512 451M-72 952C202 760 383 1115 647 940C856 801 790 610 1094 562C1327 525 1392 749 1518 689"
+        ></path>
+        <path
+          class="site-current site-current--live"
+          d="M-80 214C204 58 365 375 634 270C871 178 931-6 1207 88C1434 165 1324 376 1512 451M-72 952C202 760 383 1115 647 940C856 801 790 610 1094 562C1327 525 1392 749 1518 689"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="site-shell">
       <Header />
       <main
         id="main-content"
-        class:list={[
-          "flex-1 w-full mx-auto px-6 py-12",
-          wide ? "max-w-5xl" : "max-w-3xl",
-        ]}
+        class:list={["site-main", wide && "site-main--wide"]}
       >
         <slot />
       </main>

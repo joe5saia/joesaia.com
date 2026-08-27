@@ -1,10 +1,12 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { Picture } from "astro:assets";
-import headshot from "../assets/joe-saia-headshot.jpg";
+const currentYear = new Date().getFullYear();
+const title = "Joe Saia — Engineering & Data Leader";
+const description =
+  "Engineering and data leader. PhD economist. 15 years building software, data systems, and technical teams across healthtech, startups, AI, and the public sector.";
+const canonical = new URL("/", Astro.site).toString();
+const socialImage = new URL("/social-card.png", Astro.site).toString();
+const personId = `${canonical}#person`;
 
-const siteUrl = new URL("/", Astro.site).toString();
-const personId = `${siteUrl}#person`;
 const homepageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -12,7 +14,7 @@ const homepageJsonLd = {
       "@type": "Person",
       "@id": personId,
       name: "Joe Saia",
-      url: siteUrl,
+      url: canonical,
       jobTitle: "Engineering and data leader",
       sameAs: [
         "https://github.com/joe5saia/",
@@ -21,213 +23,1536 @@ const homepageJsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": `${siteUrl}#website`,
-      url: siteUrl,
+      "@id": `${canonical}#website`,
+      url: canonical,
       name: "Joe Saia",
-      description:
-        "Engineering and data leadership portfolio and writing by Joe Saia.",
+      description,
       inLanguage: "en-US",
       publisher: { "@id": personId },
     },
   ],
 };
+
+const headerNav = [
+  { href: "/writing/", label: "Writing" },
+  { href: "/resume/", label: "Résumé" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const careerTimeline = [
+  {
+    period: "2009–2013",
+    title: "Physics Undergrad in Troy, NY",
+    description:
+      "Studied physics and economics at Rensselaer Polytechnic Institute, learning to move between mathematical models, empirical evidence, and real-world systems.",
+  },
+  {
+    period: "2013–2014",
+    title: "Economics Masters in London",
+    description:
+      "Focused on economic theory and quantitative methods at University College London, building a deeper foundation for applied research.",
+  },
+  {
+    period: "2014–2016",
+    title: "Data Engineer at Federal Reserve",
+    description:
+      "Joined the Fed’s most technical team—a self-taught group responsible for ingesting the financial data used across the institution—and learned on the fly alongside exceptionally smart, dedicated colleagues. It showed me the leverage a small team like that can create.",
+  },
+  {
+    period: "2016–2021",
+    title: "Economics PhD at Columbia",
+    description:
+      "Worked on macro-finance topics while going deep on Bayesian methods, causal inference, and economic modeling—and learning how to frame ambiguous questions precisely.",
+  },
+  {
+    period: "2021",
+    title: "ML Engineer at Revelio Labs",
+    description:
+      "Joined my first startup as one of its first 10 employees and went deep on building dynamic data pipelines for machine-learning models.",
+  },
+  {
+    period: "2021–2024",
+    title: "Data Scientist and Senior Manager at Perry Health",
+    description:
+      "At a lean Series A company, learned how to run a business from an exceptional non-technical leadership team—and grew from an individual contributor into a leader across technical teams.",
+  },
+  {
+    period: "2024–2026",
+    title: "Head of Engineering at Rhythm Management",
+    description:
+      "Served enterprise clients, solving larger-scale versions of Perry’s technical challenges while helping the organization reimagine itself as a collection of owners. The new challenge was not just scaling systems, but remaking how the business operated.",
+  },
+  {
+    period: "2026–Now",
+    title: "Founder and President at Unhistoric Acts",
+    description:
+      "Founded a 501(c)(3) civic software foundation to house Town Crier, an AI-assisted platform that enables agents to answer questions about local government.",
+  },
+];
 ---
 
-<BaseLayout
-  title="Joe Saia — Engineering & Data Leader"
-  description="Engineering and data leader. PhD economist. 15 years building software, data, and the teams behind them in healthtech and startups."
-  wide
->
-  <Fragment slot="head">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#070d10" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Joe Saia" />
+    <meta property="og:image" content={socialImage} />
+    <meta
+      property="og:image:alt"
+      content="Joe Saia social card with a mahogany library and sitting chair"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta
+      name="twitter:image:alt"
+      content="Joe Saia social card with a mahogany library and sitting chair"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Joe Saia — Writing"
+      href="/rss.xml"
+    />
+    <title>{title}</title>
     <script
       is:inline
       type="application/ld+json"
       set:html={JSON.stringify(homepageJsonLd)}
     />
-  </Fragment>
+  </head>
 
-  <section class="space-y-16">
-    <div class="grid items-center gap-10 lg:grid-cols-[1fr_320px]">
-      <div class="space-y-6">
-        <div class="space-y-4">
-          <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            Engineering and data leadership
-          </p>
-          <h1
-            class="text-4xl font-bold tracking-tight text-text-heading sm:text-5xl"
-          >
-            Joe Saia
-          </h1>
-        </div>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-        <div class="space-y-5">
-          <p class="text-xl leading-relaxed text-text-primary">
-            Engineering and data leader building software, data systems, and
-            teams for high-stakes, high-growth environments.
-          </p>
-          <p class="max-w-2xl text-lg leading-relaxed text-text-secondary">
-            I'm a PhD economist who has spent 15 years building across startups,
-            healthtech, AI, and data infrastructure. I'm interested in teams
-            that combine intellectual depth, practical execution, and meaningful
-            impact.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap gap-4 pt-2">
-          <a
-            href="/writing/"
-            class="inline-flex items-center rounded bg-btn-bg px-4 py-2 text-sm font-medium text-text-heading transition-colors hover:bg-btn-bg-hover"
-          >
-            Read the Blog
-          </a>
-          <a
-            href="/contact/"
-            class="inline-flex items-center rounded border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-border-hover"
-          >
-            Get in Touch
-          </a>
-          <a
-            href="/resume/"
-            class="inline-flex items-center rounded px-1 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-text-heading"
-          >
-            View Resume
-          </a>
-        </div>
-      </div>
-
-      <figure class="rounded-2xl border border-border bg-surface-raised p-2">
-        <Picture
-          src={headshot}
-          alt="Joe Saia"
-          formats={["avif", "webp"]}
-          widths={[320, 640, 900]}
-          sizes="(min-width: 1024px) 320px, calc(100vw - 3rem)"
-          width={900}
-          height={1125}
-          loading="eager"
-          fetchpriority="high"
-          class="aspect-4/5 w-full rounded-xl object-cover"
-        />
-      </figure>
-    </div>
-
-    <dl
-      class="grid gap-5 border-y border-border py-6 sm:grid-cols-2 lg:grid-cols-5"
-    >
-      <div>
-        <dt class="text-2xl font-semibold text-text-heading">15 years</dt>
-        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
-          Building software and data systems
-        </dd>
-      </div>
-      <div>
-        <dt class="text-2xl font-semibold text-text-heading">PhD</dt>
-        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
-          Columbia economist
-        </dd>
-      </div>
-      <div>
-        <dt class="text-2xl font-semibold text-text-heading">Research</dt>
-        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
-          Economic modeling, Bayesian methods, and causal inference
-        </dd>
-      </div>
-      <div>
-        <dt class="text-2xl font-semibold text-text-heading">25 people</dt>
-        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
-          Engineering and data org leadership
-        </dd>
-      </div>
-      <div>
-        <dt class="text-2xl font-semibold text-text-heading">AI + data</dt>
-        <dd class="mt-1 text-sm leading-relaxed text-text-secondary">
-          Production systems in healthtech and startups
-        </dd>
-      </div>
-    </dl>
-
-    <div class="space-y-8">
-      <div class="max-w-2xl space-y-3">
-        <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-          Working thesis
-        </p>
-        <h2 class="text-2xl font-semibold tracking-tight text-text-heading">
-          What I look for in the work, and the teams doing it.
-        </h2>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-2">
-        <article class="rounded-lg border border-border p-6">
-          <p class="text-sm font-medium text-accent">01</p>
-          <h3 class="mt-3 text-lg font-medium text-text-heading">
-            Teams with real leverage
-          </h3>
-          <p class="mt-3 leading-relaxed text-text-secondary">
-            Great teams become more than the sum of their parts through hiring,
-            ways of working, and the trust that lets people argue and ship
-            anyway. I've led a 25-person engineering and data org, worked inside
-            a global four-person team punching far above its weight, and served
-            on a corporate Senior Leadership Team.
-          </p>
-        </article>
-
-        <article class="rounded-lg border border-border p-6">
-          <p class="text-sm font-medium text-accent">02</p>
-          <h3 class="mt-3 text-lg font-medium text-text-heading">
-            Work that matters
-          </h3>
-          <p class="mt-3 leading-relaxed text-text-secondary">
-            I want to help build things that improve the world. That has meant
-            public-sector research, work on systems-level economic questions,
-            and healthtech products that improve individual lives.
-          </p>
-        </article>
-
-        <article class="rounded-lg border border-border p-6">
-          <p class="text-sm font-medium text-accent">03</p>
-          <h3 class="mt-3 text-lg font-medium text-text-heading">
-            Colleagues with depth and range
-          </h3>
-          <p class="mt-3 leading-relaxed text-text-secondary">
-            I've gone deep on theory through a Columbia PhD, Bayesian research,
-            and causal inference, then wide on practice by building data
-            infrastructure, ML pipelines, and engineering teams across seed,
-            Series A, and growth-stage companies.
-          </p>
-        </article>
-
-        <article class="rounded-lg border border-border p-6">
-          <p class="text-sm font-medium text-accent">04</p>
-          <h3 class="mt-3 text-lg font-medium text-text-heading">
-            Pragmatic AI
-          </h3>
-          <p class="mt-3 leading-relaxed text-text-secondary">
-            I've built AI tools embedded in production applications, including
-            triage assistants, and I'm excited by the shift underway. I'm also
-            realistic about today's limits and interested in how teams reshape
-            work around what should be automated and what should stay human.
-          </p>
-        </article>
-      </div>
-    </div>
-
-    <div
-      class="rounded-2xl border border-border bg-surface-raised px-6 py-8 sm:px-8"
-    >
-      <div
-        class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"
+    <div class="ambient-field" aria-hidden="true">
+      <svg
+        class="ambient-current"
+        viewBox="0 0 1440 2200"
+        preserveAspectRatio="none"
+        focusable="false"
       >
-        <p class="max-w-2xl text-lg leading-relaxed text-text-primary">
-          If that describes a team you're building — or one you'd want to put me
-          in touch with — let's talk.
-        </p>
-        <a
-          href="/contact/"
-          class="inline-flex shrink-0 items-center justify-center rounded bg-btn-bg px-4 py-2 text-sm font-medium text-text-heading transition-colors hover:bg-btn-bg-hover"
-        >
-          Get in Touch
-        </a>
-      </div>
+        <path
+          class="current current--dim"
+          d="M-80 230C228 74 358 382 625 291C882 203 913-8 1192 84C1420 159 1323 391 1512 464M-72 955C188 765 364 1135 615 963C821 821 770 600 1078 561C1313 532 1322 752 1518 686M-56 1806C242 1648 403 1982 676 1799C868 1670 814 1451 1115 1440C1337 1432 1399 1622 1510 1586"
+        ></path>
+        <path
+          class="current current--live"
+          d="M-80 230C228 74 358 382 625 291C882 203 913-8 1192 84C1420 159 1323 391 1512 464M-72 955C188 765 364 1135 615 963C821 821 770 600 1078 561C1313 532 1322 752 1518 686M-56 1806C242 1648 403 1982 676 1799C868 1670 814 1451 1115 1440C1337 1432 1399 1622 1510 1586"
+        ></path>
+      </svg>
     </div>
-  </section>
-</BaseLayout>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="/" aria-label="Joe Saia, home">
+          <span class="wordmark-name">Joe Saia</span>
+        </a>
+
+        <nav aria-label="Primary">
+          <ul class="header-nav">
+            {
+              headerNav.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <svg
+          class="hero-current"
+          viewBox="0 0 1400 760"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M-65 599C184 490 303 716 534 581C766 445 674 184 961 137C1211 96 1298 332 1466 270"
+          ></path>
+          <circle cx="530" cy="583" r="4"></circle>
+          <circle cx="959" cy="138" r="4"></circle>
+        </svg>
+
+        <p class="eyebrow hero-eyebrow">Technical leadership</p>
+
+        <h1 id="hero-title">
+          <span>Joe</span>
+          <span class="hero-surname">Saia.</span>
+        </h1>
+
+        <p class="hero-coordinate">
+          West Orange, New Jersey<br />
+          <span>40.80° N · 74.24° W</span>
+        </p>
+
+        <div class="hero-intro">
+          <p class="hero-lead">
+            Building software, data systems, and teams for high-stakes,
+            high-growth environments.
+          </p>
+          <p>
+            I have 15 years of software and data experience across startups,
+            healthtech, AI, and the public sector, as well as a PhD in
+            economics. I’m passionate about building software and organizations
+            that tackle complex problems.
+          </p>
+        </div>
+
+        <p class="field-note">
+          A study in distributed intelligence<br />
+          <span>Explore · connect · adapt</span>
+        </p>
+      </section>
+
+      <section id="about" class="section about" aria-labelledby="about-title">
+        <header class="section-heading about-heading">
+          <p class="eyebrow"><span>01</span> Depth, then range</p>
+          <h2 id="about-title">Ideas should move through the whole system.</h2>
+        </header>
+
+        <div class="about-body">
+          <article class="about-content">
+            <p class="about-kicker">
+              Complex problems need more than one lens.
+            </p>
+            <div class="about-copy">
+              <p>
+                Economics taught me to make assumptions explicit and separate
+                signal from noise. Engineering taught me that a correct model
+                only matters if it can survive contact with a real product,
+                organization, and user.
+              </p>
+              <p>
+                The work I enjoy most sits at those boundaries: technically
+                difficult, operationally important, and too ambiguous for any
+                one discipline to solve alone.
+              </p>
+            </div>
+          </article>
+
+          <aside class="range-note" aria-label="Areas of experience">
+            <p>Range of motion</p>
+            <ul>
+              <li>Machine learning</li>
+              <li>Technical strategy</li>
+              <li>AI systems</li>
+              <li>Cross-functional leadership</li>
+              <li>Startup operations</li>
+              <li>Bayesian methods</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="path" class="section proof" aria-labelledby="proof-title">
+        <header class="section-heading proof-heading">
+          <p class="eyebrow"><span>02</span> The path so far</p>
+          <h2 id="proof-title">One current, widening over time.</h2>
+          <p>
+            Each step added a new way of seeing the system—from physical models
+            and economic research to data, software, and organizational
+            leadership.
+          </p>
+        </header>
+
+        <ol class="career-timeline">
+          {
+            careerTimeline.map((step, index) => (
+              <li class="career-step">
+                <p class="career-period">{step.period}</p>
+                <span class="career-node" aria-hidden="true" />
+                <article>
+                  <p class="career-index">
+                    Current {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section
+        id="thesis"
+        class="section thesis"
+        aria-labelledby="thesis-title"
+      >
+        <header class="section-heading thesis-heading">
+          <p class="eyebrow"><span>03</span> Working thesis</p>
+          <h2 id="thesis-title">What I Value in my Work</h2>
+        </header>
+
+        <div class="thesis-map">
+          <svg
+            class="thesis-current"
+            viewBox="0 0 1000 1260"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M114-20C171 165 727 41 768 263C813 507 244 406 217 646C191 882 784 737 748 1017C724 1201 353 1110 354 1303"
+            ></path>
+          </svg>
+
+          <ol>
+            <li>
+              <article>
+                <p class="thesis-number">01 <span aria-hidden="true"></span></p>
+                <h3>Teams that Value Ownership</h3>
+                <p>
+                  Teams and individuals that identify problems and own the work
+                  to solve them.
+                </p>
+              </article>
+            </li>
+            <li>
+              <article>
+                <p class="thesis-number">02 <span aria-hidden="true"></span></p>
+                <h3>Impact &amp; Mission</h3>
+                <p>
+                  I want to work with people who are trying to improve the
+                  world.
+                </p>
+              </article>
+            </li>
+            <li>
+              <article>
+                <p class="thesis-number">03 <span aria-hidden="true"></span></p>
+                <h3>Colleagues with Depth and Range</h3>
+                <p>
+                  I value colleagues I can learn from—people who challenge one
+                  another, share what they know, and push each other to do
+                  better work.
+                </p>
+              </article>
+            </li>
+            <li>
+              <article>
+                <p class="thesis-number">04 <span aria-hidden="true"></span></p>
+                <h3>Pragmatic AI</h3>
+                <p>
+                  I have built AI tools inside production applications,
+                  including triage assistants. I’m interested in what should be
+                  automated, what should stay human, and how teams adapt around
+                  both.
+                </p>
+              </article>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section
+        id="routes"
+        class="section routes"
+        aria-labelledby="routes-title"
+      >
+        <header class="section-heading routes-heading">
+          <p class="eyebrow"><span>04</span> Continue outward</p>
+          <h2 id="routes-title">Choose a current.</h2>
+        </header>
+
+        <nav class="route-list" aria-label="Explore my website">
+          <a href="/writing/">
+            <span class="route-number">01</span>
+            <span class="route-name">Writing</span>
+            <span class="route-detail"
+              >Notes on engineering, data, AI, and leadership.</span
+            >
+            <span class="route-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="/resume/">
+            <span class="route-number">02</span>
+            <span class="route-name">Résumé</span>
+            <span class="route-detail"
+              >Experience, education, and my full working history.</span
+            >
+            <span class="route-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="/contact/">
+            <span class="route-number">03</span>
+            <span class="route-name">Contact</span>
+            <span class="route-detail"
+              >If this sounds like a team you are building, start here.</span
+            >
+            <span class="route-arrow" aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-lead">
+        <p class="eyebrow">Joe Saia</p>
+        <p>Engineering, data, and the teams behind them.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="/writing/">Writing</a>
+        <a
+          href="https://github.com/joe5saia/"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >
+        <a
+          href="https://www.linkedin.com/in/joe-saia/"
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn</a
+        >
+      </div>
+
+      <p class="copyright">© {currentYear} Joe Saia</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: dark;
+    --ink: #070d10;
+    --ink-blue: #0b161d;
+    --ink-lift: #11222a;
+    --bone: #eee6d8;
+    --mist: #a9b2b3;
+    --mist-dim: #778487;
+    --copper: #d47a3b;
+    --amber: #f2a44f;
+    --line: rgba(238, 230, 216, 0.17);
+    --line-bright: rgba(238, 230, 216, 0.34);
+    --font-display:
+      "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --font-sans:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    --gutter: clamp(1.25rem, 4vw, 4.5rem);
+    --page-width: 92rem;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    background: var(--ink);
+  }
+
+  body {
+    min-width: 20rem;
+    margin: 0;
+    overflow-x: hidden;
+    background:
+      radial-gradient(
+        circle at 76% 7%,
+        rgba(212, 122, 59, 0.1),
+        transparent 23rem
+      ),
+      radial-gradient(
+        circle at 9% 32%,
+        rgba(24, 63, 74, 0.28),
+        transparent 31rem
+      ),
+      radial-gradient(
+        circle at 88% 68%,
+        rgba(27, 69, 76, 0.18),
+        transparent 34rem
+      ),
+      var(--ink);
+    color: var(--bone);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+    content: "";
+    opacity: 0.035;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:focus-visible {
+    border-radius: 2px;
+    outline: 3px solid var(--amber);
+    outline-offset: 5px;
+  }
+
+  ::selection {
+    background: var(--copper);
+    color: var(--ink);
+  }
+
+  .skip-link {
+    position: fixed;
+    z-index: 100;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--bone);
+    color: var(--ink);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: translateY(-180%);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .ambient-field {
+    position: absolute;
+    z-index: 0;
+    inset: 0 0 auto;
+    height: 100%;
+    min-height: 220rem;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .ambient-current {
+    width: 100%;
+    height: 100%;
+    opacity: 0.64;
+  }
+
+  .current {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .current--dim {
+    stroke: rgba(212, 122, 59, 0.13);
+    stroke-width: 1;
+  }
+
+  .current--live {
+    stroke: var(--copper);
+    stroke-dasharray: 2 84;
+    stroke-linecap: round;
+    stroke-width: 2;
+    animation: drift 14.5s linear infinite;
+    filter: drop-shadow(0 0 7px rgba(242, 164, 79, 0.72));
+  }
+
+  .site-header,
+  main,
+  .site-footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: rgba(7, 13, 16, 0.72);
+    backdrop-filter: blur(16px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 5rem);
+    width: min(100%, var(--page-width));
+    min-height: 5rem;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .wordmark {
+    display: inline-flex;
+    justify-self: start;
+  }
+
+  .wordmark-name {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+
+  .header-nav {
+    display: flex;
+    gap: clamp(1.1rem, 2.7vw, 2.5rem);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header-nav a {
+    display: block;
+    padding: 0.55rem 0;
+    color: var(--mist);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition:
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .header-nav a:hover {
+    color: var(--amber);
+  }
+
+  .header-nav li:last-child a {
+    border: 1px solid rgba(212, 122, 59, 0.48);
+    padding: 0.65rem 0.85rem;
+    color: var(--bone);
+  }
+
+  .header-nav li:last-child a:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  main {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto 1fr auto;
+    min-height: calc(100svh - 5rem);
+    padding: clamp(3rem, 7vh, 6.5rem) 0 clamp(4rem, 9vh, 8rem);
+    isolation: isolate;
+  }
+
+  .hero-current {
+    position: absolute;
+    z-index: -1;
+    inset: 6% -10% 0;
+    width: 120%;
+    height: 92%;
+    overflow: visible;
+  }
+
+  .hero-current path {
+    fill: none;
+    stroke: rgba(212, 122, 59, 0.48);
+    stroke-width: 1.25;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .hero-current circle {
+    fill: var(--amber);
+    filter: drop-shadow(0 0 12px rgba(242, 164, 79, 0.9));
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse 4.2s ease-in-out infinite;
+  }
+
+  .hero-eyebrow {
+    grid-column: 1 / 7;
+    align-self: start;
+    margin: 0;
+  }
+
+  .eyebrow {
+    color: var(--copper);
+    font-size: 0.69rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .eyebrow > span {
+    display: inline-block;
+    margin-right: 0.8rem;
+    color: var(--mist-dim);
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  h1 {
+    grid-column: 1 / -1;
+    align-self: center;
+    margin: 0;
+    font-size: clamp(6rem, 16.2vw, 15rem);
+    letter-spacing: -0.065em;
+    line-height: 0.67;
+  }
+
+  h1 span {
+    display: block;
+  }
+
+  .hero-surname {
+    margin-left: 21%;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(238, 230, 216, 0.58);
+  }
+
+  .hero-coordinate {
+    grid-column: 1 / 4;
+    align-self: end;
+    margin: 0 0 0.6rem;
+    color: var(--mist);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .hero-coordinate span {
+    color: var(--mist-dim);
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-intro {
+    grid-column: 7 / 12;
+    align-self: end;
+    max-width: 40rem;
+    margin: 0 0 0 auto;
+    color: var(--mist);
+    font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  }
+
+  .hero-lead {
+    margin-bottom: 1rem;
+    color: var(--bone);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.8vw, 2.55rem);
+    line-height: 1.17;
+  }
+
+  .field-note {
+    position: absolute;
+    top: 21%;
+    right: 0;
+    margin: 0;
+    color: var(--mist);
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    line-height: 1.35;
+    transform: rotate(90deg) translateX(100%);
+    transform-origin: top right;
+  }
+
+  .field-note span {
+    color: var(--copper);
+    font-family: var(--font-sans);
+    font-size: 0.57rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .section {
+    position: relative;
+    padding: clamp(7rem, 13vw, 13rem) 0;
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--line);
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(1rem, 2vw, 2rem);
+  }
+
+  .section-heading .eyebrow {
+    grid-column: 1 / 5;
+    align-self: start;
+    margin: 0;
+  }
+
+  .section-heading h2 {
+    grid-column: 4 / 12;
+    margin: 0;
+    font-size: clamp(3.15rem, 6.6vw, 7.25rem);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+
+  .about-body {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: clamp(5rem, 10vw, 10rem);
+  }
+
+  .about-content {
+    grid-column: 1 / 10;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .about-kicker {
+    grid-column: 1 / 4;
+    margin: 0;
+    color: var(--bone);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.4vw, 2.25rem);
+    line-height: 1.2;
+  }
+
+  .about-copy {
+    grid-column: 4 / 10;
+    color: var(--mist);
+    font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  }
+
+  .about-copy p:first-child::first-letter {
+    float: left;
+    margin: 0.05em 0.12em 0 0;
+    color: var(--copper);
+    font-family: var(--font-display);
+    font-size: 4.7em;
+    line-height: 0.72;
+  }
+
+  .about-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .range-note {
+    grid-column: 10 / -1;
+    align-self: end;
+    border-top: 1px solid var(--line-bright);
+    padding-top: 1rem;
+  }
+
+  .range-note > p {
+    margin-bottom: 1rem;
+    color: var(--copper);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .range-note ul {
+    margin: 0;
+    padding: 0;
+    color: var(--mist);
+    font-size: 0.77rem;
+    list-style: none;
+  }
+
+  .range-note li + li {
+    margin-top: 0.65rem;
+  }
+
+  .proof-heading h2 {
+    grid-column: 5 / -1;
+  }
+
+  .proof-heading > p:last-child {
+    grid-column: 8 / -1;
+    max-width: 35rem;
+    margin: 2.5rem 0 0;
+    color: var(--mist);
+    font-size: 1rem;
+  }
+
+  .career-timeline {
+    --date-column: clamp(7rem, 16vw, 13rem);
+    --node-column: clamp(2.5rem, 5vw, 4.5rem);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4rem, 7vw, 7rem);
+    max-width: 79rem;
+    margin-top: clamp(6rem, 11vw, 10rem);
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1rem 0;
+    list-style: none;
+  }
+
+  .career-timeline::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--date-column) + var(--node-column) / 2);
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(212, 122, 59, 0.72) 3%,
+      rgba(212, 122, 59, 0.3) 92%,
+      transparent
+    );
+    content: "";
+  }
+
+  .career-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--date-column) var(--node-column) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .career-period {
+    margin: 0;
+    padding-top: 0.42rem;
+    color: var(--mist-dim);
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .career-node {
+    position: absolute;
+    z-index: 1;
+    top: 0.36rem;
+    left: calc(var(--date-column) + var(--node-column) / 2 - 0.36rem);
+    width: 0.72rem;
+    height: 0.72rem;
+    border: 1px solid var(--amber);
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow:
+      0 0 0 8px rgba(212, 122, 59, 0.07),
+      0 0 22px rgba(242, 164, 79, 0.38);
+  }
+
+  .career-step article {
+    grid-column: 3;
+    max-width: 50rem;
+    border-top: 1px solid var(--line-bright);
+    padding-top: 1.15rem;
+  }
+
+  .career-index {
+    margin-bottom: 1.4rem;
+    color: var(--copper);
+    font-size: 0.61rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .career-step h3 {
+    margin: 0 0 1rem;
+    color: var(--bone);
+    font-size: clamp(2rem, 4vw, 4.4rem);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+
+  .career-step article > p:last-child {
+    max-width: 43rem;
+    margin: 0;
+    color: var(--mist);
+    font-size: clamp(0.9rem, 1.2vw, 1.02rem);
+    line-height: 1.7;
+  }
+
+  .thesis-heading h2 {
+    grid-column: 4 / -1;
+    max-width: 68rem;
+  }
+
+  .thesis-map {
+    position: relative;
+    max-width: 76rem;
+    min-height: 80rem;
+    margin: clamp(6rem, 10vw, 10rem) auto 0;
+  }
+
+  .thesis-current {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .thesis-current path {
+    fill: none;
+    stroke: rgba(212, 122, 59, 0.37);
+    stroke-dasharray: 1 7;
+    stroke-linecap: round;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .thesis-map ol {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(4, 1fr);
+    min-height: 80rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .thesis-map li {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: start;
+  }
+
+  .thesis-map li:nth-child(1) article {
+    grid-column: 1 / 6;
+  }
+
+  .thesis-map li:nth-child(2) article {
+    grid-column: 8 / -1;
+  }
+
+  .thesis-map li:nth-child(3) article {
+    grid-column: 2 / 7;
+  }
+
+  .thesis-map li:nth-child(4) article {
+    grid-column: 7 / 12;
+  }
+
+  .thesis-map article {
+    position: relative;
+    border-top: 1px solid var(--line-bright);
+    padding-top: 1.2rem;
+  }
+
+  .thesis-number {
+    position: relative;
+    margin-bottom: 2rem;
+    color: var(--copper);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+  }
+
+  .thesis-number span {
+    position: absolute;
+    top: -1.52rem;
+    left: 0;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 16px rgba(242, 164, 79, 0.72);
+  }
+
+  .thesis-map h3 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 3.7vw, 3.5rem);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+
+  .thesis-map article > p:last-child {
+    max-width: 31rem;
+    margin-bottom: 0;
+    color: var(--mist);
+    font-size: 0.95rem;
+  }
+
+  .routes {
+    padding-bottom: clamp(8rem, 14vw, 14rem);
+  }
+
+  .routes-heading h2 {
+    grid-column: 5 / -1;
+  }
+
+  .route-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: clamp(5rem, 9vw, 9rem);
+    border-top: 1px solid var(--line-bright);
+  }
+
+  .route-list > a {
+    display: grid;
+    grid-template-columns: 0.7fr 4fr 3fr auto;
+    gap: clamp(1rem, 3vw, 4rem);
+    align-items: center;
+    min-height: clamp(8rem, 13vw, 12.5rem);
+    border-bottom: 1px solid var(--line-bright);
+    padding: 1.5rem 0;
+    transition:
+      color 180ms ease,
+      padding 180ms ease;
+  }
+
+  .route-list > a:hover {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    color: var(--amber);
+  }
+
+  .route-number {
+    align-self: start;
+    padding-top: 0.7rem;
+    color: var(--copper);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  .route-name {
+    font-family: var(--font-display);
+    font-size: clamp(3.1rem, 7vw, 7.5rem);
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+  }
+
+  .route-detail {
+    max-width: 23rem;
+    color: var(--mist);
+    font-size: 0.9rem;
+  }
+
+  .route-arrow {
+    color: var(--copper);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    transition: transform 180ms ease;
+  }
+
+  .route-list > a:hover .route-arrow {
+    transform: translate(5px, -5px);
+  }
+
+  .site-footer {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+    padding: clamp(4rem, 7vw, 7rem) var(--gutter);
+  }
+
+  .footer-lead .eyebrow {
+    margin-bottom: 1rem;
+  }
+
+  .footer-lead > p:last-child {
+    max-width: 26rem;
+    margin: 0;
+    color: var(--bone);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+
+  .footer-links a,
+  .copyright {
+    color: var(--mist-dim);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-links a {
+    transition: color 160ms ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--amber);
+  }
+
+  .copyright {
+    justify-self: end;
+    margin: 0;
+  }
+
+  @keyframes drift {
+    to {
+      stroke-dashoffset: -172;
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.75);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero {
+      min-height: 56rem;
+    }
+
+    .hero-intro {
+      grid-column: 6 / -1;
+    }
+
+    .field-note {
+      display: none;
+    }
+
+    .section-heading h2,
+    .proof-heading h2,
+    .thesis-heading h2,
+    .routes-heading h2 {
+      grid-column: 4 / -1;
+    }
+
+    .about-kicker {
+      grid-column: 1 / 4;
+    }
+
+    .about-content {
+      grid-column: 1 / -1;
+    }
+
+    .about-copy {
+      grid-column: 4 / -1;
+    }
+
+    .range-note {
+      grid-column: 4 / 8;
+      margin-top: 2rem;
+    }
+
+    .career-timeline {
+      --date-column: clamp(6.5rem, 17vw, 9rem);
+    }
+
+    .thesis-map,
+    .thesis-map ol {
+      min-height: 72rem;
+    }
+
+    .site-footer {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .copyright {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    :root {
+      --gutter: 1.25rem;
+    }
+
+    .site-header {
+      position: relative;
+    }
+
+    .header-inner {
+      gap: 1rem;
+      min-height: 4.75rem;
+    }
+
+    .header-nav {
+      gap: clamp(0.65rem, 3vw, 1rem);
+    }
+
+    .header-nav a {
+      padding: 0.5rem 0;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+    }
+
+    .header-nav li:last-child a {
+      padding: 0.5rem 0.6rem;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100svh - 4.75rem);
+      padding: 3rem 0 4rem;
+    }
+
+    .hero-current {
+      inset: 13% -30% 15%;
+      width: 160%;
+      height: 72%;
+    }
+
+    .hero-eyebrow {
+      order: 1;
+    }
+
+    h1 {
+      order: 2;
+      margin: auto 0;
+      padding: 4rem 0;
+      font-size: clamp(5.2rem, 28vw, 8.4rem);
+      line-height: 0.75;
+    }
+
+    .hero-surname {
+      margin-top: 0.15em;
+      margin-left: 9%;
+    }
+
+    .hero-coordinate {
+      display: none;
+    }
+
+    .hero-intro {
+      order: 3;
+      max-width: 34rem;
+      margin: 0;
+    }
+
+    .hero-lead {
+      font-size: 1.75rem;
+    }
+
+    .section {
+      padding: 7rem 0;
+    }
+
+    .section-heading {
+      display: block;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2.9rem, 15vw, 4.4rem);
+    }
+
+    .about-body {
+      display: block;
+      margin-top: 4.5rem;
+    }
+
+    .about-content {
+      display: block;
+    }
+
+    .about-kicker {
+      max-width: 17rem;
+      margin-bottom: 3rem;
+    }
+
+    .about-copy {
+      font-size: 1rem;
+    }
+
+    .range-note {
+      max-width: 16rem;
+      margin: 3rem 0 0 auto;
+    }
+
+    .proof-heading > p:last-child {
+      max-width: 30rem;
+      margin-top: 2rem;
+    }
+
+    .career-timeline {
+      --date-column: 0rem;
+      --node-column: 2.4rem;
+      gap: 4.5rem;
+      margin-top: 5rem;
+      padding: 0;
+    }
+
+    .career-timeline::before {
+      left: calc(var(--node-column) / 2);
+    }
+
+    .career-step {
+      grid-template-columns: var(--node-column) minmax(0, 1fr);
+    }
+
+    .career-period {
+      grid-column: 2;
+      margin-bottom: 0.7rem;
+      padding-top: 0;
+    }
+
+    .career-node {
+      top: 0.25rem;
+      left: calc(var(--node-column) / 2 - 0.36rem);
+    }
+
+    .career-step article {
+      grid-column: 2;
+    }
+
+    .career-index {
+      margin-bottom: 1rem;
+    }
+
+    .career-step h3 {
+      font-size: clamp(2rem, 10vw, 3.25rem);
+    }
+
+    .thesis-map,
+    .thesis-map ol {
+      min-height: 0;
+    }
+
+    .thesis-map {
+      margin-top: 5rem;
+    }
+
+    .thesis-current {
+      display: none;
+    }
+
+    .thesis-map ol {
+      display: block;
+    }
+
+    .thesis-map li {
+      display: block;
+    }
+
+    .thesis-map li + li {
+      margin-top: 5.5rem;
+    }
+
+    .thesis-map article {
+      margin-left: 0;
+    }
+
+    .thesis-map li:nth-child(even) article {
+      margin-left: clamp(1.5rem, 11vw, 4rem);
+    }
+
+    .thesis-map h3 {
+      font-size: clamp(2.2rem, 11vw, 3.4rem);
+    }
+
+    .route-list {
+      margin-top: 4rem;
+    }
+
+    .route-list > a {
+      grid-template-columns: auto 1fr auto;
+      gap: 0.6rem 1rem;
+      min-height: 9rem;
+      padding: 1.5rem 0;
+    }
+
+    .route-list > a:hover {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .route-number {
+      grid-row: 1;
+      align-self: center;
+      padding: 0;
+    }
+
+    .route-name {
+      grid-column: 2;
+      font-size: clamp(3rem, 16vw, 5rem);
+    }
+
+    .route-detail {
+      grid-column: 2 / -1;
+      grid-row: 2;
+      font-size: 0.82rem;
+    }
+
+    .route-arrow {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .site-footer {
+      display: block;
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+
+    .footer-links {
+      margin: 3rem 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

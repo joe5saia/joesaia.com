@@ -5,47 +5,134 @@ interface Props {
   summary: string;
   slug: string;
   featured?: boolean;
+  index: number;
 }
 
-const { title, date, summary, slug, featured } = Astro.props;
+const { title, date, summary, slug, featured, index } = Astro.props;
 ---
 
-<article class="group">
-  <a href={`/writing/${slug}/`} class="block">
-    <div class="flex items-start justify-between gap-4">
-      <div>
-        <time class="text-sm text-accent" datetime={date.toISOString()}>
-          {
-            date.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }
-        </time>
-        <h2
-          class="text-lg font-medium mt-1 text-text-heading group-hover:text-accent transition-colors"
-        >
-          {title}
-          {featured && <span class="ml-2 text-xs text-accent">Featured</span>}
-        </h2>
-        <p class="text-text-secondary text-sm mt-1 line-clamp-2">{summary}</p>
-      </div>
-      <svg
-        class="w-5 h-5 text-text-muted group-hover:text-accent transition-colors flex-shrink-0 mt-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M9 5l7 7-7 7"></path>
-      </svg>
+<article class="post-entry">
+  <a href={`/writing/${slug}/`}>
+    <p class="entry-number" aria-hidden="true">
+      {index.toString().padStart(2, "0")}
+    </p>
+    <div class="entry-meta">
+      <time datetime={date.toISOString()}>
+        {
+          date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            timeZone: "UTC",
+          })
+        }
+      </time>
+      {featured && <span>Featured</span>}
     </div>
+    <div class="entry-copy">
+      <h2>{title}</h2>
+      <p>{summary}</p>
+    </div>
+    <span class="entry-arrow" aria-hidden="true">↗</span>
   </a>
 </article>
+
+<style>
+  .post-entry {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .post-entry a {
+    display: grid;
+    padding: clamp(1.75rem, 4vw, 3rem) 0;
+    grid-template-columns: 3rem minmax(8rem, 0.4fr) minmax(0, 1.4fr) 2rem;
+    align-items: start;
+    gap: clamp(1rem, 3vw, 3rem);
+    text-decoration: none;
+  }
+
+  .entry-number,
+  .entry-meta,
+  .entry-copy h2,
+  .entry-copy p {
+    margin: 0;
+  }
+
+  .entry-number {
+    color: var(--copper);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .entry-meta {
+    display: flex;
+    color: var(--mist-dim);
+    flex-direction: column;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .entry-meta span {
+    margin-top: 0.55rem;
+    color: var(--copper);
+  }
+
+  .entry-copy h2 {
+    color: var(--bone-bright);
+    font-size: clamp(1.65rem, 3.4vw, 3rem);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    transition: color 180ms ease;
+  }
+
+  .entry-copy p {
+    max-width: 43rem;
+    margin-top: 1rem;
+    color: var(--mist);
+    font-size: 0.93rem;
+    line-height: 1.65;
+  }
+
+  .entry-arrow {
+    color: var(--mist-dim);
+    font-size: 1.15rem;
+    line-height: 1;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .post-entry a:hover .entry-copy h2,
+  .post-entry a:hover .entry-arrow {
+    color: var(--amber);
+  }
+
+  .post-entry a:hover .entry-arrow {
+    transform: translate(0.2rem, -0.2rem);
+  }
+
+  @media (max-width: 44rem) {
+    .post-entry a {
+      grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem;
+      gap: 0.75rem;
+    }
+
+    .entry-meta {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .entry-copy {
+      grid-column: 2 / -1;
+      grid-row: 2;
+    }
+
+    .entry-arrow {
+      grid-column: 3;
+      grid-row: 1;
+    }
+  }
+</style>

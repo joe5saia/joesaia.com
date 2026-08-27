@@ -14,24 +14,93 @@ const posts = (
 <BaseLayout
   title="Writing — Joe Saia"
   description="Articles on data engineering, analytics leadership, and AI-augmented development."
+  wide
 >
-  <h1 class="text-3xl font-bold mb-4 text-text-heading">Writing</h1>
+  <section class="page-intro" aria-labelledby="writing-title">
+    <p class="page-eyebrow"><span>03</span> Field notes</p>
+    <div>
+      <h1 class="page-title" id="writing-title">Writing</h1>
+      <p class="page-dek">
+        Notes on technical leadership, data systems, applied AI, and the work of
+        building organizations that can take on difficult problems.
+      </p>
+    </div>
+  </section>
 
   {
     posts.length > 0 ? (
-      <div class="grid gap-6">
-        {posts.map((post) => (
-          <PostCard
-            title={post.data.title}
-            date={post.data.date}
-            summary={post.data.summary}
-            slug={post.id}
-            featured={post.data.featured}
-          />
-        ))}
-      </div>
+      <section class="writing-ledger" aria-labelledby="archive-title">
+        <div class="ledger-heading">
+          <h2 id="archive-title">The archive</h2>
+          <p>
+            {posts.length.toString().padStart(2, "0")}{" "}
+            {posts.length === 1 ? "entry" : "entries"}
+          </p>
+        </div>
+        <ol class="post-list">
+          {posts.map((post, index) => (
+            <li>
+              <PostCard
+                title={post.data.title}
+                date={post.data.date}
+                summary={post.data.summary}
+                slug={post.id}
+                featured={post.data.featured}
+                index={index + 1}
+              />
+            </li>
+          ))}
+        </ol>
+      </section>
     ) : (
-      <p class="text-text-secondary">No posts yet. Check back soon.</p>
+      <p class="empty-state">No posts yet. Check back soon.</p>
     )
   }
 </BaseLayout>
+
+<style>
+  .writing-ledger {
+    padding-top: clamp(3.5rem, 7vw, 6.5rem);
+  }
+
+  .ledger-heading {
+    display: flex;
+    padding-bottom: 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    border-bottom: 1px solid var(--line-bright);
+  }
+
+  .ledger-heading h2,
+  .ledger-heading p {
+    margin: 0;
+  }
+
+  .ledger-heading h2 {
+    color: var(--bone);
+    font-family: var(--font-sans);
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+
+  .ledger-heading p {
+    color: var(--mist-dim);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .empty-state {
+    margin-top: 4rem;
+    color: var(--mist);
+  }
+</style>
