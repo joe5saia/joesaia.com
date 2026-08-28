@@ -4,6 +4,7 @@ date: 2026-02-01
 summary: "Alternative to code dependencies"
 tags: ["Meta", "Open Source", "Dependency Management"]
 featured: false
+draft: true
 ---
 
 Effective software is a tower of abstractions. We move the frontier of what's possible by building on top of previous solutions. Typically, this takes the form of importing a dependency to utilize some functionality it provides. Sometimes this means importing a giant package for a single function, other times it's importing a very small dependency that supplies exactly that single function. Both approaches have their pros and cons. Managing dependencies has the following drawbacks:

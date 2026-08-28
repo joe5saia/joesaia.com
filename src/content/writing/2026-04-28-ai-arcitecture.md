@@ -4,6 +4,7 @@ date: 2026-04-22
 summary: "Org Design"
 tags: ["Workflows", "AI", "Org Design"]
 featured: true
+draft: true
 ---
 
 Dan Lorec, the founder and CEO of Chainguard, had a stray comment one time to the effect that as an industry we've decided code review is critical to high quality code but some of the best, most elegant code was written indivdually and plopped into git with an "Initial commit" message and 20K LOC. To a certain extent what we are seeing there is selection on unobservables, we only see the massive initial commits that are good and the only people that can write these massive good intial commits are strong engineers. When they are working in this mode, it's clear that they have a very clear vision of the thing and the things that make up the thing. Too often, even on mature products, those writing the code do not have a clear vision of the thing they are trying to build, even for incremental changes. When I say they know the thing, I mean they know it from both a product and technical perspective. They knowi it in it's totalty, not just as a shadow on the wall.

@@ -3,6 +3,7 @@ title: "Software Workflows with AI May 2026"
 date: 2026-05-23
 summary: "Draft notes on software workflows with AI in May 2026."
 featured: false
+draft: true
 ---
 
 ## Draft
