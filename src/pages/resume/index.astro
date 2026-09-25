@@ -3,37 +3,48 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../../design-system/components/Button.astro";
 import Eyebrow from "../../../design-system/components/Eyebrow.astro";
 
+const achievements = [
+  "Implemented a HIPAA-compliant AI agent for initial clinical triage of cardiac device transmissions, flagging abnormal readings for clinician review, cutting triage lead time from three days to near real time and freeing 20 FTEs of capacity.",
+  "Built and led a 26-person engineering, data, QA, IT, and Salesforce organization at Rhythm Management Group, reporting to the CEO.",
+  "Improved platform uptime from 85% to over 99% and moved releases from quarterly to biweekly within three months at Rhythm.",
+  "Reduced cloud spend 30% through backend consolidation while improving system performance at Rhythm.",
+];
+
 const experience = [
   {
-    company: "Rhythm Management Group",
-    title: "VP of Engineering",
-    dates: "Apr 2025 – Mar 2026",
+    company: "Unhistoric Acts Foundation",
+    title: "President & Founder",
+    dates: "Mar 2026 – Present",
     highlights: [
-      "Reporting to the CEO, built and led a 26-person org spanning product engineering, platform engineering, QA, IT, and Salesforce analysts",
-      "Co-owned the BI stack (Snowflake + Fivetran + Sigma) with VP of Finance; moved executive reporting to self-serve dashboards and established source-of-truth metrics",
-      "Implemented Salesforce Omnichannel routing; measured a 35% productivity lift",
-      "Hands-on contributor averaging 2–5 production PRs per week: built Python ETL for claims data into Salesforce and Snowflake, automating reconciliation and enabling claims funnel measurement",
+      "Founded a 501(c)(3) nonprofit to build Town Crier, a civic-tech platform that makes local government records (agendas, minutes, ordinances) usable by residents, journalists, and AI agents.",
+      "Designed an AI-native engineering process and serve as its architect and final reviewer, with coding agents building against written specs, automating tests, and validating their work end to end.",
+      "Shipped an MCP server backed by a retrieval-augmented generation (RAG) pipeline, so AI agents can search, retrieve, and cite local government records they could not previously reach.",
+      "Continuously test frontier models and agent tooling, and fold what works into the development process.",
     ],
   },
   {
     company: "Rhythm Management Group",
-    title: "Director of Engineering",
-    dates: "May 2024 – Apr 2025",
+    title: "Head of Engineering",
+    dates: "May 2024 – Mar 2026",
     highlights: [
-      "Transformed a waterfall-in-disguise team into a high-agency agile org that shipped against customer pain points in days, not quarters",
-      "Drove 99%+ uptime, moved releases from quarterly to bi-weekly, and consolidated backend services for 30% lower cloud spend",
-      "Insourced key IT functions to improve reliability, security posture, and data governance",
+      "Private-equity-backed remote cardiac monitoring company. Reported to the CEO and led a fully in-house, 26-person organization across product and platform engineering, QA, support, IT, data analysis, and Salesforce, spanning the United States, Latin America, Europe, and Turkey.",
+      "Managed eight direct reports: a Director of Engineering; a Senior Manager over the product, QA, platform, and support teams; three senior engineers; a data analyst; a Salesforce analyst; and an IT manager.",
+      "Reorganized a legacy waterfall team around ownership and iterative delivery, shortening customer response times and product decision cycles. Raised platform uptime from 85% to over 99% and moved releases from quarterly to biweekly.",
+      "Implemented an AI agent for first-pass clinical triage that flags abnormal cardiac device transmissions for clinician review, cutting lead time from three days to near real time and freeing 20 FTEs of capacity.",
+      "Co-owned the Snowflake, Fivetran, and Sigma BI stack with the VP of Finance, moving executive and operational reporting to self-service dashboards with shared metric definitions.",
+      "Personally built Python ETL from the revenue cycle management vendor into Salesforce and Snowflake, automating claims reconciliation and measuring claims funnel performance.",
+      "Incorporated Claude Code into the engineering process, along with AI PR reviews and shared skills.",
     ],
   },
   {
     company: "Perry Health",
-    title: "Senior Manager of Data and Engineering",
+    title: "Senior Manager of Data & Engineering",
     dates: "May 2022 – May 2024",
     highlights: [
-      "Reporting to the COO, owned the EHR web app and data infrastructure using Python and React; led a cross-functional team of engineers and data scientists across NY and EU",
-      "Built acquisition-to-enrollment funnel (Rudderstack, GA4, Tableau), instrumented events, and ran A/B tests to improve conversion",
-      "Built claims processing pipeline managing $1.5M per year enabling a two-person team; maintained industry-leading 74% collections rate",
-      "Shipped data integrations (Abbott, Dexcom, SureScripts) to improve clinical decision-making",
+      "Venture-backed healthtech company with a $35M Series A. Reported directly to the COO, led engineers and data scientists across New York and Europe, and owned the EHR web application and data infrastructure.",
+      "Built the acquisition-to-enrollment funnel with RudderStack, Google Analytics, and Tableau, instrumenting events and running A/B tests to improve conversion.",
+      "Built the claims processing pipeline that let a two-person revenue team manage ~$1.5M annually at a 74% collections rate, above the industry average for RPM operations.",
+      "Shipped integrations with Abbott, Dexcom, and Surescripts to improve clinical decision-making.",
     ],
   },
   {
@@ -41,8 +52,8 @@ const experience = [
     title: "Data Scientist",
     dates: "Dec 2021 – May 2022",
     highlights: [
-      "Migrated Python ETLs to Fivetran and dbt SQL on Redshift, enabling faster iteration",
-      "Maintained comprehensive company-wide reporting on all business aspects using Looker, driving data-informed decision-making supporting $35 million Series A",
+      "Migrated Python ETLs to Fivetran and dbt SQL on Amazon Redshift, enabling faster iteration.",
+      "Maintained company-wide Looker reporting to support business decisions and the $35M Series A raise.",
     ],
   },
   {
@@ -50,8 +61,8 @@ const experience = [
     title: "Machine Learning Engineer",
     dates: "May 2021 – Dec 2021",
     highlights: [
-      "Engineered AWS EMR + PySpark pipeline to process one million LinkedIn profiles daily",
-      "Trained ensemble model to standardize employer names across the full universe of LinkedIn profiles",
+      "Engineered an AWS EMR and PySpark pipeline processing one million LinkedIn profiles daily.",
+      "Trained an ensemble model to standardize employer names across LinkedIn profiles.",
     ],
   },
   {
@@ -59,7 +70,7 @@ const experience = [
     title: "Senior Research Assistant",
     dates: "Oct 2014 – Jul 2016",
     highlights: [
-      "Designed 45 TB data lake housing NYSE exchange data augmented with internally developed indicators",
+      "Designed a 45 TB data lake of NYSE trade data augmented with internally developed indicators.",
     ],
   },
 ];
@@ -76,7 +87,7 @@ const education = [
     dates: "Sep 2013 – Sep 2014",
   },
   {
-    degree: "BS Physics and Economics",
+    degree: "BS Physics & Economics",
     school: "Rensselaer Polytechnic Institute",
     dates: "Aug 2009 – May 2013",
   },
@@ -84,37 +95,29 @@ const education = [
 
 const skills = [
   {
-    label: "Languages",
-    value: "SQL, Python, R, Julia, Golang, TypeScript, Node.js, React",
+    label: "Languages and frameworks",
+    value: "Python, SQL, R, Julia, Go, TypeScript, Node.js, React, NestJS",
   },
   {
-    label: "Experimentation & Inference",
+    label: "AI",
     value:
-      "A/B test design, power analysis, CUPED, stratification, uplift modeling, DML, causal forests",
-  },
-  {
-    label: "AI Tools",
-    value: "Claude Code, Codex, Amp, GitHub Copilot, Pi",
+      "AI-native development / coding agents, MCP, RAG, Claude Code, Codex, Amp",
   },
   {
     label: "Data Platforms",
     value: "Snowflake, Redshift, dbt, Fivetran, AWS EMR, Spark, Lambda",
   },
   {
-    label: "Visualization & BI",
+    label: "BI and product analytics",
     value:
-      "Tableau, Looker, Sigma, executive storytelling and self-serve dashboards",
-  },
-  {
-    label: "Event & Funnel Analytics",
-    value: "attribution, conversion, retention, Google Analytics (GA4)",
+      "Tableau, Looker, Sigma, executive reporting, self-service dashboards, attribution, conversion and retention analysis, Google Analytics 4",
   },
 ];
 ---
 
 <BaseLayout
   title="Resume — Joe Saia"
-  description="Resume of Joe Saia — engineering and analytics leader with 10+ years building data platforms and high-autonomy teams."
+  description="Resume of Joe Saia — engineering leader and PhD economist building AI-native engineering organizations."
   wide
 >
   <section class="page-intro" aria-labelledby="resume-title">
@@ -122,18 +125,15 @@ const skills = [
     <div>
       <h1 class="page-title" id="resume-title">Résumé</h1>
       <p class="page-dek">
-        Engineering and analytics leader with 10+ years building data platforms,
-        production systems, and high-autonomy teams. I specialize in hiring and
-        developing high-agency team members and using AI tooling to deliver
-        outsized business impact.
+        Engineering leader and PhD economist who builds AI-native engineering
+        organizations. I have shipped production AI agents in healthcare and
+        scaled a 26-person team across engineering, data, QA, and IT, with deep
+        experience in EHR integrations, clinical device data, and claims
+        processing.
       </p>
       <div class="resume-actions" role="group" aria-label="Download résumé">
         <Button href="/joe_saia_resume.pdf" download variant="primary">
           PDF
-          <span slot="icon">↓</span>
-        </Button>
-        <Button href="/joe_saia_resume.docx" download>
-          DOCX
           <span slot="icon">↓</span>
         </Button>
       </div>
@@ -161,20 +161,35 @@ const skills = [
     <aside class="resume-index">
       <p>On this page</p>
       <nav aria-label="Résumé sections">
-        <a href="#experience"><span>01</span> Experience</a>
-        <a href="#education"><span>02</span> Education</a>
-        <a href="#skills"><span>03</span> Technical skills</a>
+        <a href="#achievements"><span>01</span> Key achievements</a>
+        <a href="#experience"><span>02</span> Experience</a>
+        <a href="#education"><span>03</span> Education</a>
+        <a href="#skills"><span>04</span> Skills</a>
       </nav>
     </aside>
 
     <div class="resume-record">
       <section
         class="resume-section"
+        id="achievements"
+        aria-labelledby="achievements-title"
+      >
+        <header class="section-heading">
+          <span>01</span>
+          <h2 id="achievements-title">Key Achievements</h2>
+        </header>
+        <ul class="achievements-list">
+          {achievements.map((achievement) => <li>{achievement}</li>)}
+        </ul>
+      </section>
+
+      <section
+        class="resume-section"
         id="experience"
         aria-labelledby="experience-title"
       >
         <header class="section-heading">
-          <span>01</span>
+          <span>02</span>
           <h2 id="experience-title">Experience</h2>
         </header>
 
@@ -209,7 +224,7 @@ const skills = [
         aria-labelledby="education-title"
       >
         <header class="section-heading">
-          <span>02</span>
+          <span>03</span>
           <h2 id="education-title">Education</h2>
         </header>
 
@@ -234,8 +249,8 @@ const skills = [
         aria-labelledby="skills-title"
       >
         <header class="section-heading">
-          <span>03</span>
-          <h2 id="skills-title">Technical Skills</h2>
+          <span>04</span>
+          <h2 id="skills-title">Skills</h2>
         </header>
 
         <dl class="skills-list">
@@ -379,6 +394,20 @@ const skills = [
     line-height: 0.95;
   }
 
+  .achievements-list {
+    display: grid;
+    margin: 0;
+    padding: 1.5rem 0 0 1.25rem;
+    gap: 1rem;
+    color: var(--mist);
+    font-size: 0.87rem;
+    line-height: 1.62;
+  }
+
+  .achievements-list li::marker {
+    color: var(--copper);
+  }
+
   .experience-list,
   .education-list {
     margin: 0;
@@ -505,7 +534,7 @@ const skills = [
     }
 
     .resume-index nav {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .resume-index a {

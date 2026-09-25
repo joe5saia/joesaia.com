@@ -7,6 +7,9 @@ import { env } from "node:process";
 // https://astro.build/config
 export default defineConfig({
   site: "https://joesaia.com",
+  devToolbar: {
+    enabled: false,
+  },
   build: {
     inlineStylesheets: "always",
   },
