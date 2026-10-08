@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import SurvivalTo80Chart from "../components/SurvivalTo80Chart.astro";
+import QualityLayers from "../components/QualityLayers.astro";
 import Badge from "../../design-system/components/Badge.astro";
 import type { CollectionEntry } from "astro:content";
 
@@ -95,6 +96,7 @@ const articleJsonLd = {
       <div class="prose max-w-none">
         {visualization === "survival-to-80" && <SurvivalTo80Chart />}
         <slot />
+        {visualization === "quality-layers" && <QualityLayers />}
       </div>
     </div>
 

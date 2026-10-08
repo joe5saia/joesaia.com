@@ -12,6 +12,12 @@ export default defineConfig(
     ignores: ["dist/", ".astro/", "node_modules/", ".agents/skills/"],
   },
   {
+    files: ["src/scripts/**/*.js"],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+  {
     files: ["scripts/**/*.mjs", "tests/**/*.mjs"],
     languageOptions: {
       globals: globals.node,

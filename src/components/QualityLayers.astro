@@ -1,0 +1,173 @@
+---
+const levers = [
+  "Giving a damn",
+  "Code review",
+  "Manual testing",
+  "Unit tests",
+  "Integration tests",
+  "End-to-end tests",
+  "Property testing",
+  "Fuzzing",
+  "Formal QA",
+  "Dogfooding",
+  "Demos",
+  "Observability",
+  "Specification design",
+];
+const models = [
+  {
+    name: "Typical process",
+    rate: "6.33",
+    coding: 80,
+    enabled: [0, 1, 2, 3, 11],
+  },
+  {
+    name: "Layered process",
+    rate: "3.75",
+    coding: 50,
+    enabled: [0, 1, 2, 3, 4, 5, 6, 7, 8, 11],
+  },
+];
+---
+
+<quality-layers
+  class="not-prose my-12 block border-y border-border bg-surface-raised/40 py-6 sm:py-8"
+>
+  <header class="mb-6">
+    <h2 class="font-serif text-3xl text-text-heading">
+      Defect rates by quality process
+    </h2>
+    <p class="mt-3 text-sm text-text-secondary">
+      Defects that slip through, per 100 possible defects. Lower is better.
+      Change either process to compare.
+    </p>
+  </header>
+
+  <div
+    class="sticky top-28 min-[52.01rem]:top-20 z-10 bg-surface py-3"
+    data-chart
+  >
+    <div
+      class="grid grid-cols-2 gap-4 sm:gap-8"
+      aria-label="Remaining defects comparison"
+    >
+      {
+        models.map((model, side) => (
+          <div class="min-w-0 text-center">
+            <p class="text-xs text-text-secondary">{model.name}</p>
+            <p
+              class="my-2 font-serif text-3xl tabular-nums text-text-heading"
+              data-result
+            >
+              {model.rate}%
+            </p>
+            <div
+              class="relative flex h-24 sm:h-40 items-end justify-center border-y border-border bg-surface-overlay/40"
+              aria-hidden="true"
+            >
+              <div class="absolute inset-x-0 top-1/2 border-t border-dashed border-border" />
+              <div
+                data-bar
+                class:list={[
+                  "relative w-2/5",
+                  side === 0 ? "bg-text-secondary" : "bg-accent",
+                ]}
+                style={`height: ${Number(model.rate) * 10}%`}
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p
+      class="mt-3 text-xs text-text-secondary"
+      data-comparison
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      Typical: 6.33%. Layered: 3.75%. Layered has 40.7% fewer escaping defects.
+    </p>
+    <p class="mt-1 text-xs text-text-secondary" data-scale>
+      Shared scale: 0–10% · adjusts with your inputs
+    </p>
+  </div>
+
+  <form class="mt-6">
+    <div class="grid grid-cols-2 gap-4 sm:gap-8">
+      {
+        models.map((model) => (
+          <fieldset disabled data-model class="min-w-0">
+            <legend class="mb-2 text-sm font-semibold text-text-heading">
+              {model.name}
+            </legend>
+            {levers.map((name, index) => (
+              <div data-lever class="scroll-mt-96 border-t border-border py-3">
+                <label class="flex min-h-11 cursor-pointer items-center justify-between gap-2 text-xs leading-snug sm:text-sm">
+                  <span>{name}</span>
+                  <input
+                    type="checkbox"
+                    role="switch"
+                    checked={model.enabled.includes(index)}
+                    aria-label={`${model.name}: ${name}`}
+                    class="quality-switch"
+                  />
+                </label>
+                <div class="mt-2 flex items-center gap-2">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value={index === 0 ? model.coding : 25}
+                    disabled={!model.enabled.includes(index)}
+                    aria-label={`${model.name}: ${name} effectiveness`}
+                    class="min-h-6 w-full min-w-0 accent-accent disabled:opacity-30"
+                  />
+                  <output class="w-10 shrink-0 text-right text-xs tabular-nums text-text-secondary">
+                    {index === 0 ? model.coding : 25}%
+                  </output>
+                </div>
+              </div>
+            ))}
+          </fieldset>
+        ))
+      }
+    </div>
+    <button
+      type="reset"
+      disabled
+      class="mt-5 min-h-11 border border-border px-4 text-xs uppercase tracking-widest text-text-primary hover:border-border-hover disabled:opacity-40"
+      >Reset to article defaults</button
+    >
+  </form>
+  <p class="mt-4 text-xs text-text-secondary" data-status role="status">
+    Loading the Rust/WASM calculator…
+  </p>
+  <noscript
+    ><p class="mt-2 text-sm text-text-secondary">
+      Enable JavaScript to adjust the model. The bars show the article’s
+      defaults.
+    </p></noscript
+  >
+  <details class="mt-4 text-xs leading-relaxed text-text-secondary">
+    <summary class="cursor-pointer py-2 text-text-primary"
+      >How the model works</summary
+    >
+    <p class="mt-2">
+      Each enabled layer removes its effectiveness percentage of the defects
+      still remaining, not of the original total. Remaining defects = 100 × the
+      product of (1 − effectiveness / 100). These are illustrative assumptions,
+      not measured guarantees; real safeguards can share blind spots.
+    </p>
+    <p class="mt-2">
+      Typical: 80% from coding, then four layers at 25%. Layered: 50% from
+      coding, then nine layers at 25%. The article does not name those nine;
+      here they are review, manual, unit, integration, end-to-end, property
+      testing, fuzzing, QA, and observability. All other layers start off.
+    </p>
+  </details>
+</quality-layers>
+
+<script>
+  import "../scripts/quality-layers.js";
+</script>

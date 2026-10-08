@@ -22,6 +22,46 @@
   --font-serif: var(--ds-font-serif);
 }
 
+/* Native checkboxes retain keyboard/screen-reader behavior as toggle switches. */
+.quality-switch {
+  appearance: none;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 1.15rem;
+  margin: 0;
+  border: 1px solid var(--color-text-secondary);
+  border-radius: 999px;
+  background: var(--color-surface-overlay);
+  cursor: pointer;
+}
+
+.quality-switch::before {
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin: 0.13rem;
+  border-radius: 50%;
+  background: var(--color-text-secondary);
+  content: "";
+}
+
+.quality-switch:checked {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
+.quality-switch:checked::before {
+  transform: translateX(0.85rem);
+  background: var(--color-surface);
+}
+
+quality-layers input:focus-visible,
+quality-layers button:focus-visible,
+quality-layers summary:focus-visible {
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 4px;
+}
+
 @layer base {
   *,
   *::before,
@@ -38,7 +78,7 @@
   body {
     min-width: 20rem;
     margin: 0;
-    overflow-x: hidden;
+    overflow-x: clip;
     background:
       radial-gradient(
         circle at 76% 7%,

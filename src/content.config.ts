@@ -12,7 +12,7 @@ const writing = defineCollection({
     featured: z.boolean().optional().default(false),
     draft: z.boolean().optional().default(false),
     canonical: z.string().optional(),
-    visualization: z.literal("survival-to-80").optional(),
+    visualization: z.enum(["survival-to-80", "quality-layers"]).optional(),
   }),
 });
 

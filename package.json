@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:wasm": "bash scripts/build-quality-wasm.sh",
+    "test:rust": "cargo test --manifest-path wasm/quality-model/Cargo.toml",
     "preview": "astro preview",
     "post:new": "node scripts/create-post.mjs",
     "test": "node --test",
