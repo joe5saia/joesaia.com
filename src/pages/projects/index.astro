@@ -1,0 +1,141 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Eyebrow from "../../../design-system/components/Eyebrow.astro";
+import Button from "../../../design-system/components/Button.astro";
+
+const selected = (await getCollection("projects"))
+  .flatMap((project) =>
+    project.data.portfolio
+      ? [{ ...project, portfolio: project.data.portfolio }]
+      : [],
+  )
+  .sort((a, b) => a.portfolio.order - b.portfolio.order);
+
+const projects = await Promise.all(
+  selected.map(async (project, index) => ({
+    ...project,
+    number: String(index + 1).padStart(2, "0"),
+    ...(await render(project)),
+  })),
+);
+---
+
+<BaseLayout
+  title="Portfolio — Joe Saia"
+  description="Hearth, Rexford Commercial Capital, Mix Stamp, Omni, and Town Crier: selected work across household software, business operations, native apps, civic records, and applied AI. Product scope and technology stacks."
+  wide
+>
+  <section class="page-intro" aria-labelledby="portfolio-title">
+    <Eyebrow>Portfolio</Eyebrow>
+    <div>
+      <h1 class="page-title" id="portfolio-title">Selected work.</h1>
+      <p class="page-dek">
+        From everyday products to the systems underneath them. A selection of my
+        recent work across full-stack software, native apps, and applied AI.
+      </p>
+    </div>
+  </section>
+
+  <nav class="project-index" aria-label="Selected projects">
+    {
+      projects.map((project) => (
+        <a href={`#${project.id}`}>
+          <span class="index-number" aria-hidden="true">
+            {project.number}
+          </span>
+          <span class="index-name">{project.data.name}</span>
+          <span class="index-stack">{project.data.stack.join(" · ")}</span>
+          <span class="index-arrow" aria-hidden="true">
+            ↓
+          </span>
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="case-studies">
+    {
+      projects.map(({ id, data, portfolio, number, Content }) => (
+        <article class="project" id={id} aria-labelledby={`${id}-title`}>
+          <header class="project-heading">
+            <Eyebrow index={number}>{data.type}</Eyebrow>
+            <h2 id={`${id}-title`}>{data.name}</h2>
+            <p class="project-summary">{portfolio.summary}</p>
+          </header>
+
+          <div class="project-body">
+            <section class="product-scope" aria-labelledby={`${id}-scope`}>
+              <h3 class="section-label" id={`${id}-scope`}>
+                Product scope
+              </h3>
+              <div class="product-description">
+                <Content />
+              </div>
+              <ul class="scope-list">
+                {data.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section class="tech-stack" aria-labelledby={`${id}-stack`}>
+              <h3 class="section-label" id={`${id}-stack`}>
+                Tech stack
+              </h3>
+              <dl>
+                {portfolio.layers.map((layer) => (
+                  <div>
+                    <dt>{layer.name}</dt>
+                    <dd>{layer.tools}</dd>
+                  </div>
+                ))}
+              </dl>
+              {data.repo && (
+                <a class="source-link" href={data.repo}>
+                  View {data.name} on GitHub <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {data.website && (
+                <a class="source-link" href={data.website}>
+                  Visit {data.name} <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {!data.repo && (
+                <p class="mt-4 text-sm text-text-secondary">
+                  Private source code
+                </p>
+              )}
+            </section>
+          </div>
+
+          <aside class="engineering-note" aria-labelledby={`${id}-engineering`}>
+            <h3 class="section-label" id={`${id}-engineering`}>
+              Engineering focus
+            </h3>
+            <div>
+              <p>{portfolio.engineering}</p>
+              {portfolio.evidence && (
+                <a href={portfolio.evidence.url}>
+                  {portfolio.evidence.label}
+                  {"\u00a0"}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+          </aside>
+        </article>
+      ))
+    }
+  </div>
+
+  <section class="portfolio-close" aria-labelledby="portfolio-contact">
+    <div>
+      <Eyebrow>Build something useful</Eyebrow>
+      <h2 id="portfolio-contact">Have a problem worth solving?</h2>
+    </div>
+    <Button href="/contact/">
+      Get in touch <span slot="icon">↗</span>
+    </Button>
+  </section>
+</BaseLayout>

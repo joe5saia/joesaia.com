@@ -293,6 +293,255 @@ quality-layers summary:focus-visible {
   border: 1px solid var(--line-bright);
 }
 
+.project-index {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-bottom: var(--line-width) solid var(--color-border-hover);
+}
+
+.project-index a {
+  display: grid;
+  position: relative;
+  padding: var(--space-6) var(--space-5);
+  grid-template-rows: auto 1fr auto;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.project-index a + a {
+  border-left: var(--line-width) solid var(--color-border);
+}
+
+.project-index a:hover {
+  background: var(--color-surface-raised);
+}
+
+.project-index .index-number,
+.project-index .index-arrow {
+  color: var(--color-accent-hover);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+.project-index .index-arrow {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-5);
+}
+
+.project-index .index-name {
+  margin: var(--space-5) 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.project-index .index-stack {
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+}
+
+.case-studies .project {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  border-bottom: var(--line-width) solid var(--color-border-hover);
+  scroll-margin-top: 9rem;
+}
+
+.case-studies h2 {
+  max-width: 18ch;
+  margin: var(--space-6) 0 var(--space-5);
+  color: var(--color-text-heading);
+  font-size: var(--text-heading-2);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-heading);
+  overflow-wrap: anywhere;
+}
+
+.case-studies .project-summary {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  line-height: 1.3;
+}
+
+.case-studies .project-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-top: var(--space-7);
+}
+
+.case-studies .section-label {
+  margin: 0 0 var(--space-5);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.case-studies .product-description p {
+  max-width: var(--reading-width);
+  margin: 0 0 var(--space-5);
+}
+
+.case-studies .scope-list {
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--color-text-secondary);
+  list-style: disc;
+}
+
+.case-studies .scope-list li + li {
+  margin-top: var(--space-3);
+}
+
+.case-studies .scope-list li::marker {
+  color: var(--color-accent);
+}
+
+.case-studies .tech-stack {
+  padding-left: var(--space-6);
+  border-left: var(--line-width) solid var(--color-border);
+}
+
+.case-studies .tech-stack dl {
+  margin: 0 0 var(--space-6);
+}
+
+.case-studies .tech-stack dl > div + div {
+  margin-top: var(--space-5);
+}
+
+.case-studies .tech-stack dt {
+  margin-bottom: var(--space-1);
+  font-size: var(--text-small);
+  font-weight: 600;
+}
+
+.case-studies .tech-stack dd {
+  margin: 0;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.case-studies a {
+  color: var(--color-accent-hover);
+  font-size: var(--text-small);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.case-studies a:hover {
+  color: var(--color-text-heading);
+}
+
+.case-studies .product-description a {
+  font-size: inherit;
+}
+
+.case-studies .engineering-note {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.4fr) minmax(0, 1.6fr);
+  gap: var(--space-6);
+  margin-top: var(--space-7);
+  padding: var(--space-6);
+  background: var(--color-surface-raised);
+  border-top: var(--line-width) solid var(--color-border);
+}
+
+.case-studies .engineering-note h3 {
+  margin: var(--space-1) 0 0;
+}
+
+.case-studies .engineering-note p {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+.portfolio-close {
+  display: flex;
+  padding: var(--space-8) 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.portfolio-close h2 {
+  max-width: 24ch;
+  margin: var(--space-5) 0 0;
+  font-size: var(--text-heading-3);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-heading);
+}
+
+.portfolio-close .ds-button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 64rem) {
+  .project-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-index a:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .project-index a:nth-child(n + 3) {
+    border-top: var(--line-width) solid var(--color-border);
+  }
+}
+
+@media (max-width: 52rem) {
+  .case-studies .project-body,
+  .case-studies .engineering-note {
+    grid-template-columns: 1fr;
+  }
+
+  .case-studies .tech-stack {
+    padding-left: 0;
+    padding-top: var(--space-6);
+    border-left: 0;
+    border-top: var(--line-width) solid var(--color-border);
+  }
+}
+
+@media (max-width: 44rem) {
+  .project-index a {
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .project-index .index-arrow {
+    top: var(--space-5);
+    right: var(--space-3);
+  }
+
+  .portfolio-close {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .case-studies .engineering-note {
+    padding: var(--space-5);
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 28rem) {
+  .project-index {
+    grid-template-columns: 1fr;
+  }
+
+  .project-index a + a {
+    border-left: 0;
+    border-top: var(--line-width) solid var(--color-border);
+  }
+}
+
 @keyframes site-drift {
   to {
     stroke-dashoffset: -172;

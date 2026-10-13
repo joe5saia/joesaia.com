@@ -22,8 +22,18 @@ const projects = defineCollection({
     name: z.string(),
     type: z.string(),
     stack: z.array(z.string()),
-    repo: z.url(),
+    repo: z.url().optional(),
+    website: z.url().optional(),
     highlights: z.array(z.string()),
+    portfolio: z
+      .object({
+        order: z.number().int().positive(),
+        summary: z.string(),
+        engineering: z.string(),
+        layers: z.array(z.object({ name: z.string(), tools: z.string() })),
+        evidence: z.object({ label: z.string(), url: z.url() }).optional(),
+      })
+      .optional(),
   }),
 });
 
