@@ -5,17 +5,17 @@ stack: ["React", "TypeScript", "Cloudflare", "MCP"]
 repo: "https://github.com/joe5saia/hearth"
 highlights:
   - "A connected recipe library, weekly meal planner, grocery catalog, and shopping list with duplicate-aware recipe-to-list selection."
-  - "AI-assisted ingredient matching with Jev AI: normalize recipe text, retrieve catalog candidates, review suggestions, and save reusable matches."
-  - "An OAuth-protected Model Context Protocol (MCP) server lets AI assistants use the same household data and validation as the website."
+  - "AI-assisted ingredient matching pipeline with Jev AI: normalize recipe text, retrieve catalog candidates, review suggestions, and save reusable matches."
+  - "An OAuth-protected Model Context Protocol (MCP) server lets external AI assistants use the same household data and validation as the website."
 portfolio:
   order: 1
-  summary: "One household. From recipe to shopping list."
-  engineering: "Make AI useful without making it the source of truth. Matching combines language models with lexical catalog retrieval, cached decisions, explicit review, and guarded writes that avoid overwriting newer edits."
+  summary: "Household meal planning made easy."
+  engineering: "Use AI to reduce the friction of meal planning, with a simple workflow for choosing meals, planning the week, shopping for ingredients, and cooking."
   layers:
     - name: "Interface"
       tools: "React · TypeScript · Vite · Effect"
     - name: "Application & data"
-      tools: "Cloudflare Workers · D1/SQLite · Workers AI · Jev AI"
+      tools: "Cloudflare Workers · D1/SQLite · Workers AI · Jev AI · EffectTS"
     - name: "Agent access & verification"
       tools: "MCP SDK · OAuth · Cloudflare Access · Vitest · Miniflare"
   evidence:
