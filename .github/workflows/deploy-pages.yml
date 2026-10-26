@@ -5,9 +5,14 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
+concurrency:
+  group: joesaia-pages-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
@@ -22,9 +27,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Run tests
-        run: npm test
 
       - name: Build site
         run: npm run build

@@ -82,3 +82,17 @@ Configured for Cloudflare Pages:
 ## License
 
 MIT
+
+## GitHub Actions resource policy — October 26, 2026
+
+Actions is deployment-only: `ci.yml` and the duplicate tests in `deploy-pages.yml`
+are removed. Main pushes and existing manual deployment remain; Astro builds `dist`
+once for Pages. Deployments now serialize without cancelling active uploads and have
+a 15-minute limit. Test sources remain: run `task test`, `task lint`, and `task build`
+locally or in an Amp orb before shipping, not in Actions.
+
+No deployment or paid cloud validation was triggered by the audit. On November 1 or
+later, after release authorization, verify the exact revision's Pages upload and
+public site; this remains deferred, not scheduled. An administrator must inspect
+classic branch protection before adoption because the audit token cannot read it;
+do not leave a required `build-and-test` check orphaned or bypass security settings.
