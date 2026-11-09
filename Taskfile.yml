@@ -21,6 +21,11 @@ tasks:
     cmds:
       - npm run preview
 
+  editor:
+    desc: "Start the blog editor (http://localhost:4322)"
+    cmds:
+      - npm run editor
+
   test:
     desc: "Run unit tests"
     cmds:

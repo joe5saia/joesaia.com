@@ -4,3 +4,8 @@ services:
     portal:
       title: Joe Saia Portfolio
       description: Astro development server
+  editor:
+    command: node editor/server.mjs
+    portal:
+      title: Blog editor
+      description: Edit posts in src/content/writing and see Amp's review notes

@@ -71,6 +71,10 @@ featured: true
 Post content here...
 ```
 
+### Editing posts
+
+`task editor` starts a small editor at [http://localhost:4322](http://localhost:4322) for the posts in `src/content/writing/`. It lists drafts (`draft: true`) first, saves the Markdown file as is, and shows review notes from `.amp/blog-review/` that you can apply or dismiss. In an Amp orb it runs as the `editor` service.
+
 ## Deployment
 
 Configured for Cloudflare Pages:

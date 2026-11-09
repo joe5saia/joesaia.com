@@ -18,7 +18,7 @@ export default defineConfig(
     },
   },
   {
-    files: ["scripts/**/*.mjs", "tests/**/*.mjs"],
+    files: ["scripts/**/*.mjs", "tests/**/*.mjs", "editor/**/*.mjs"],
     languageOptions: {
       globals: globals.node,
     },

@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog editor</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--color-surface);
+        color: var(--color-text-primary);
+        font: 15px/1.5 var(--font-sans);
+      }
+      button,
+      a.button {
+        font: inherit;
+        font-size: 13px;
+        color: var(--color-text-primary);
+        background: var(--color-btn-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 5px 12px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: border-color 160ms;
+      }
+      button:hover,
+      a.button:hover {
+        border-color: var(--color-border-hover);
+      }
+      button.primary {
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-surface);
+        font-weight: 600;
+      }
+      button.primary:hover {
+        background: var(--color-accent-hover);
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr) 340px;
+        height: 100vh;
+      }
+      aside,
+      .comments {
+        overflow-y: auto;
+        background: var(--color-surface-raised);
+      }
+      aside {
+        border-right: 1px solid var(--color-border);
+      }
+      .comments {
+        border-left: 1px solid var(--color-border);
+        padding: 16px;
+      }
+      h1,
+      h2 {
+        font-family: var(--font-serif);
+        font-weight: 500;
+        color: var(--color-text-heading);
+        margin: 0;
+      }
+      h1 {
+        font-size: 20px;
+        padding: 18px 16px 10px;
+      }
+      h2 {
+        font-size: 17px;
+        margin-bottom: 12px;
+      }
+      .filter {
+        display: flex;
+        gap: 6px;
+        padding: 0 16px 12px;
+      }
+      .filter button[aria-pressed="true"] {
+        border-color: var(--color-accent);
+        color: var(--color-accent-hover);
+      }
+      .posts {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .posts button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border: 0;
+        border-radius: 0;
+        border-left: 3px solid transparent;
+        background: none;
+        padding: 9px 16px;
+      }
+      .posts button:hover {
+        background: var(--color-surface-overlay);
+      }
+      .posts button[aria-current="true"] {
+        background: var(--color-surface-overlay);
+        border-left-color: var(--color-accent);
+      }
+      .post-title {
+        display: block;
+        font-size: 14px;
+        color: var(--color-text-heading);
+      }
+      .post-meta {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        font-size: 12px;
+        color: var(--color-text-muted);
+      }
+      .badge {
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--color-accent-hover);
+        background: var(--color-accent-subtle);
+        border-radius: 4px;
+        padding: 0 5px;
+      }
+      .badge.comments-badge {
+        color: var(--color-text-primary);
+        background: var(--color-surface-overlay);
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .toolbar .file {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--color-text-muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .toolbar .spacer {
+        flex: 1;
+      }
+      .status {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+      }
+      .status.dirty {
+        color: var(--color-accent-hover);
+      }
+      .banner {
+        display: none;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 20px;
+        font-size: 13px;
+        background: var(--color-accent-subtle);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .banner.shown {
+        display: flex;
+      }
+      textarea {
+        flex: 1;
+        width: 100%;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 28px 40px 40vh;
+        resize: none;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--color-text-primary);
+        font: 18px/1.7 var(--font-serif);
+        caret-color: var(--color-accent-hover);
+      }
+      textarea::selection {
+        background: rgba(212, 122, 59, 0.38);
+      }
+      .empty {
+        margin: auto;
+        color: var(--color-text-muted);
+      }
+      .comment {
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        background: var(--color-surface);
+        cursor: pointer;
+      }
+      .comment:hover {
+        border-color: var(--color-border-hover);
+      }
+      .comment .quote {
+        font-family: var(--font-serif);
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        border-left: 2px solid var(--color-accent);
+        padding-left: 8px;
+        margin-bottom: 6px;
+        white-space: pre-wrap;
+      }
+      .comment .quote del {
+        text-decoration-color: var(--color-accent);
+      }
+      .comment ins {
+        display: block;
+        text-decoration: none;
+        font-family: var(--font-serif);
+        font-size: 14px;
+        color: var(--color-text-heading);
+        background: var(--color-accent-subtle);
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-bottom: 6px;
+        white-space: pre-wrap;
+      }
+      .comment .note {
+        font-size: 13px;
+        margin: 0 0 8px;
+        white-space: pre-wrap;
+      }
+      .comment .missing {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        margin: 0 0 8px;
+      }
+      .comment .actions {
+        display: flex;
+        gap: 6px;
+      }
+      .hint {
+        font-size: 13px;
+        color: var(--color-text-muted);
+      }
+      @media (max-width: 1000px) {
+        .app {
+          grid-template-columns: minmax(0, 1fr);
+          grid-template-rows: auto minmax(70vh, 1fr) auto;
+          height: auto;
+        }
+        aside {
+          max-height: 35vh;
+          border-right: 0;
+          border-bottom: 1px solid var(--color-border);
+        }
+        textarea {
+          padding: 20px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside>
+        <h1>Writing</h1>
+        <div class="filter">
+          <button type="button" data-filter="drafts" aria-pressed="true">
+            Drafts
+          </button>
+          <button type="button" data-filter="all" aria-pressed="false">
+            All posts
+          </button>
+        </div>
+        <ul class="posts" id="posts"></ul>
+      </aside>
+
+      <main>
+        <div class="toolbar">
+          <span class="file" id="file">No post open</span>
+          <span class="badge" id="draft-badge" hidden>Draft</span>
+          <span class="spacer"></span>
+          <span class="status" id="status"></span>
+          <a class="button" id="preview" target="_blank" hidden>Preview</a>
+          <button class="primary" id="save" type="button" disabled>Save</button>
+        </div>
+        <div class="banner" id="banner">
+          <span>This post changed on disk while you were editing.</span>
+          <button type="button" id="reload">Load the disk version</button>
+        </div>
+        <p class="empty" id="empty">Pick a post to start writing.</p>
+        <textarea
+          id="editor"
+          spellcheck="true"
+          aria-label="Post Markdown"
+          hidden
+        ></textarea>
+      </main>
+
+      <section class="comments" aria-labelledby="comments-heading">
+        <h2 id="comments-heading">Review notes</h2>
+        <div id="comments"></div>
+      </section>
+    </div>
+
+    <script type="module">
+      const $ = (id) => document.getElementById(id);
+      const editor = $("editor");
+      const state = {
+        posts: [],
+        previewBase: null,
+        filter: "drafts",
+        file: null,
+        version: null,
+        saved: "",
+        comments: [],
+        applied: new Set(),
+        saving: false,
+      };
+
+      const isDirty = () =>
+        state.file !== null &&
+        (editor.value !== state.saved || state.applied.size > 0);
+
+      async function api(path, options = {}) {
+        const response = await fetch(path, {
+          ...options,
+          headers: { "content-type": "application/json" },
+        });
+        const body = await response.json();
+        if (!response.ok && response.status !== 409) {
+          throw new Error(body.error ?? response.statusText);
+        }
+        return { status: response.status, body };
+      }
+
+      function el(tag, props = {}, children = []) {
+        const node = Object.assign(document.createElement(tag), props);
+        node.append(...children);
+        return node;
+      }
+
+      async function loadPosts() {
+        const { body } = await api("/api/posts");
+        state.posts = body.posts;
+        state.previewBase = body.previewBase;
+        renderPosts();
+      }
+
+      function renderPosts() {
+        const visible = state.posts.filter(
+          (post) => state.filter === "all" || post.draft,
+        );
+        $("posts").replaceChildren(
+          ...visible.map((post) => {
+            const meta = el("span", { className: "post-meta" }, [post.date]);
+            if (post.draft) {
+              meta.append(
+                el("span", { className: "badge", textContent: "Draft" }),
+              );
+            }
+            if (post.openComments) {
+              meta.append(
+                el("span", {
+                  className: "badge comments-badge",
+                  textContent: `${post.openComments} note${post.openComments === 1 ? "" : "s"}`,
+                }),
+              );
+            }
+            const button = el("button", { type: "button" }, [
+              el("span", {
+                className: "post-title",
+                textContent: post.title || post.file,
+              }),
+              meta,
+            ]);
+            button.setAttribute(
+              "aria-current",
+              String(post.file === state.file),
+            );
+            button.addEventListener("click", () => openPost(post.file));
+            return el("li", {}, [button]);
+          }),
+        );
+        if (!visible.length) {
+          $("posts").replaceChildren(
+            el("li", { className: "hint", textContent: "No drafts." }),
+          );
+          $("posts").firstChild.style.padding = "0 16px";
+        }
+      }
+
+      async function openPost(file) {
+        if (
+          file !== state.file &&
+          isDirty() &&
+          !confirm("Discard unsaved changes?")
+        ) {
+          return;
+        }
+        const { body } = await api(`/api/posts/${encodeURIComponent(file)}`);
+        state.file = file;
+        state.version = body.version;
+        state.saved = body.content;
+        state.comments = body.comments;
+        state.applied = new Set();
+        editor.value = body.content;
+        editor.hidden = false;
+        $("empty").hidden = true;
+        $("banner").classList.remove("shown");
+        location.hash = `file=${encodeURIComponent(file)}`;
+        editor.scrollTop = 0;
+        renderHeader();
+        renderPosts();
+        renderComments();
+      }
+
+      function renderHeader() {
+        const post = state.posts.find((p) => p.file === state.file);
+        $("file").textContent = state.file ?? "No post open";
+        $("draft-badge").hidden = !post?.draft;
+        const preview = $("preview");
+        preview.hidden = !(state.previewBase && state.file);
+        if (!preview.hidden) {
+          const slug = state.file.replace(/\.md$/, "").toLowerCase();
+          preview.href = new URL(`writing/${slug}/`, state.previewBase).href;
+        }
+        renderStatus();
+      }
+
+      function renderStatus(message) {
+        const dirty = isDirty();
+        $("save").disabled = !dirty || state.saving;
+        const body = editor.value.replace(/^---[\s\S]*?\n---/, "");
+        const words = (body.match(/\S+/g) ?? []).length;
+        $("status").className = `status${dirty ? " dirty" : ""}`;
+        $("status").textContent = state.file
+          ? (message ??
+            `${words.toLocaleString()} words · ${dirty ? "Unsaved" : "Saved"}`)
+          : "";
+      }
+
+      function renderComments() {
+        const container = $("comments");
+        if (!state.file) {
+          container.replaceChildren(
+            el("p", {
+              className: "hint",
+              textContent: "Open a post to see notes.",
+            }),
+          );
+          return;
+        }
+        const open = state.comments.filter(
+          (c) => (c.status ?? "open") === "open" && !state.applied.has(c.id),
+        );
+        const closed = state.comments.length - open.length;
+        const cards = open.map((comment) => {
+          const found = comment.quote
+            ? editor.value.indexOf(comment.quote)
+            : -1;
+          const card = el("article", { className: "comment" });
+          if (comment.quote) {
+            const quote = el("div", { className: "quote" });
+            quote.append(
+              comment.suggestion !== undefined
+                ? el("del", { textContent: comment.quote })
+                : comment.quote,
+            );
+            card.append(quote);
+          }
+          if (comment.suggestion !== undefined) {
+            card.append(
+              el("ins", { textContent: comment.suggestion || "(delete)" }),
+            );
+          }
+          if (comment.note) {
+            card.append(
+              el("p", { className: "note", textContent: comment.note }),
+            );
+          }
+          if (comment.quote && found === -1) {
+            card.append(
+              el("p", {
+                className: "missing",
+                textContent: "This text is no longer in the post.",
+              }),
+            );
+          }
+          const actions = el("div", { className: "actions" });
+          if (comment.suggestion !== undefined) {
+            const apply = el("button", {
+              type: "button",
+              textContent: "Apply",
+            });
+            apply.disabled = found === -1;
+            apply.addEventListener("click", (event) => {
+              event.stopPropagation();
+              applySuggestion(comment);
+            });
+            actions.append(apply);
+          }
+          const dismiss = el("button", {
+            type: "button",
+            textContent:
+              comment.suggestion !== undefined ? "Dismiss" : "Resolve",
+          });
+          dismiss.addEventListener("click", (event) => {
+            event.stopPropagation();
+            dismissComment(comment);
+          });
+          actions.append(dismiss);
+          card.append(actions);
+          card.addEventListener("click", () => selectQuote(comment.quote));
+          return card;
+        });
+        if (!cards.length) {
+          cards.push(
+            el("p", {
+              className: "hint",
+              textContent:
+                "No open notes. Ask Amp in the thread to copy-edit or review this post, and its notes show up here.",
+            }),
+          );
+        }
+        if (closed) {
+          cards.push(
+            el("p", {
+              className: "hint",
+              textContent: `${closed} resolved note${closed === 1 ? "" : "s"}.`,
+            }),
+          );
+        }
+        container.replaceChildren(...cards);
+      }
+
+      function selectQuote(quote) {
+        const start = quote ? editor.value.indexOf(quote) : -1;
+        if (start === -1) return;
+        // Put the caret at the start first so the browser scrolls it into view.
+        editor.blur();
+        editor.setSelectionRange(start, start);
+        editor.focus();
+        editor.setSelectionRange(start, start + quote.length);
+      }
+
+      function applySuggestion(comment) {
+        const start = editor.value.indexOf(comment.quote);
+        if (start === -1) return;
+        editor.focus();
+        editor.setSelectionRange(start, start + comment.quote.length);
+        // execCommand keeps the change in the textarea's undo history.
+        if (!document.execCommand("insertText", false, comment.suggestion)) {
+          editor.setRangeText(
+            comment.suggestion,
+            start,
+            start + comment.quote.length,
+            "end",
+          );
+        }
+        state.applied.add(comment.id);
+        renderComments();
+        renderStatus();
+      }
+
+      async function dismissComment(comment) {
+        const { body } = await api(
+          `/api/posts/${encodeURIComponent(state.file)}/comments/${encodeURIComponent(comment.id)}`,
+          { method: "POST", body: JSON.stringify({ status: "dismissed" }) },
+        );
+        state.comments = body.comments;
+        renderComments();
+        loadPosts();
+      }
+
+      async function save(force = false) {
+        if (!isDirty() || state.saving) return;
+        state.saving = true;
+        renderStatus("Saving…");
+        const content = editor.value;
+        try {
+          const { status, body } = await api(
+            `/api/posts/${encodeURIComponent(state.file)}`,
+            {
+              method: "PUT",
+              body: JSON.stringify({
+                content,
+                version: state.version,
+                applied: [...state.applied],
+                force,
+              }),
+            },
+          );
+          if (status === 409) {
+            state.saving = false;
+            if (
+              confirm(
+                "This post changed on disk since you opened it. Overwrite the disk version with yours?",
+              )
+            ) {
+              return save(true);
+            }
+            renderStatus();
+            return;
+          }
+          state.version = body.version;
+          state.saved = content;
+          state.comments = body.comments;
+          state.applied = new Set();
+          $("banner").classList.remove("shown");
+          renderComments();
+          loadPosts().then(renderHeader);
+        } catch (error) {
+          alert(`Save failed: ${error.message}`);
+        } finally {
+          state.saving = false;
+          renderStatus();
+        }
+      }
+
+      // Pick up notes Amp writes, and edits made on disk, while the post is open.
+      async function poll() {
+        if (!state.file || document.hidden || state.saving) return;
+        const file = state.file;
+        const { body } = await api(`/api/posts/${encodeURIComponent(file)}`);
+        if (file !== state.file) return;
+        if (JSON.stringify(body.comments) !== JSON.stringify(state.comments)) {
+          state.comments = body.comments;
+          renderComments();
+          loadPosts();
+        }
+        if (body.version !== state.version) {
+          if (isDirty()) {
+            $("banner").classList.add("shown");
+          } else {
+            const { selectionStart, selectionEnd, scrollTop } = editor;
+            state.version = body.version;
+            state.saved = body.content;
+            editor.value = body.content;
+            editor.setSelectionRange(selectionStart, selectionEnd);
+            editor.scrollTop = scrollTop;
+            renderComments();
+            loadPosts().then(renderHeader);
+          }
+        }
+      }
+
+      $("reload").addEventListener("click", () => openPost(state.file));
+      $("save").addEventListener("click", () => save());
+      editor.addEventListener("input", () => {
+        renderStatus();
+        renderComments();
+      });
+      document.addEventListener("keydown", (event) => {
+        if ((event.metaKey || event.ctrlKey) && event.key === "s") {
+          event.preventDefault();
+          save();
+        }
+      });
+      window.addEventListener("beforeunload", (event) => {
+        if (isDirty()) event.preventDefault();
+      });
+      for (const button of document.querySelectorAll("[data-filter]")) {
+        button.addEventListener("click", () => {
+          state.filter = button.dataset.filter;
+          for (const other of document.querySelectorAll("[data-filter]")) {
+            other.setAttribute("aria-pressed", String(other === button));
+          }
+          renderPosts();
+        });
+      }
+
+      await loadPosts();
+      renderComments();
+      const fromHash = new URLSearchParams(location.hash.slice(1)).get("file");
+      if (fromHash && state.posts.some((post) => post.file === fromHash)) {
+        await openPost(fromHash);
+      }
+      setInterval(() => poll().catch(() => {}), 3000);
+    </script>
+  </body>
+</html>

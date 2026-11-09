@@ -64,6 +64,37 @@ repo: url (required)
 highlights: string[] (required)
 ```
 
+## Blog Editor and Draft Review
+
+Joe writes every post himself. On posts, Amp copy-edits and comments; it does not write or rewrite prose. Unpublished posts have `draft: true` in their frontmatter.
+
+- `editor/server.mjs` is a small editor for `src/content/writing/`. In an orb it runs as the `editor` service in `.amp/services.yaml` (`amp orb services ensure`); locally, `task editor`.
+- To review a post, do not edit the post file. Write notes to `.amp/blog-review/<post file name without .md>.json`, which the editor shows beside the post within a few seconds. The file is a JSON array; append to it and keep earlier entries:
+
+  ```json
+  [
+    {
+      "id": "3",
+      "quote": "The odds is that",
+      "suggestion": "The odds are that",
+      "note": "Subject-verb agreement."
+    },
+    {
+      "id": "4",
+      "quote": "a claim that needs support",
+      "note": "Is there an example you could point to?"
+    }
+  ]
+  ```
+
+  - `id`: unique within the file.
+  - `quote`: exact text copied from the post, long enough to occur only once. The editor finds the note's place by this text.
+  - `suggestion` (optional): replacement for `quote`, for copy edits such as spelling, grammar, punctuation, and typos. Joe applies or dismisses each one.
+  - `note` (optional): the reason for a suggestion, or a comment or question with no suggestion.
+  - `status`: set by the editor to `applied` or `dismissed` once Joe acts. Do not suggest a dismissed change again.
+
+- Scaffold posts with `task post`, then add `draft: true` until Joe publishes. Publishing means setting `draft: false` (or removing it) and committing, only when Joe asks.
+
 ## Code Conventions
 
 - Use Astro components (`.astro`) for all UI
