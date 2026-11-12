@@ -10,7 +10,7 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 const DEFAULT_OUTPUT_DIR = path.resolve(process.cwd(), "src/content/writing");
-const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}$/;
+export const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}$/;
 const USAGE = `
 Usage:
   pnpm post:new "Post Title" "Post summary"
@@ -65,17 +65,25 @@ export function getLocalDateString() {
 }
 
 /**
- * Build the frontmatter and starter body for a new post.
+ * Build the frontmatter block for a new post, ending with a newline.
  * @param {{
  *   title: string,
  *   summary: string,
  *   date: string,
  *   tags: string[],
- *   featured: boolean
+ *   featured: boolean,
+ *   draft?: boolean
  * }} params
  * @returns {string}
  */
-export function buildPostContent({ title, summary, date, tags, featured }) {
+export function buildFrontmatter({
+  title,
+  summary,
+  date,
+  tags,
+  featured,
+  draft = false,
+}) {
   const lines = [
     "---",
     `title: "${escapeYamlString(title)}"`,
@@ -89,9 +97,19 @@ export function buildPostContent({ title, summary, date, tags, featured }) {
   }
 
   lines.push(`featured: ${featured ? "true" : "false"}`);
-  lines.push("---", "", "## Draft", "", "Write here.");
+  if (draft) lines.push("draft: true");
+  lines.push("---", "");
 
   return lines.join("\n");
+}
+
+/**
+ * Build the frontmatter and starter body for a new post.
+ * @param {Parameters<typeof buildFrontmatter>[0]} params
+ * @returns {string}
+ */
+export function buildPostContent(params) {
+  return `${buildFrontmatter(params)}\n## Draft\n\nWrite here.`;
 }
 
 /**

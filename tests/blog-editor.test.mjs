@@ -128,3 +128,36 @@ test("saves only against the current version and records applied notes", async (
     ],
   );
 });
+
+test("creates a frontmatter-only draft named like `task post`", async () => {
+  const created = await call("/api/posts", {
+    method: "POST",
+    body: { title: 'Joe\'s "New" Post', summary: "Why.", date: "2026-11-12" },
+  });
+  assert.equal(created.status, 201);
+  assert.deepEqual(await created.json(), {
+    file: "2026-11-12-joes-new-post.md",
+  });
+  assert.equal(
+    await fs.readFile(
+      path.join(writingDir, "2026-11-12-joes-new-post.md"),
+      "utf8",
+    ),
+    '---\ntitle: "Joe\'s \\"New\\" Post"\ndate: 2026-11-12\nsummary: "Why."\nfeatured: false\ndraft: true\n---\n\n',
+  );
+
+  const again = await call("/api/posts", {
+    method: "POST",
+    body: { title: "Joe's New Post", summary: "Other.", date: "2026-11-12" },
+  });
+  assert.equal(again.status, 409);
+  assert.equal(
+    (
+      await call("/api/posts", {
+        method: "POST",
+        body: { title: "No summary", summary: " " },
+      })
+    ).status,
+    400,
+  );
+});

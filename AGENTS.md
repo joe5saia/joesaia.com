@@ -93,7 +93,7 @@ Joe writes every post himself. On posts, Amp copy-edits and comments; it does no
   - `note` (optional): the reason for a suggestion, or a comment or question with no suggestion.
   - `status`: set by the editor to `applied` or `dismissed` once Joe acts. Do not suggest a dismissed change again.
 
-- Scaffold posts with `task post`, then add `draft: true` until Joe publishes. Publishing means setting `draft: false` (or removing it) and committing, only when Joe asks.
+- Joe can create a post from the editor's **New post** button, which writes a frontmatter-only draft (`POST /api/posts`). Otherwise scaffold posts with `task post`, then add `draft: true` until Joe publishes. Publishing means setting `draft: false` (or removing it) and committing, only when Joe asks.
 
 ## Code Conventions
 

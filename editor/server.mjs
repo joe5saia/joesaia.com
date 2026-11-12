@@ -13,6 +13,14 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
+import {
+  DATE_FORMAT,
+  buildFrontmatter,
+  getLocalDateString,
+  slugify,
+  writePostFile,
+} from "../scripts/create-post.mjs";
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const POST_FILE = /^[A-Za-z0-9._-]+\.md$/;
 const COMMENT_STATUSES = new Set(["open", "applied", "dismissed"]);
@@ -128,6 +136,44 @@ export function createEditorServer({ writingDir, commentsDir, previewBase }) {
         posts,
         previewBase: previewBase ? await previewBase() : null,
       });
+    }
+
+    // New posts follow `task post`: YYYY-MM-DD-slug.md, frontmatter only, as a draft.
+    if (req.method === "POST" && url.pathname === "/api/posts") {
+      const body = await readJson(req);
+      const title = typeof body.title === "string" ? body.title.trim() : "";
+      const summary =
+        typeof body.summary === "string" ? body.summary.trim() : "";
+      const date = body.date ?? getLocalDateString();
+      if (!title || !summary) {
+        return sendJson(res, 400, { error: "Title and summary are required." });
+      }
+      if (typeof date !== "string" || !DATE_FORMAT.test(date)) {
+        return sendJson(res, 400, { error: "Date must be YYYY-MM-DD." });
+      }
+      const slug = slugify(title);
+      if (!slug) {
+        return sendJson(res, 400, {
+          error: "The title needs at least one letter or number.",
+        });
+      }
+      const file = `${date}-${slug}.md`;
+      const content =
+        buildFrontmatter({
+          title,
+          summary,
+          date,
+          tags: [],
+          featured: false,
+          draft: true,
+        }) + "\n";
+      try {
+        await writePostFile(postPath(file), content);
+      } catch (error) {
+        if (error.cause?.code !== "EEXIST") throw error;
+        return sendJson(res, 409, { error: `${file} already exists.` });
+      }
+      return sendJson(res, 201, { file });
     }
 
     if (parts[0] !== "api" || parts[1] !== "posts" || !parts[2]) {

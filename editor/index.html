@@ -75,7 +75,55 @@
       }
       h1 {
         font-size: 20px;
-        padding: 18px 16px 10px;
+      }
+      .sidebar-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px 10px;
+      }
+      dialog {
+        width: min(440px, calc(100vw - 32px));
+        padding: 20px;
+        color: var(--color-text-primary);
+        background: var(--color-surface-raised);
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.55);
+      }
+      dialog form {
+        display: grid;
+        gap: 14px;
+      }
+      dialog label {
+        display: grid;
+        gap: 4px;
+        font-size: 13px;
+        color: var(--color-text-secondary);
+      }
+      dialog input {
+        font: 15px/1.4 var(--font-sans);
+        color: var(--color-text-primary);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 7px 10px;
+      }
+      dialog input:focus {
+        border-color: var(--color-accent);
+        outline: none;
+      }
+      dialog .error {
+        margin: 0;
+        font-size: 13px;
+        color: var(--color-accent-hover);
+      }
+      dialog .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
       }
       h2 {
         font-size: 17px;
@@ -277,7 +325,10 @@
   <body>
     <div class="app">
       <aside>
-        <h1>Writing</h1>
+        <div class="sidebar-head">
+          <h1>Writing</h1>
+          <button type="button" id="new-post">New post</button>
+        </div>
         <div class="filter">
           <button type="button" data-filter="drafts" aria-pressed="true">
             Drafts
@@ -316,6 +367,25 @@
         <div id="comments"></div>
       </section>
     </div>
+
+    <dialog id="new-post-dialog" aria-labelledby="new-post-heading">
+      <form id="new-post-form" method="dialog">
+        <h2 id="new-post-heading">New post</h2>
+        <label>
+          Title
+          <input name="title" required autocomplete="off" />
+        </label>
+        <label>
+          Summary
+          <input name="summary" required autocomplete="off" />
+        </label>
+        <p class="error" id="new-post-error" hidden></p>
+        <div class="actions">
+          <button type="button" id="new-post-cancel">Cancel</button>
+          <button class="primary" type="submit">Create draft</button>
+        </div>
+      </form>
+    </dialog>
 
     <script type="module">
       const $ = (id) => document.getElementById(id);
@@ -404,8 +474,9 @@
         }
       }
 
-      async function openPost(file) {
+      async function openPost(file, discard = false) {
         if (
+          !discard &&
           file !== state.file &&
           isDirty() &&
           !confirm("Discard unsaved changes?")
@@ -658,6 +729,49 @@
           }
         }
       }
+
+      const newPostDialog = $("new-post-dialog");
+      const newPostForm = $("new-post-form");
+      $("new-post").addEventListener("click", () => {
+        if (isDirty() && !confirm("Discard unsaved changes?")) return;
+        newPostForm.reset();
+        $("new-post-error").hidden = true;
+        newPostDialog.showModal();
+      });
+      $("new-post-cancel").addEventListener("click", () =>
+        newPostDialog.close(),
+      );
+      newPostForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const form = new FormData(newPostForm);
+        const now = new Date();
+        // The writer's local date, as `task post` uses, not the server's.
+        const date = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+        const response = await fetch("/api/posts", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            title: form.get("title"),
+            summary: form.get("summary"),
+            date,
+          }),
+        });
+        const body = await response.json();
+        if (!response.ok) {
+          $("new-post-error").textContent = body.error ?? response.statusText;
+          $("new-post-error").hidden = false;
+          return;
+        }
+        newPostDialog.close();
+        await loadPosts();
+        await openPost(body.file, true);
+        editor.focus();
+        editor.setSelectionRange(editor.value.length, editor.value.length);
+      });
 
       $("reload").addEventListener("click", () => openPost(state.file));
       $("save").addEventListener("click", () => save());

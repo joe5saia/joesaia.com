@@ -73,7 +73,7 @@ Post content here...
 
 ### Editing posts
 
-`task editor` starts a small editor at [http://localhost:4322](http://localhost:4322) for the posts in `src/content/writing/`. It lists drafts (`draft: true`) first, saves the Markdown file as is, and shows review notes from `.amp/blog-review/` that you can apply or dismiss. In an Amp orb it runs as the `editor` service.
+`task editor` starts a small editor at [http://localhost:4322](http://localhost:4322) for the posts in `src/content/writing/`. It lists drafts (`draft: true`) first, saves the Markdown file as is, and shows review notes from `.amp/blog-review/` that you can apply or dismiss. **New post** asks for a title and summary and creates `YYYY-MM-DD-slug.md` as a draft with frontmatter only, the same way `task post` names and dates it, then opens it. In an Amp orb it runs as the `editor` service.
 
 ## Deployment
 
