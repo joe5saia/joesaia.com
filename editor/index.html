@@ -670,20 +670,22 @@
         editor.setSelectionRange(start, start + quote.length);
       }
 
+      // Replaces editor text so Ctrl/Cmd+Z can undo it: execCommand keeps the
+      // change in the textarea's undo history, setRangeText does not.
+      function replaceRange(start, end, text) {
+        editor.focus();
+        editor.setSelectionRange(start, end);
+        const command = text ? "insertText" : "delete";
+        if (!document.execCommand(command, false, text)) {
+          editor.setRangeText(text, start, end, "end");
+          editor.dispatchEvent(new Event("input"));
+        }
+      }
+
       function applySuggestion(comment) {
         const start = editor.value.indexOf(comment.quote);
         if (start === -1) return;
-        editor.focus();
-        editor.setSelectionRange(start, start + comment.quote.length);
-        // execCommand keeps the change in the textarea's undo history.
-        if (!document.execCommand("insertText", false, comment.suggestion)) {
-          editor.setRangeText(
-            comment.suggestion,
-            start,
-            start + comment.quote.length,
-            "end",
-          );
-        }
+        replaceRange(start, start + comment.quote.length, comment.suggestion);
         state.applied.add(comment.id);
         storeBackup();
         renderComments();
@@ -828,6 +830,74 @@
         if ((event.metaKey || event.ctrlKey) && event.key === "s") {
           event.preventDefault();
           save();
+        }
+      });
+
+      // With nothing selected, Ctrl/Cmd+X and C cut or copy the whole line,
+      // and pasting that line inserts it above the caret's line.
+      let lineCopy = null; // { caret, start, end, text } while a copy or cut runs
+      let copiedLine = null; // text of the last line copied this way
+      editor.addEventListener("keydown", (event) => {
+        const key = event.key.toLowerCase();
+        lineCopy = null;
+        if (!(event.metaKey || event.ctrlKey) || event.shiftKey || event.altKey)
+          return;
+        if (key !== "c" && key !== "x") return;
+        const { value, selectionStart: caret, selectionEnd } = editor;
+        if (caret !== selectionEnd || !value) return;
+        const start = value.lastIndexOf("\n", caret - 1) + 1;
+        const newline = value.indexOf("\n", caret);
+        const lineEnd = newline === -1 ? value.length : newline;
+        // Cutting the last line also takes the newline before it.
+        const end = newline === -1 ? lineEnd : newline + 1;
+        const cutStart = newline === -1 && start > 0 ? start - 1 : start;
+        lineCopy = {
+          caret,
+          start: cutStart,
+          end,
+          text: value.slice(start, lineEnd) + "\n",
+        };
+        // Select the range so the browser runs its copy or cut command;
+        // Safari skips both when nothing is selected.
+        editor.setSelectionRange(cutStart, end);
+      });
+      function copyLine(event) {
+        if (!lineCopy) {
+          copiedLine = null;
+          return;
+        }
+        const { caret, start, end, text } = lineCopy;
+        lineCopy = null;
+        event.preventDefault();
+        event.clipboardData.setData("text/plain", text);
+        copiedLine = text;
+        if (event.type === "cut") {
+          replaceRange(start, end, "");
+        } else {
+          editor.setSelectionRange(caret, caret);
+        }
+      }
+      editor.addEventListener("copy", copyLine);
+      editor.addEventListener("cut", copyLine);
+
+      editor.addEventListener("paste", (event) => {
+        const text = event.clipboardData.getData("text/plain");
+        const { value, selectionStart: start, selectionEnd: end } = editor;
+        const selected = value.slice(start, end);
+        const url = text.trim();
+        // Pasting a URL over selected text makes a Markdown link.
+        if (
+          selected &&
+          /^https?:\/\/\S+$/.test(url) &&
+          !/^https?:\/\//.test(selected)
+        ) {
+          event.preventDefault();
+          replaceRange(start, end, `[${selected}](${url})`);
+        } else if (start === end && text === copiedLine) {
+          event.preventDefault();
+          const lineStart = value.lastIndexOf("\n", start - 1) + 1;
+          replaceRange(lineStart, lineStart, text);
+          editor.setSelectionRange(start + text.length, start + text.length);
         }
       });
       window.addEventListener("beforeunload", (event) => {
