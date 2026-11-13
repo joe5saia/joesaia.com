@@ -411,11 +411,34 @@
           ...options,
           headers: { "content-type": "application/json" },
         });
+        // The editor always answers in JSON, so anything else came from the
+        // portal in front of it, usually because the portal sign-in expired.
+        if (!response.headers.get("content-type")?.includes("json")) {
+          throw new Error(
+            "The portal sign-in has probably expired. Open the editor in a new tab to sign in again, then come back to this tab and save. Your unsaved text is also kept in this browser, so reloading won't lose it.",
+          );
+        }
         const body = await response.json();
         if (!response.ok && response.status !== 409) {
           throw new Error(body.error ?? response.statusText);
         }
         return { status: response.status, body };
+      }
+
+      // Unsaved text survives reloads and expired portal sign-ins.
+      const backupKey = (file) => `blog-editor:unsaved:${file}`;
+      function storeBackup() {
+        if (!state.file) return;
+        if (!isDirty()) return localStorage.removeItem(backupKey(state.file));
+        localStorage.setItem(
+          backupKey(state.file),
+          JSON.stringify({
+            content: editor.value,
+            version: state.version,
+            applied: [...state.applied],
+            savedAt: Date.now(),
+          }),
+        );
       }
 
       function el(tag, props = {}, children = []) {
@@ -484,12 +507,30 @@
           return;
         }
         const { body } = await api(`/api/posts/${encodeURIComponent(file)}`);
+        // Leaving the open post (switching, or loading the disk version) discards its edits.
+        if (state.file) localStorage.removeItem(backupKey(state.file));
         state.file = file;
         state.version = body.version;
         state.saved = body.content;
         state.comments = body.comments;
         state.applied = new Set();
         editor.value = body.content;
+        const backup = JSON.parse(localStorage.getItem(backupKey(file)));
+        if (backup && backup.content !== body.content) {
+          const when = new Date(backup.savedAt).toLocaleString();
+          if (
+            confirm(
+              `This browser has unsaved text for this post from ${when}. Restore it?`,
+            )
+          ) {
+            // Keep the backup's version so saving warns if the disk changed since.
+            state.version = backup.version;
+            state.applied = new Set(backup.applied);
+            editor.value = backup.content;
+          } else {
+            localStorage.removeItem(backupKey(file));
+          }
+        }
         editor.hidden = false;
         $("empty").hidden = true;
         $("banner").classList.remove("shown");
@@ -644,6 +685,7 @@
           );
         }
         state.applied.add(comment.id);
+        storeBackup();
         renderComments();
         renderStatus();
       }
@@ -692,6 +734,7 @@
           state.saved = content;
           state.comments = body.comments;
           state.applied = new Set();
+          storeBackup();
           $("banner").classList.remove("shown");
           renderComments();
           loadPosts().then(renderHeader);
@@ -751,18 +794,19 @@
           String(now.getMonth() + 1).padStart(2, "0"),
           String(now.getDate()).padStart(2, "0"),
         ].join("-");
-        const response = await fetch("/api/posts", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            title: form.get("title"),
-            summary: form.get("summary"),
-            date,
-          }),
-        });
-        const body = await response.json();
-        if (!response.ok) {
-          $("new-post-error").textContent = body.error ?? response.statusText;
+        let body, status;
+        try {
+          ({ body, status } = await api("/api/posts", {
+            method: "POST",
+            body: JSON.stringify({
+              title: form.get("title"),
+              summary: form.get("summary"),
+              date,
+            }),
+          }));
+          if (status === 409) throw new Error(body.error);
+        } catch (error) {
+          $("new-post-error").textContent = error.message;
           $("new-post-error").hidden = false;
           return;
         }
@@ -776,6 +820,7 @@
       $("reload").addEventListener("click", () => openPost(state.file));
       $("save").addEventListener("click", () => save());
       editor.addEventListener("input", () => {
+        storeBackup();
         renderStatus();
         renderComments();
       });
