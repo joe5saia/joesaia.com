@@ -83,6 +83,10 @@ export function createEditorServer({ writingDir, commentsDir, previewBase }) {
     for (const comment of comments) {
       if (ids.includes(comment.id)) comment.status = status;
     }
+    return writeComments(file, comments);
+  }
+
+  async function writeComments(file, comments) {
     await fs.mkdir(commentsDir, { recursive: true });
     await fs.writeFile(
       commentsPath(file),
@@ -212,6 +216,30 @@ export function createEditorServer({ writingDir, commentsDir, previewBase }) {
         ? await setCommentStatus(file, applied, "applied")
         : await readComments(file);
       return sendJson(res, 200, { version: versionOf(body.content), comments });
+    }
+
+    if (
+      req.method === "POST" &&
+      parts[3] === "comments" &&
+      parts[4] &&
+      parts[5] === "replies"
+    ) {
+      const { text } = await readJson(req);
+      if (typeof text !== "string" || !text.trim()) {
+        return sendJson(res, 400, { error: "A reply needs some text." });
+      }
+      const comments = await readComments(file);
+      const comment = comments.find((c) => c.id === parts[4]);
+      if (!comment) {
+        return sendJson(res, 404, { error: `No note ${parts[4]}` });
+      }
+      comment.replies = [
+        ...(comment.replies ?? []),
+        { author: "Joe", text: text.trim(), at: new Date().toISOString() },
+      ];
+      return sendJson(res, 200, {
+        comments: await writeComments(file, comments),
+      });
     }
 
     if (req.method === "POST" && parts[3] === "comments" && parts[4]) {

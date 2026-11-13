@@ -301,6 +301,34 @@
         display: flex;
         gap: 6px;
       }
+      .comment .reply {
+        font-size: 13px;
+        margin: 0 0 8px;
+        padding-left: 8px;
+        border-left: 2px solid var(--color-border);
+        white-space: pre-wrap;
+      }
+      .comment .reply strong {
+        display: block;
+        font-size: 12px;
+        color: var(--color-text-secondary);
+      }
+      .comment textarea {
+        flex: none;
+        display: block;
+        box-sizing: border-box;
+        margin: 0 0 8px;
+        padding: 7px 10px;
+        min-height: 64px;
+        resize: vertical;
+        font: 13px/1.5 var(--font-sans);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+      }
+      .comment textarea:focus {
+        border-color: var(--color-accent);
+      }
       .hint {
         font-size: 13px;
         color: var(--color-text-muted);
@@ -400,6 +428,10 @@
         comments: [],
         applied: new Set(),
         saving: false,
+        // The note being replied to, and unsent reply text by note ID, so a
+        // re-render (such as Amp adding a note) keeps what Joe is typing.
+        replying: null,
+        replyDrafts: new Map(),
       };
 
       const isDirty = () =>
@@ -613,7 +645,70 @@
               }),
             );
           }
+          for (const reply of comment.replies ?? []) {
+            card.append(
+              el("p", { className: "reply" }, [
+                el("strong", { textContent: reply.author }),
+                reply.text,
+              ]),
+            );
+          }
+          const replyKey = `${state.file}#${comment.id}`;
+          if (state.replying === replyKey) {
+            const input = el("textarea", {
+              value: state.replyDrafts.get(replyKey) ?? "",
+              placeholder: "Reply to Amp…",
+              ariaLabel: "Reply",
+            });
+            input.dataset.replyKey = replyKey;
+            input.addEventListener("click", (event) => event.stopPropagation());
+            input.addEventListener("input", () =>
+              state.replyDrafts.set(replyKey, input.value),
+            );
+            input.addEventListener("keydown", (event) => {
+              if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+                sendReply(comment);
+              }
+            });
+            card.append(input);
+          }
           const actions = el("div", { className: "actions" });
+          if (state.replying === replyKey) {
+            const send = el("button", {
+              type: "button",
+              className: "primary",
+              textContent: "Send reply",
+            });
+            send.addEventListener("click", (event) => {
+              event.stopPropagation();
+              sendReply(comment);
+            });
+            const cancel = el("button", {
+              type: "button",
+              textContent: "Cancel",
+            });
+            cancel.addEventListener("click", (event) => {
+              event.stopPropagation();
+              state.replying = null;
+              renderComments();
+            });
+            actions.append(send, cancel);
+            card.append(actions);
+            card.addEventListener("click", () => selectQuote(comment.quote));
+            return card;
+          }
+          const replyButton = el("button", {
+            type: "button",
+            textContent: "Reply",
+          });
+          replyButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            state.replying = replyKey;
+            renderComments();
+            document
+              .querySelector(`[data-reply-key="${CSS.escape(replyKey)}"]`)
+              ?.focus();
+          });
           if (comment.suggestion !== undefined) {
             const apply = el("button", {
               type: "button",
@@ -635,7 +730,7 @@
             event.stopPropagation();
             dismissComment(comment);
           });
-          actions.append(dismiss);
+          actions.append(dismiss, replyButton);
           card.append(actions);
           card.addEventListener("click", () => selectQuote(comment.quote));
           return card;
@@ -657,7 +752,33 @@
             }),
           );
         }
+        const focused = document.activeElement?.dataset?.replyKey;
         container.replaceChildren(...cards);
+        if (focused) {
+          const input = container.querySelector(
+            `[data-reply-key="${CSS.escape(focused)}"]`,
+          );
+          input?.focus();
+          input?.setSelectionRange(input.value.length, input.value.length);
+        }
+      }
+
+      async function sendReply(comment) {
+        const replyKey = `${state.file}#${comment.id}`;
+        const text = state.replyDrafts.get(replyKey)?.trim();
+        if (!text) return;
+        try {
+          const { body } = await api(
+            `/api/posts/${encodeURIComponent(state.file)}/comments/${encodeURIComponent(comment.id)}/replies`,
+            { method: "POST", body: JSON.stringify({ text }) },
+          );
+          state.comments = body.comments;
+          state.replyDrafts.delete(replyKey);
+          state.replying = null;
+          renderComments();
+        } catch (error) {
+          alert(`Reply failed: ${error.message}`);
+        }
       }
 
       function selectQuote(quote) {

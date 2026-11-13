@@ -92,6 +92,7 @@ Joe writes every post himself. On posts, Amp copy-edits and comments; it does no
   - `suggestion` (optional): replacement for `quote`, for copy edits such as spelling, grammar, punctuation, and typos. Joe applies or dismisses each one.
   - `note` (optional): the reason for a suggestion, or a comment or question with no suggestion.
   - `status`: set by the editor to `applied` or `dismissed` once Joe acts. Do not suggest a dismissed change again.
+  - `replies` (optional): the conversation on a note, oldest first, as `{ "author": "Joe" | "Amp", "text": "...", "at": "<ISO time>" }`. Joe adds his from the editor's **Reply** button. When a note's last reply is Joe's, answer it by appending an `Amp` reply to that note's `replies`, keeping the earlier ones. If Joe's reply asks for a different edit, change that note's `suggestion` too.
 
 - Joe can create a post from the editor's **New post** button, which writes a frontmatter-only draft (`POST /api/posts`). Otherwise scaffold posts with `task post`, then add `draft: true` until Joe publishes. Publishing means setting `draft: false` (or removing it) and committing, only when Joe asks.
 

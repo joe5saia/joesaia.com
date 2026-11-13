@@ -161,3 +161,43 @@ test("creates a frontmatter-only draft named like `task post`", async () => {
     400,
   );
 });
+
+test("appends Joe's replies to a note and keeps the rest of the file", async () => {
+  const route = "/api/posts/2026-11-09-draft.md/comments/b/replies";
+  assert.equal(
+    (await call(route, { method: "POST", body: { text: "  First.  " } }))
+      .status,
+    200,
+  );
+  const second = await call(route, {
+    method: "POST",
+    body: { text: "Second." },
+  });
+  assert.equal(second.status, 200);
+
+  const comments = JSON.parse(
+    await fs.readFile(path.join(commentsDir, "2026-11-09-draft.json"), "utf8"),
+  );
+  assert.deepEqual((await second.json()).comments, comments);
+  const [a, b] = comments;
+  assert.equal(a.replies, undefined);
+  assert.equal(b.note, "Good how?");
+  assert.deepEqual(
+    b.replies.map(({ author, text }) => ({ author, text })),
+    [
+      { author: "Joe", text: "First." },
+      { author: "Joe", text: "Second." },
+    ],
+  );
+
+  const blank = await call(route, { method: "POST", body: { text: " " } });
+  assert.equal(blank.status, 400);
+  const missing = await call(
+    "/api/posts/2026-11-09-draft.md/comments/zz/replies",
+    {
+      method: "POST",
+      body: { text: "Hi" },
+    },
+  );
+  assert.equal(missing.status, 404);
+});
