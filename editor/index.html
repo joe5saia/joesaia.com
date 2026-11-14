@@ -618,6 +618,15 @@
             ? editor.value.indexOf(comment.quote)
             : -1;
           const card = el("article", { className: "comment" });
+          // Jump to the quote on a plain click, but not when Joe selects note
+          // text to copy it: by drag, or by double or triple click (hence the wait).
+          let jump;
+          card.addEventListener("click", () => {
+            clearTimeout(jump);
+            jump = setTimeout(() => {
+              if (getSelection().isCollapsed) selectQuote(comment.quote);
+            }, 250);
+          });
           if (comment.quote) {
             const quote = el("div", { className: "quote" });
             quote.append(
@@ -694,7 +703,6 @@
             });
             actions.append(send, cancel);
             card.append(actions);
-            card.addEventListener("click", () => selectQuote(comment.quote));
             return card;
           }
           const replyButton = el("button", {
@@ -732,7 +740,6 @@
           });
           actions.append(dismiss, replyButton);
           card.append(actions);
-          card.addEventListener("click", () => selectQuote(comment.quote));
           return card;
         });
         if (!cards.length) {
