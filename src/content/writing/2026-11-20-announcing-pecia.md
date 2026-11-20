@@ -3,7 +3,7 @@ title: "Announcing Pecia"
 date: 2026-11-20
 summary: "An agent-native, markdown-based knowledge base built on Cloudflare Artifacts"
 featured: false
-draft: true
+draft: false
 ---
 
 I'd like to share [Pecia](https://github.com/joe5saia/Pecia), an agent-native, markdown-based knowledge base built on Cloudflare Artifacts. The name comes from how medieval universities copied books: one checked master copy, rented out piece by piece. I asked Claude to make a fun explainer [here](https://joesaia.com/pecia/).
