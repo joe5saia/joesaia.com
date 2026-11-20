@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peciae: copying one book with forty pens (Paris &amp; Bologna, c. 1250–1350)</title>
+<meta name="description" content="An interactive explainer of the medieval university pecia system: stationers, exemplars cut into numbered pieces, scribes copying in parallel, and the traces it left in manuscripts.">
+<style>
+:root{
+  --parch:#f3ead6; --parch2:#ebdfc4; --parch3:#dccca8;
+  --ink:#2a2018; --ink2:#5a4a3a; --rubric:#a8321e; --lapis:#2f4f8f; --gold:#b48a2c;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--parch)}
+body{margin:0;color:var(--ink);font:18px/1.6 var(--serif);
+  background:
+    radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.5),transparent 60%),
+    radial-gradient(ellipse at 100% 100%,rgba(160,120,60,.12),transparent 50%),
+    var(--parch);}
+a{color:var(--lapis)}
+main{max-width:980px;margin:0 auto;padding:0 22px 80px}
+header.hero{max-width:980px;margin:0 auto;padding:56px 22px 18px}
+.kicker{font:600 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--rubric)}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:.3em 0 .25em;font-weight:600;letter-spacing:-.01em}
+h1 em{color:var(--rubric);font-style:normal}
+.lede{font-size:21px;max-width:44em;color:var(--ink2)}
+h2{font-size:30px;margin:2.2em 0 .4em;font-weight:600;display:flex;gap:.5em;align-items:baseline}
+h2 .num{font:600 15px var(--mono);color:var(--rubric);border:1.5px solid var(--rubric);border-radius:3px;padding:1px 6px}
+h3{font-size:21px;margin:1.6em 0 .3em}
+p{max-width:44em}
+.drop::first-letter{float:left;font-size:3.6em;line-height:.82;padding:.06em .1em 0 0;color:var(--rubric);font-weight:700}
+section:nth-of-type(even) .drop::first-letter{color:var(--lapis)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font:14px var(--mono);margin:18px 0 0}
+nav.toc a{text-decoration:none;color:var(--ink2);border-bottom:1px dotted var(--ink2)}
+nav.toc a:hover{color:var(--rubric)}
+.panel{background:rgba(255,252,243,.72);border:1px solid var(--parch3);border-radius:6px;padding:18px 20px;margin:18px 0;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.row{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:flex-end}
+label.ctl{display:flex;flex-direction:column;font:13px var(--mono);color:var(--ink2);min-width:150px}
+label.ctl b{color:var(--ink);font-weight:600}
+select,input[type=number]{font:15px var(--serif);padding:4px 6px;background:#fffaf0;border:1px solid var(--parch3);border-radius:4px;color:var(--ink)}
+input[type=range]{accent-color:var(--rubric);width:170px}
+button{font:600 14px var(--mono);background:var(--ink);color:var(--parch);border:0;border-radius:4px;padding:8px 14px;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink2)}
+button:hover{background:var(--rubric);color:#fff}
+.seg{display:inline-flex;border:1px solid var(--ink2);border-radius:4px;overflow:hidden}
+.seg button{background:transparent;color:var(--ink);border-radius:0;font-weight:500}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--parch)}
+.big{font:600 34px/1.1 var(--serif)}
+.unit{font:13px var(--mono);color:var(--ink2)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin:14px 0}
+.stat{background:#fffaf0;border:1px solid var(--parch3);border-radius:5px;padding:10px 12px}
+.stat .v{font:600 24px/1.15 var(--serif)}
+.stat .l{font:12px/1.35 var(--mono);color:var(--ink2)}
+.stat.hl .v{color:var(--rubric)}
+canvas{display:block;width:100%;background:#fffaf0;border:1px solid var(--parch3);border-radius:4px}
+.legend{font:12px var(--mono);color:var(--ink2);display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 2px}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:4px;border:1px solid rgba(0,0,0,.25)}
+.note{font-size:15px;color:var(--ink2)}
+.mono{font-family:var(--mono)}
+.cap{font:13px/1.45 var(--mono);color:var(--ink2);margin-top:6px}
+blockquote{margin:14px 0;padding:6px 0 6px 18px;border-left:3px solid var(--rubric);font-style:italic;max-width:42em}
+blockquote cite{display:block;font:normal 13px var(--mono);color:var(--ink2);margin-top:4px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.cols2{grid-template-columns:1fr}}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:16px 0}
+.flow .box{flex:1 1 140px;background:#fffaf0;border:1px solid var(--parch3);border-radius:5px;padding:10px 12px;font-size:15px;position:relative}
+.flow .box b{display:block;font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--rubric)}
+.flow .arrow{align-self:center;font:20px var(--mono);color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--parch3);vertical-align:top}
+th{font:600 12px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);cursor:pointer;user-select:none;white-space:nowrap}
+td.n{font-family:var(--mono);text-align:right;white-space:nowrap}
+th.n{text-align:right}
+tr.hot td{background:rgba(168,50,30,.07)}
+.yr{font:600 12px var(--mono);padding:1px 5px;border-radius:3px;color:#fff;background:var(--lapis)}
+.yr.y1275{background:var(--rubric)}
+/* manuscript page */
+.leaf-wrap{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+.leaf{position:relative;width:min(100%,560px);aspect-ratio:0.72;background:linear-gradient(100deg,#efe2c2,#f7eed8 30%,#f4e8cc 70%,#e8d8b4);border-radius:2px 6px 6px 2px;box-shadow:0 2px 10px rgba(60,40,10,.25);overflow:hidden;flex:0 0 auto}
+.leaf .trim{position:absolute;top:0;bottom:0;right:0;background:var(--parch);border-left:1px dashed rgba(90,74,58,.6);transition:width .15s}
+.leaf .trim span{position:absolute;bottom:6px;left:6px;font:11px var(--mono);color:var(--ink2);white-space:nowrap}
+.leaf .text{position:absolute;top:8%;left:9%;width:62%;bottom:9%;display:grid;grid-template-columns:1fr 1fr;gap:5%;font:12.2px/1.5 var(--serif);color:#3a2a1c;text-align:justify;hyphens:auto}
+.leaf .text p{margin:0}
+.leaf .text .r{color:var(--rubric)}
+.leaf .text .b{color:var(--lapis);font-weight:700}
+.leaf .text .newink{color:#4b3826;filter:saturate(.7)}
+.leaf .text .ini{float:left;font-size:30px;line-height:.9;margin:2px 3px 0 0;font-weight:700}
+.leaf .mark{position:absolute;font:italic 11px var(--serif);color:#5b3b22;cursor:help;padding:1px 3px;border-radius:2px;transition:opacity .2s}
+.leaf .mark:hover,.leaf .mark.on{background:rgba(168,50,30,.15);outline:1px solid var(--rubric)}
+.leaf .runner{position:absolute;top:3.2%;left:9%;width:62%;text-align:center;font:10px var(--serif);color:var(--lapis)}
+.side{flex:1 1 280px;min-width:260px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:16px 0}
+.card{background:#fffaf0;border:1px solid var(--parch3);border-radius:5px;padding:12px 14px}
+.card .lat{font-style:italic;font-size:18px;color:var(--ink)}
+.card .en{font-size:15px;color:var(--ink2);margin:4px 0}
+.card .sm{font:12px/1.45 var(--mono);color:var(--ink2)}
+ol.timeline{list-style:none;padding:0;margin:16px 0;border-left:2px solid var(--parch3)}
+ol.timeline li{position:relative;padding:4px 0 10px 22px;max-width:44em}
+ol.timeline li::before{content:"";position:absolute;left:-7px;top:12px;width:12px;height:12px;border-radius:50%;background:var(--parch);border:2px solid var(--rubric)}
+ol.timeline li b{font-family:var(--mono);font-size:14px;color:var(--rubric);margin-right:6px}
+ul.src{font-size:15px;padding-left:1.2em}
+ul.src li{margin:6px 0;max-width:52em}
+.formula{font:15px var(--mono);background:#fffaf0;border:1px dashed var(--parch3);padding:8px 10px;border-radius:4px;display:inline-block}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--parch);font:12px/1.4 var(--mono);padding:5px 8px;border-radius:4px;z-index:9;display:none;max-width:280px}
+.ctl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:12px 22px}
+details{margin:10px 0}
+summary{cursor:pointer;font:600 14px var(--mono);color:var(--ink2)}
+footer{max-width:980px;margin:0 auto;padding:20px 22px 60px;font:13px var(--mono);color:var(--ink2)}
+.stars{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.stars{grid-template-columns:1fr}}
+.stars svg{width:100%;height:auto;background:#fffaf0;border:1px solid var(--parch3);border-radius:4px}
+/* ---- v2: play layer ---- */
+.topbar{position:fixed;top:10px;right:12px;z-index:20;display:flex;gap:8px}
+@media (max-width:760px){.topbar{top:auto;bottom:10px}.toast{bottom:auto;top:16px}.achpanel{top:auto;bottom:56px}}
+.pill{font:600 13px var(--mono);background:var(--ink);color:var(--parch);border-radius:20px;padding:7px 13px;border:2px solid var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.pill:hover{background:var(--rubric)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;background:var(--ink);color:var(--parch);padding:10px 18px;border-radius:8px;font:14px/1.4 var(--mono);z-index:40;transition:.35s;border:2px solid var(--gold);pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast b{color:#f2c96b}
+.achpanel{position:fixed;top:54px;right:12px;width:min(360px,92vw);max-height:70vh;overflow:auto;background:#fffaf0;border:2px solid var(--gold);border-radius:8px;padding:12px 14px;z-index:30;display:none;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.achpanel.open{display:block}
+.ach{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--parch3);font-size:14px;line-height:1.35}
+.ach .seal{flex:0 0 30px;height:30px;border-radius:50%;background:#d8cdb4;display:grid;place-items:center;font:700 13px var(--serif);color:#fff}
+.ach.got .seal{background:radial-gradient(circle at 35% 30%,#e0553b,#8e2414);box-shadow:0 0 0 2px #f2c96b}
+.ach:not(.got){opacity:.55}
+.ach small{display:block;font:12px var(--mono);color:var(--ink2)}
+.gloss{font-style:italic;color:var(--lapis);font-size:16px;line-height:1.5;border-left:2px dotted var(--lapis);padding:2px 0 2px 12px;max-width:40em;margin:12px 0}
+.gloss::before{content:"☞ ";font-style:normal;font-size:19px}
+.cta{display:inline-block;margin-top:14px;font:600 16px var(--mono);background:var(--rubric);color:#fff;text-decoration:none;padding:10px 18px;border-radius:5px;box-shadow:0 3px 0 #6e1f12}
+.cta:hover{transform:translateY(1px);box-shadow:0 2px 0 #6e1f12}
+/* shop */
+.shop{position:relative;background:#fbf4e2;border:2px solid #8a6d3b;border-radius:8px;overflow:hidden;box-shadow:0 4px 18px rgba(80,50,10,.18)}
+.facade{display:block;width:100%;height:auto;background:#c9b48a}
+.gbar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:10px 14px;background:#efe3c6;border-bottom:1px solid var(--parch3);font:13px var(--mono)}
+.gbar .cal{flex:1 1 260px}
+.season{position:relative;height:10px;background:#fffaf0;border:1px solid var(--parch3);border-radius:5px;margin-top:4px;overflow:hidden}
+.season i{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(90deg,var(--lapis),var(--rubric))}
+.season s{position:absolute;top:0;bottom:0;width:2px;background:var(--gold)}
+.ggrid{display:grid;grid-template-columns:1.35fr 1fr;gap:0}
+@media (max-width:760px){.ggrid{grid-template-columns:1fr}}
+.gcell{padding:12px 14px;border-bottom:1px solid var(--parch3)}
+.gcell+.gcell{border-left:1px solid var(--parch3)}
+@media (max-width:760px){.gcell+.gcell{border-left:0}}
+.gcell h4{margin:0 0 8px;font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--rubric)}
+.counter{display:flex;flex-wrap:wrap;gap:8px;min-height:132px}
+.cust{width:150px;background:#fffaf0;border:1px solid var(--parch3);border-radius:6px;padding:6px 8px 8px;position:relative;animation:walkin .45s ease-out}
+.cust.leaving{animation:walkout .8s ease-in 1.6s forwards}
+@keyframes walkin{from{transform:translateX(-30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes walkout{to{transform:translateX(40px);opacity:0}}
+.cust .top{display:flex;gap:6px;align-items:flex-end}
+.cust .top svg{flex:0 0 auto}
+.cust .nm{font:600 13px var(--serif);line-height:1.15}
+.cust .who{font:10.5px/1.25 var(--mono);color:var(--ink2)}
+.cust .say{font:italic 13px/1.3 var(--serif);margin:5px 0;min-height:2.6em}
+.cust .pat{height:4px;background:#e6dcc4;border-radius:2px;overflow:hidden}
+.cust .pat i{display:block;height:100%;background:var(--lapis);transition:width .2s}
+.cust.angry .pat i{background:var(--rubric)}
+.cust button.give{width:100%;margin-top:6px;padding:6px 6px;font-size:12px}
+.cust button.give:disabled{background:#cdbf9f;color:#6b5a46;cursor:not-allowed}
+.cust.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.street{font:12px var(--mono);color:var(--ink2);margin-top:6px}
+.shelfg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.pc{position:relative;aspect-ratio:.78;background:linear-gradient(160deg,#fffaf0,#efe2c2);border:1px solid #b9a27a;border-radius:2px 4px 4px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:600 16px var(--serif);color:var(--ink);transition:transform .2s,opacity .2s}
+.pc small{font:10px/1.2 var(--mono);color:var(--ink2);text-align:center;padding:0 2px}
+.pc.out{opacity:.4;background:#e4d6b6;border-style:dashed}
+.pc.repair{background:#d9d4cc;opacity:.75}
+.pc.flash{transform:scale(1.12)}
+.pc .lines{position:absolute;left:18%;right:18%;top:14%;height:22%;background:repeating-linear-gradient(#0000 0 3px,#8a7760 3px 4px);opacity:.35}
+.basketg{display:flex;flex-wrap:wrap;gap:8px;min-height:70px}
+.bitem{width:112px;background:#fffaf0;border:1px solid var(--parch3);border-radius:5px;padding:6px;text-align:center;font:600 15px var(--serif);animation:walkin .3s}
+.bitem .auto{height:3px;background:#e6dcc4;margin:4px 0}
+.bitem .auto i{display:block;height:100%;background:var(--gold)}
+.bitem button{font-size:11px;padding:4px 6px;margin:2px}
+.ledger{font:13px/1.7 var(--mono)}
+.ledger div{display:flex;justify-content:space-between;border-bottom:1px dotted var(--parch3)}
+.ledger .neg{color:var(--rubric)}
+.ledger .tot{font-weight:700;border-bottom:0}
+.glog{list-style:none;margin:0;padding:8px 14px 10px;font:13px/1.5 var(--serif);max-height:142px;overflow:hidden;background:#f6ecd4}
+.glog li{animation:walkin .3s;padding:1px 0}
+.glog li.old{animation:none}
+.glog li.bad{color:var(--rubric)}
+.glog li.good{color:#2d6a3e}
+.glog li .d{font:11px var(--mono);color:var(--ink2);margin-right:6px}
+.overlay{position:absolute;inset:0;background:rgba(243,234,214,.94);display:flex;align-items:center;justify-content:center;z-index:5;padding:20px;overflow:auto}
+.overlay .inner{max-width:560px;text-align:center}
+.overlay h3{font-size:28px;margin:.2em 0}
+.overlay .rank{font:600 20px var(--serif);color:var(--rubric);margin:10px 0}
+.overlay .colo{font-style:italic;color:var(--lapis)}
+.overlay table{margin:10px auto;width:auto;font-size:15px}
+.overlay td{padding:3px 12px;border:0}
+.feast{position:absolute;left:0;right:0;top:38%;z-index:4;text-align:center;pointer-events:none;opacity:0;transform:scale(.9);transition:.4s}
+.feast.show{opacity:1;transform:none}
+.feast div{display:inline-block;background:var(--lapis);color:#fff;padding:10px 18px;border-radius:6px;font:600 15px var(--mono);box-shadow:0 6px 20px rgba(0,0,0,.25);border:2px solid var(--gold)}
+.real{font-size:15px}
+.real td:first-child{white-space:nowrap;font-family:var(--mono);font-size:13px}
+/* scribe game */
+.spot{background:#fffaf0;border:1px solid var(--parch3);border-radius:8px;padding:16px 18px}
+.spot .txt{font:19px/1.75 var(--serif);margin:6px 0 10px}
+.spot .ref{color:var(--ink2);font-size:17px}
+.spot .w{cursor:pointer;border-radius:3px;padding:0 1px;transition:background .15s}
+.spot .w:hover{background:rgba(47,79,143,.15)}
+.spot .w.hit{background:#cfe8cf;outline:1px solid #2d6a3e}
+.spot .w.miss{background:#f3c9c0;animation:shake .3s}
+.spot .w.show{background:#f2e08f}
+.timer{height:6px;background:#e6dcc4;border-radius:3px;overflow:hidden;margin:8px 0}
+.timer i{display:block;height:100%;background:var(--rubric);width:100%}
+.spot .expl{min-height:3em;font-size:16px;color:var(--ink2)}
+.lbl{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+<div class="topbar"><button class="pill" id="sndBtn">🔔 sound on</button><button class="pill" id="achBtn">🏅 0/15</button></div>
+<div class="achpanel" id="achPanel"><div class="lbl" style="margin-bottom:6px">Achievements · kept in this browser</div><div id="achList"></div></div>
+<div class="toast" id="toast"></div>
+
+<header class="hero">
+  <div class="kicker">Paris · Bologna · c. 1250–1350 · a game, a simulator, and some very small handwriting</div>
+  <h1>One book, <em>forty pens</em>: the pecia system</h1>
+  <p class="lede">Thirteenth-century universities had a throughput problem. Every student needed the same few very long books, and a professional scribe managed about one leaf a day. The fix was neither a faster scribe nor a new technology. The stationer kept one checked master copy as a pile of loose, numbered pieces and rented them out one at a time.</p>
+  <a class="cta" href="#play">Run the shop yourself ▸</a>
+  <nav class="toc">
+    <a href="#problem">1 · the bottleneck</a>
+    <a href="#trick">2 · the trick</a>
+    <a href="#play">3 · mind the shop (game)</a>
+    <a href="#sim">4 · the model, minus the drama</a>
+    <a href="#rules">5 · rules &amp; prices</a>
+    <a href="#evidence">6 · be the scribe</a>
+    <a href="#editors">7 · what editors do with it</a>
+    <a href="#where">8 · where &amp; when</a>
+    <a href="#caveats">9 · what we don’t know</a>
+    <a href="#sources">sources</a>
+  </nav>
+</header>
+
+<main>
+
+<section id="problem">
+  <h2><span class="num">1</span> The bottleneck</h2>
+  <p class="drop">Pick a book from the official Paris price lists of 1275 and 1304. A pecia in Paris was normally a gathering of four leaves (two folded sheets, eight pages, sixteen columns). The figures reported for a careful professional scribe come to about a leaf and a few lines per day, or roughly four days per piece.</p>
+  <div class="panel">
+    <div class="row">
+      <label class="ctl">Work (from the Paris lists)
+        <select id="pbWork"></select>
+      </label>
+      <label class="ctl">Leaves copied per day: <b id="pbRateV">1.1</b>
+        <input type="range" id="pbRate" min="0.6" max="1.6" step="0.05" value="1.1">
+      </label>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="pbPieces">–</div><div class="l">pieces in the exemplar</div></div>
+      <div class="stat"><div class="v" id="pbLeaves">–</div><div class="l">exemplar leaves (≈ 4 per piece)</div></div>
+      <div class="stat hl"><div class="v" id="pbDays">–</div><div class="l">working days for one scribe to copy it</div></div>
+      <div class="stat"><div class="v" id="pbYear">–</div><div class="l">copies per year from one bound exemplar (300 working days)</div></div>
+    </div>
+    <p class="note" style="margin:0">Treat this as an order of magnitude: exemplar leaves and copy leaves were not the same size. The point stands, though. If the master copy is a bound book, one person holds it for most of a year, and every other student waits.</p>
+  </div>
+  <p class="gloss">Scribes knew it, and said so. A stock line from colophons: <i>Scribere qui nescit nullum putat esse laborem</i>, “Whoever can’t write thinks writing is no work.”</p>
+</section>
+
+<section id="trick">
+  <h2><span class="num">2</span> The trick</h2>
+  <p class="drop">The stationer (<i>stationarius</i>) was a bookseller sworn to the university. For each set text he kept an <i>exemplar</i>: a copy checked for correctness and left <b>unbound</b>, as a stack of independent, numbered pieces (<i>peciae</i>). A customer, or a scribe working for one, rented piece 1, copied it, returned it, rented piece 2, and so on. While one scribe worked on piece 7, others could be on pieces 3, 12 and 40. The fee was set by the university, not by the stationer.</p>
+  <div class="flow" aria-label="Flow of a text through the pecia system">
+    <div class="box"><b>Author</b>autograph or a fair copy (apograph)</div><div class="arrow">→</div>
+    <div class="box"><b>Exemplar</b>one checked copy on equal, numbered, unbound pieces</div><div class="arrow">→</div>
+    <div class="box"><b>Stationer</b>rents pieces in turn at the university’s fixed rate</div><div class="arrow">→</div>
+    <div class="box"><b>Scribes</b>many copy at once, one piece each</div><div class="arrow">→</div>
+    <div class="box"><b>Pecia copies</b>bound by the buyer, each one hop from the exemplar</div>
+  </div>
+  <p>Note what this buys and what it costs. It buys <b>parallelism</b>: as many scribes as there are pieces can work on one text at the same time. It buys <b>fidelity</b>: every copy is made directly from the same checked master, not from a copy of a copy. The cost is a shared single point of failure. Pieces wear, tear, go missing and get replaced, and whatever happens to piece 12 happens to every copy made from it afterwards.</p>
+  <p class="gloss">Destrez thought the word <i>pecia</i> came from the parchment-makers: a “piece” was a prepared skin, folded into a gathering. So it is a tanners’ word that got promoted.</p>
+  <p>Hugues Shooner called it “a first attempt at industrial book production before the invention of printing.” The section below lets you check that claim.</p>
+</section>
+
+<section id="play">
+  <h2><span class="num">3</span> Mind the shop</h2>
+  <p class="drop">Paris, 1304. You're a sworn stationer, and on your shelf sits the official exemplar of Thomas Aquinas's commentary <i>De sensu et sensato</i>: ten loose pieces, listed at 8 pence for the whole set. Scribes will turn up and ask for the next piece they need. Hand it over, collect your pence, and keep them moving. Returned pieces land in the basket. Check them yourself, or let Colin the apprentice shelve them without looking. Every seventh day the bell rings and the <i>peciarii</i> come to inspect.</p>
+  <p class="gloss">A pecia worn out by a hundred careless hands is a cheap thing to lend. Paying 10 shillings because a sharp-eyed friar denounced you is not.</p>
+
+  <div class="shop" id="shop">
+    <svg class="facade" viewBox="0 0 960 150" aria-hidden="true">
+      <defs>
+        <pattern id="aw" width="60" height="40" patternUnits="userSpaceOnUse"><rect width="30" height="40" fill="#a8321e"/><rect x="30" width="30" height="40" fill="#efe3c6"/></pattern>
+        <pattern id="st" width="34" height="18" patternUnits="userSpaceOnUse"><rect width="34" height="18" fill="#b8a17a"/><path d="M0 17.5H34M17 0V18" stroke="#9c855e" stroke-width="1"/></pattern>
+      </defs>
+      <rect width="960" height="150" fill="url(#st)"/>
+      <rect x="0" y="0" width="960" height="26" fill="#6e5636"/>
+      <path d="M0 26 H960 V58 Q945 70 930 58 Q915 70 900 58 Q885 70 870 58 Q855 70 840 58 Q825 70 810 58 Q795 70 780 58 Q765 70 750 58 Q735 70 720 58 Q705 70 690 58 Q675 70 660 58 Q645 70 630 58 Q615 70 600 58 Q585 70 570 58 Q555 70 540 58 Q525 70 510 58 Q495 70 480 58 Q465 70 450 58 Q435 70 420 58 Q405 70 390 58 Q375 70 360 58 Q345 70 330 58 Q315 70 300 58 Q285 70 270 58 Q255 70 240 58 Q225 70 210 58 Q195 70 180 58 Q165 70 150 58 Q135 70 120 58 Q105 70 90 58 Q75 70 60 58 Q45 70 30 58 Q15 70 0 58Z" fill="url(#aw)"/>
+      <g transform="translate(290,74)"><rect width="380" height="40" rx="3" fill="#2a2018"/><rect x="4" y="4" width="372" height="32" rx="2" fill="none" stroke="#b48a2c"/><text x="190" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="#f2c96b" letter-spacing="3">STATIONARIUS · EXEMPLARIA</text></g>
+      <g transform="translate(70,78)"><rect width="150" height="66" fill="#3b2c1c"/><rect x="6" y="6" width="66" height="60" fill="#e9d39a" opacity=".85"/><rect x="78" y="6" width="66" height="60" fill="#e9d39a" opacity=".85"/><g id="facadeBooks"><rect x="12" y="40" width="10" height="26" fill="#2f4f8f"/><rect x="24" y="44" width="8" height="22" fill="#a8321e"/><rect x="34" y="38" width="12" height="28" fill="#6b3f87"/><rect x="86" y="42" width="11" height="24" fill="#3d7a4a"/><rect x="99" y="46" width="9" height="20" fill="#b48a2c"/></g></g>
+      <g transform="translate(750,78)"><rect width="140" height="72" fill="#3b2c1c"/><rect x="8" y="8" width="124" height="64" fill="#5a4330"/><circle cx="114" cy="44" r="3" fill="#b48a2c"/></g>
+      <g id="cat" transform="translate(640,128)"><ellipse cx="14" cy="10" rx="14" ry="8" fill="#2a2018"/><circle cx="28" cy="2" r="6" fill="#2a2018"/><path d="M24-3l2-5 3 4M30-3l3-5 1 5" fill="#2a2018"/><path d="M0 10 Q-10 0 -6 -8" stroke="#2a2018" stroke-width="3" fill="none"><animate attributeName="d" dur="3s" repeatCount="indefinite" values="M0 10 Q-10 0 -6 -8;M0 10 Q-14 4 -12 -6;M0 10 Q-10 0 -6 -8"/></path><circle cx="30" cy="1" r="1.2" fill="#f2c96b"/></g>
+    </svg>
+    <div class="gbar">
+      <div class="cal"><span id="gDay">Day 0 · week 1</span> · <span id="gFeast"></span><div class="season" id="gSeason"><i></i></div></div>
+      <button id="gPause">❚❚ pause</button>
+      <div class="seg" id="gSpeed"><button data-v="1" aria-pressed="true">1×</button><button data-v="2" aria-pressed="false">2×</button><button data-v="4" aria-pressed="false">4×</button></div>
+    </div>
+    <div class="ggrid">
+      <div class="gcell"><h4>At the counter</h4><div class="counter" id="gCounter"></div><div class="street" id="gStreet"></div></div>
+      <div class="gcell"><h4>Ledger (in pence; 12d = 1s)</h4><div class="ledger" id="gLedger"></div></div>
+      <div class="gcell"><h4>The exemplar: <i style="text-transform:none;letter-spacing:0">De sensu et sensato</i>, 10 pieces</h4><div class="shelfg" id="gShelf"></div></div>
+      <div class="gcell"><h4>Returns basket</h4><div class="basketg" id="gBasket"></div><div class="street">Unchecked pieces get shelved by Colin after 2½ days.</div></div>
+    </div>
+    <ul class="glog" id="gLog"></ul>
+    <div class="feast" id="gFeastBanner"><div>🔔 Feast day! The six <i>peciarii</i> inspect your shelf…</div></div>
+    <div class="overlay" id="gOverlay">
+      <div class="inner">
+        <div class="kicker">A season of 12 weeks · about 3 minutes at 1×</div>
+        <h3>Open the shop?</h3>
+        <p>Customers lose patience fast when their piece is sitting on your shelf, and slowly when it’s out with someone else. Click <b>hand over</b> on a customer to lend the piece they ask for. Use <b>🔍 check</b> or <b>shelve</b> on returned pieces. Watch for impatient customers, slow friars and the bell.</p>
+        <button class="cta" id="gStart" style="border:0">Unbar the shutters ▸</button>
+        <p class="note" style="margin-top:12px">Sound is on (quill, coins, bells, one rat). Toggle it at the top right.</p>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>What's real in this game and what isn't</summary>
+    <table class="real">
+      <tr><td>Real</td><td>The work and its listing (1304 Paris list: 10 pieces, 8d). Renting one piece at a time. About four days to copy a piece. A surcharge when a piece is kept beyond a week. Corrupt pieces being noticed by scribes (“ista pecia est falsa et corrupta”). Inspection by six <i>peciarii</i> on feast days, with correction at the stationer's expense. The 10-solidi fine per denounced corrupt piece, plus double reimbursement to the scholar.</td></tr>
+      <tr><td>Merged</td><td>The <i>peciarii</i> and the fine come from <b>Bologna's</b> statutes, not Paris. Bolognese and Parisian shillings were also different coins. The game puts both in one shop because that makes a better game.</td></tr>
+      <tr><td>Invented</td><td>Every customer (Brother Odo is not a real friar), Colin, the cat, the rat, the corrector's 2d fee, the late fee of 1d, the wear rate, and the speed of time.</td></tr>
+    </table>
+  </details>
+</section>
+
+<section id="sim">
+  <h2><span class="num">4</span> The model, minus the drama</h2>
+  <p>Same shop, no customers to charm: just the queueing. A small discrete-event model. Each scribe wants one complete copy. The shop serves requests first come, first served. Each loan takes a jittered number of days. Every loan has a small chance of damaging a piece. A damaged piece stays in circulation until someone notices: a scribe who complains on return, or, under Bologna-style rules, the weekly inspection by the <i>peciarii</i>. Repair takes the piece off the shelf for a few days and puts back a <i>different</i> text of that piece.</p>
+
+  <div class="panel">
+    <div class="ctl-grid">
+      <label class="ctl">Exemplar
+        <select id="sWork"></select>
+      </label>
+      <label class="ctl">Pieces: <b id="sKv"></b>
+        <input type="range" id="sK" min="4" max="120" step="1">
+      </label>
+      <label class="ctl">Scribes wanting a copy: <b id="sSv"></b>
+        <input type="range" id="sS" min="1" max="60" step="1" value="16">
+      </label>
+      <label class="ctl">Days per piece: <b id="sDv"></b>
+        <input type="range" id="sD" min="2" max="8" step="0.5" value="4">
+      </label>
+      <label class="ctl">Jitter in copy time: <b id="sJv"></b>
+        <input type="range" id="sJ" min="0" max="0.6" step="0.05" value="0.25">
+      </label>
+      <label class="ctl">Scribes arrive over (days): <b id="sAv"></b>
+        <input type="range" id="sA" min="0" max="120" step="5" value="30">
+      </label>
+      <label class="ctl">Copies of the exemplar: <b id="sEv"></b>
+        <input type="range" id="sE" min="1" max="3" step="1" value="1">
+      </label>
+      <label class="ctl">Wear: chance a loan damages a piece: <b id="sWv"></b>
+        <input type="range" id="sW" min="0" max="0.1" step="0.005" value="0.02">
+      </label>
+      <label class="ctl">Scribe notices a corrupt piece: <b id="sNv"></b>
+        <input type="range" id="sN" min="0" max="1" step="0.05" value="0.3">
+      </label>
+      <label class="ctl">Repair takes (days): <b id="sRv"></b>
+        <input type="range" id="sR" min="1" max="20" step="1" value="6">
+      </label>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div>
+        <div class="unit" style="margin-bottom:4px">lending policy</div>
+        <div class="seg" id="sMode" role="group" aria-label="Lending policy">
+          <button data-v="inorder" aria-pressed="true">pieces in order</button>
+          <button data-v="any" aria-pressed="false">any free piece</button>
+          <button data-v="whole" aria-pressed="false">whole bound book</button>
+        </div>
+      </div>
+      <label class="ctl" style="flex-direction:row;gap:8px;align-items:center;min-width:auto"><input type="checkbox" id="sInsp"> <span><b>Bologna rules</b>: <i>peciarii</i> inspect weekly</span></label>
+      <span style="flex:1"></span>
+      <button class="ghost" id="sSeed" title="Re-roll the random seed">re-roll ⟳</button>
+      <button id="sPlay">▶ play</button>
+    </div>
+  </div>
+
+  <div class="stats" id="sStats"></div>
+
+  <h3>Who held what, and when</h3>
+  <div class="legend"><span>one row per scribe · one block per rented piece, coloured by piece number · empty gaps = waiting at the stationer’s</span><span><span class="sw" style="background:repeating-linear-gradient(45deg,#1b1410 0 2px,#fffaf0 2px 4px)"></span>copied from a damaged piece</span></div>
+  <canvas id="gantt" height="300" aria-label="Timeline of loans per scribe"></canvas>
+  <div class="row" style="margin-top:6px;gap:10px;align-items:center">
+    <span class="unit">day</span><input type="range" id="tScrub" min="0" max="1000" value="1000" style="flex:1;width:auto">
+    <span class="mono" id="tLabel" style="min-width:90px;text-align:right"></span>
+  </div>
+
+  <div class="cols2">
+    <div>
+      <h3>The stationer’s shelf</h3>
+      <div class="legend"><span><span class="sw" style="background:#fffaf0"></span>in the shop</span><span><span class="sw" style="background:#b98c5a"></span>out on loan</span><span><span class="sw" style="background:#6d6a66"></span>being repaired</span><span>darker border = more loans so far</span></div>
+      <canvas id="shelf" height="160" aria-label="State of each piece at the selected day"></canvas>
+    </div>
+    <div>
+      <h3>The finished manuscripts</h3>
+      <div class="legend" id="verLegend"></div>
+      <canvas id="mss" height="160" aria-label="Which version of each piece each copy contains"></canvas>
+    </div>
+  </div>
+  <p class="cap" id="mssCap"></p>
+
+  <details>
+    <summary>Back-of-envelope check</summary>
+    <p class="note">For pieces in order, everyone arriving on day 0, no jitter and one exemplar, the shop is a pipeline. Scribe <i>j</i> starts piece 1 after <i>j</i>−1 others have had it, so the last copy is done at</p>
+    <p><span class="formula">T<sub>pecia</sub> = (K + S − 1) · d</span> &nbsp; versus &nbsp; <span class="formula">T<sub>bound</sub> = S · K · d</span></p>
+    <p class="note">With K = <span id="fK"></span>, S = <span id="fS"></span>, d = <span id="fD"></span>: <b id="fP"></b> days against <b id="fB"></b>. Set jitter and arrival to 0 to see the simulation land on the same number. Once S exceeds K, scribes queue for piece 1 and extra hands stop helping: the number of pieces caps the parallelism.</p>
+  </details>
+</section>
+
+<section id="rules">
+  <h2><span class="num">5</span> Rules &amp; prices</h2>
+  <p class="drop">This was regulated. In Paris the university made stationers swear an oath, repeated every year or two, and threatened to cut off anyone who broke it. In this case the regulator’s worry was not speed but correctness and price gouging.</p>
+  <blockquote>“…since many damages come from corrupt and faulty exemplars, we have decreed that the said booksellers swear that they will apply care and pains with all diligence and toil to have true and correct exemplars, and that for exemplars they shall not demand from anyone anything beyond the just and moderate rent… assessed by the university or its deputies.”
+    <cite>University of Paris, statute on stationers, 8 December 1275 (Chartularium Universitatis Parisiensis I, pp. 532–534; tr. L. Thorndike)</cite></blockquote>
+  <p>Bologna went further and created inspectors. Each year the rectors and councillors of the (student-run) university chose six <i>peciarii</i>, three from north of the Alps and three from Italy, with jurisdiction over “cases of peciae and corrupt texts.”</p>
+  <blockquote>“We will that a stationer, for each corrupt pecia which he gives out and for each offense, shall incur a fine of ten solidi Bolognese, and nonetheless he shall be required to reimburse the scholar at double. Half the penalty shall go to the university, half of the remaining half to the peciarii, the remainder to the denouncer.”
+    <cite>Statutes of the University of Bologna, 1317–1347, rubric xix (ed. Malagola, 1888)</cite></blockquote>
+  <p>The same rubric has the <i>peciarii</i> examine every stationer’s exemplars on feast days, have defective pieces corrected at the stationer’s expense, and meet at least weekly or pay a fine themselves. The denouncer’s quarter of the fine was a bounty for spotting errors. Tick “Bologna rules” in the simulator to see what weekly inspection does to the number of corrupt copies.</p>
+  <p class="gloss">Do the maths: one denounced piece costs 10 solidi, or 120 pence. The <i>whole</i> Catena on Mark rents for 17 pence in Paris. (Bolognese and Parisian shillings were different coins, so this tells you the scale, not an exchange rate.) Bologna was not joking.</p>
+
+  <h3>The Paris price lists</h3>
+  <p>Two lists of exemplars survive from Paris, one from about 1275 (138 works) and one from 1304 (156 works). Both are associated with the sworn stationers of the Sens family. Each entry gives the number of pieces and a fixed price. Note: the price is the fee for renting the <i>whole</i> exemplar, piece by piece. Divide it out and it is usually under a penny per piece. Currency: 12 <i>denarii</i> (d) = 1 <i>solidus</i> (s). Click a column heading to sort.</p>
+  <div class="panel" style="padding:8px 10px;overflow-x:auto">
+    <table id="tax">
+      <thead><tr><th data-k="year">List</th><th data-k="title">Work</th><th data-k="author">Author</th><th class="n" data-k="pieces">Pieces</th><th class="n" data-k="price">Fee</th><th class="n" data-k="ppp">d / piece</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">Three works appear on both lists (highlighted when you hover). The <i>Catena</i> on Matthew went from 3s to 4s for the same 57 pieces. The <i>Secunda secundae</i> went from 4s to 5s 6d. The <i>Legenda aurea</i> went from 90 pieces at 3s to 95 pieces at 4s. A different piece count means a different exemplar, and for a historian that is a dating tool, as section 6 shows. Bracketed counts are modern corrections of what the list says.</p>
+</section>
+
+<section id="evidence">
+  <h2><span class="num">6</span> The evidence on the page, and you as the scribe</h2>
+  <p class="drop">No ledger from a Paris stationer survives. We know about the system mainly because scribes left notes to themselves. To keep track of which rented piece they had reached, they wrote a small mark in the margin where the new piece began (the usual Paris habit) or where the old one ended (common in Bologna). Then the binder trimmed the margins, and most of those notes went with the offcuts.</p>
+  <div class="leaf-wrap">
+    <div class="leaf" id="leaf" aria-label="Illustrated manuscript leaf with pecia marks">
+      <div class="runner">.I. pars · Q. I</div>
+      <div class="text">
+        <p><span class="ini b">A</span>d primum sic proceditur. <span class="r">Videtur</span> quod non sit necessarium preter philosophicas disciplinas aliam doctrinam haberi. Ad ea enim que supra rationem sunt homo non debet conari, secundum illud Eccli. iii, altiora te ne quesieris. Sed ea que rationi subduntur sufficienter traduntur in philosophicis disciplinis. Superfluum igitur uidetur preter philosophicas disciplinas aliam doctrinam haberi. <span class="r">Preterea</span>, doctrina non potest esse nisi de ente, nichil enim scitur nisi uerum, quod cum ente conuertitur. Sed de omnibus entibus tractatur in philosophicis disciplinis, et etiam de Deo, unde quedam pars philosophie dicitur theologia siue scientia diuina, ut patet per Philosophum in vi Metaphysice. Non fuit igitur necessarium preter philosophicas disciplinas aliam doctrinam haberi.</p>
+        <p><span class="r">Sed contra</span> est quod dicitur ii ad Tim. iii, omnis scriptura diuinitus inspirata utilis est ad docendum, ad arguendum, ad corripiendum, ad erudiendum ad iustitiam. Scriptura autem diuinitus inspirata non pertinet ad philosophicas disciplinas, que sunt secundum rationem humanam inuente. Utile igitur est preter philosophicas disciplinas esse aliam scientiam diuinitus inspiratam. <span class="newink" id="newPiece"><span class="r">Respondeo</span> dicendum quod necessarium fuit ad humanam salutem esse doctrinam quandam secundum reuelationem diuinam preter philosophicas disciplinas que ratione humana inuestigantur. Primo quidem quia homo ordinatur ad Deum sicut ad quendam finem qui comprehensionem rationis excedit, secundum illud Isaie lxiv, oculus non uidit Deus absque te que preparasti diligentibus te. Finem autem oportet esse precognitum hominibus, qui suas intentiones et actiones debent ordinare in finem.</span></p>
+      </div>
+      <div class="mark" id="mParis" style="right:4%" data-tip="Paris style: the scribe notes where piece 13 of the exemplar begins. Destrez found marks like this in nearly a thousand manuscripts.">xiii<sup>a</sup> pe<sup>a</sup></div>
+      <div class="mark" id="mBolo" style="right:4%;opacity:0" data-tip="Bologna style: the scribe notes where piece 12 ends ('finis'). Compare 'Hic finis xxix pecie' in Cambridge, UL Add. 4188, f. 58r.">fi. xii pe.</div>
+      <div class="trim" id="trimBar" style="width:0"><span>trimmed off</span></div>
+    </div>
+    <div class="side">
+      <div class="unit" style="margin-bottom:4px">marking habit</div>
+      <div class="seg" id="markStyle" role="group" aria-label="Marking habit">
+        <button data-v="paris" aria-pressed="true">Paris: start of piece</button>
+        <button data-v="bologna" aria-pressed="false">Bologna: end of piece</button>
+      </div>
+      <p style="margin-top:16px"><label class="ctl" style="min-width:0">Binder trims the outer margin: <b id="trimV">0 mm</b>
+        <input type="range" id="trim" min="0" max="32" value="0" style="width:100%"></label></p>
+      <p class="note">Drag the trim and watch the mark disappear. A few millimetres decide whether a manuscript is “a pecia copy with marks” or “a university-looking book we cannot prove anything about.” Experts also look for a change of ink or a slight change of hand at the same point, which is what the darker second paragraph imitates.</p>
+      <p class="cap">Illustration, not a facsimile. Text: Thomas Aquinas, <i>Summa theologiae</i> I q.1 a.1, in medieval spelling. The <i>Prima pars</i> is item 49 on the 1275 list. The position of the piece break here is invented.</p>
+    </div>
+  </div>
+
+  <h3>Real notes from real margins</h3>
+  <div class="cards">
+    <div class="card"><div class="lat">“Ista pecia est falsa et corrupta.”</div><div class="en">“This piece is false and corrupt.”</div><div class="sm">Oxford, Balliol College MS 49, f. 287r, Aquinas, <i>De virtutibus</i>: the scribe’s note at piece 12 of 23 (Ray 2015)</div></div>
+    <div class="card"><div class="lat">“hic finitur 51<sup>a</sup> pecia de dominicis et ista ultima pecia est corrupta, ut mihi videtur”</div><div class="en">“Here ends the 51st piece of the Sunday sermons, and this last piece is corrupt, it seems to me.”</div><div class="sm">Paris, BnF lat. 15953, f. 134r, Nicolas de Biard, <i>Sermones de dominicis</i> (Ray 2015)</div></div>
+    <div class="card"><div class="lat">“Hic finis xxix. pecie.”</div><div class="en">“Here is the end of the 29th piece.”</div><div class="sm">Cambridge, University Library MS Add. 4188, f. 58r, Durandus, <i>Speculum</i>, Bologna style (Ray 2015)</div></div>
+    <div class="card"><div class="lat">“incipit quedam pe<sup>a</sup>”</div><div class="en">“a piece begins” (unnumbered!)</div><div class="sm">Oxford, Bodleian MS Laud Misc. 281, fol. 129va and elsewhere, Paris, 1340–41. Unnumbered marks may mean it was copied from an earlier pecia copy rather than from the pieces themselves (Bodleian blog)</div></div>
+  </div>
+  <h3>Now you're the scribe: find the corruption</h3>
+  <p>The stationer has handed you a piece and you suspect it's bad. Compare it with the corrector's text and click the word that went wrong before the candle burns down. The five kinds of mistake are real and well known. The individual corruptions are invented, applied to real text from <i>Summa theologiae</i> I q.1 a.1.</p>
+  <div class="spot" id="spot">
+    <div class="row" style="justify-content:space-between;align-items:center"><span class="lbl" id="spRound">round 1 / 5</span><span class="lbl" id="spScore">score 0</span></div>
+    <div class="timer"><i id="spTimer"></i></div>
+    <div class="lbl">the corrector's text</div>
+    <div class="txt ref" id="spRef"></div>
+    <div class="lbl">the piece you were handed (click the bad word)</div>
+    <div class="txt" id="spBad"></div>
+    <div class="expl" id="spExpl"></div>
+    <div class="row"><button id="spGo">▸ start</button></div>
+  </div>
+
+  <p>The first two cards are the simulator’s “scribe notices a corrupt piece” event, written down by actual scribes. Under Bologna rules, the second scribe’s “it seems to me” could have earned him a quarter of a ten-solidi fine.</p>
+</section>
+
+<section id="editors">
+  <h2><span class="num">7</span> What editors do with it</h2>
+  <p class="drop">The pecia system breaks the usual method of textual criticism. In ordinary copying, manuscripts form a family tree. Each copy inherits its parent’s mistakes and adds its own, so shared errors let you reconstruct the tree. Antoine Dondaine of the Leonine Commission, which edits Aquinas, argued in 1961 that the family-tree method yields nothing for a university tradition. Every manuscript hangs off the same exemplar, or a few of them, so the tree collapses into a star.</p>
+  <div class="stars">
+    <svg viewBox="0 0 300 190" aria-label="Chain copying: errors accumulate down generations">
+      <text x="150" y="18" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a4a3a">copy of a copy of a copy</text>
+      <g id="chain"></g>
+    </svg>
+    <svg viewBox="0 0 300 190" aria-label="Pecia copying: every copy one hop from the exemplar">
+      <text x="150" y="18" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a4a3a">pecia: everyone copies the exemplar</text>
+      <g id="star"></g>
+    </svg>
+  </div>
+  <p class="cap">Numbers in the circles count accumulated errors, assuming each act of copying adds about two. Illustrative only.</p>
+  <p>What the star gives you instead is a history <b>per piece</b>. The Leonine edition of Aquinas’s <i>De malo</i> (vol. 23) describes an exemplar of 28 pieces, “each of these 28 peciae is a unit from the viewpoint of research inasmuch as each has its own history of deterioration, of correction, and of either total or partial replacement. For this reason we have worked strictly by pecia.” Its editors trace the earliest state of the Paris text, which they call α, and the later states it degraded into (β, γ). Earlier, H.-D. Saffrey had shown that several exemplars of one work could circulate at once and that their pieces were interchangeable. So a copy can change textual family at a piece boundary, in the middle of a sentence.</p>
+  <p>That is the right-hand panel in the simulator. Each row is a finished manuscript and each column is a piece. With wear on and repairs happening, the columns change colour: copies made before the repair carry α, copies made after carry β. The “copies disagree” count tells you how many pieces an editor would have to treat as separate problems.</p>
+  <p>One more honest point: a pecia text is not automatically a good one. The same Leonine preface notes that the exemplar inherited Aquinas’s own slips (“his handwriting is bad”) and any intermediate copying, and then “passed through hundreds of hands that left their traces on it.”</p>
+  <p class="gloss">Aquinas’s own handwriting is so hard to read that palaeographers call it <i>littera inintelligibilis</i>. Every exemplar of his works began as somebody’s brave attempt to read it.</p>
+</section>
+
+<section id="where">
+  <h2><span class="num">8</span> Where &amp; when</h2>
+  <ol class="timeline">
+    <li><b>c. 1200</b>Graham Pollard argues the system began at Bologna, the oldest university, around this time.</li>
+    <li><b>1228</b>The commune of Vercelli, courting masters who were leaving Padua, promises two <i>exemplatores</i> with exemplars “correct in both text and gloss, so that the scholars may pay for their copies at a price set by the rectors.”</li>
+    <li><b>c. 1250</b>First signs in Paris, apparently inside the Dominican convent of Saint-Jacques, before the licensed stationers take the method up.</li>
+    <li><b>1264</b>Padua’s statutes: <i>cum absque exemplaribus universitas scholarium stare non possit</i>, “since a university of scholars cannot stand without exemplars.”</li>
+    <li><b>1275</b>Paris statute on stationers (8 December) and the first surviving Paris price list of 138 works.</li>
+    <li><b>1270–1350</b>Shooner’s estimate of the system’s peak.</li>
+    <li><b>1304</b>Second Paris list, 156 works.</li>
+    <li><b>1317–1347</b>Bologna statutes with the six <i>peciarii</i>, fines, layout rules and a price list revised every ten years (121 legal texts).</li>
+    <li><b>c. 1330–1350</b>Paris use fades. The Hundred Years’ War (from 1337) and the Black Death (1347–48) finish it off. In the Italian universities exemplar copying continues until printing arrives.</li>
+    <li><b>1906</b>The Leonine edition’s introduction to the <i>Supplementum</i> of the <i>Summa</i> gives the first solid study of copying by exemplar and pecia.</li>
+    <li><b>1935</b>Jean Destrez publishes <i>La pecia dans les manuscrits universitaires</i>. He went through more than 7,000 manuscripts leaf by leaf, found nearly a thousand with piece marks and identified about thirty surviving exemplars.</li>
+  </ol>
+  <p>Pollard counted at least eleven universities where the system existed: Bologna, Padua, Vercelli, Perugia, Treviso and Florence in northern Italy, Naples, Salamanca, Paris, Toulouse, and Oxford. Destrez identified actual exemplars and copies only from Bologna, Paris, Oxford and Naples. For the other seven, the evidence is their statutes. No trace has been found at Salerno, Montpellier, Orléans, Angers, Avignon or Cambridge, or at any German or Dutch university.</p>
+</section>
+
+<section id="caveats">
+  <h2><span class="num">9</span> What we don’t know</h2>
+  <ul>
+    <li><b>The four-step picture is a model.</b> Pollard’s “author → apograph → stationer’s pieces → pecia copy” is an ideal type. No evidence links an author directly to a stationer’s exemplar.</li>
+    <li><b>Oxford is disputed.</b> Destrez and Pollard argued for an Oxford system. Parkes and de Hamel doubt it, and recent work (Ray 2015) suggests that most English pecia copies were made in Paris and carried home.</li>
+    <li><b>Piece size varied.</b> Four leaves was the norm, but a Bologna <i>quaternus</i> could count as two peciae, and at least one exemplar mixes both kinds.</li>
+    <li><b>Order of copying.</b> The simulator’s “any free piece” mode is a speculation. Pollard thought pieces were sometimes copied out of order, but the usual assumption is sequential renting.</li>
+    <li><b>Destrez’s book was a first sketch.</b> The editors of the 1988 symposium volume called it “a preliminary overview,” and his card files are still being worked through (Murano 2005 catalogues the works known to have circulated this way).</li>
+    <li><b>The simulator invents its parameters.</b> The rules are real (fixed fees, inspection, fines, repair) but the probabilities are not. No source gives a wear rate per loan.</li>
+  </ul>
+</section>
+
+<section id="sources">
+  <h2><span class="num">§</span> Sources</h2>
+  <ul class="src">
+    <li>J. Destrez, <i>La pecia dans les manuscrits universitaires du XIII<sup>e</sup> et du XIV<sup>e</sup> siècle</i> (Paris: Vautrain, 1935). The founding study, with 36 plates. See the review in <a href="https://www.persee.fr/doc/scrip_0036-9772_1953_num_7_1_2464"><i>Scriptorium</i> 7 (1953)</a> for the 7,000 / ~1,000 / ~30 figures and the Padua quotation.</li>
+    <li>G. Pollard, “The <i>pecia</i> system in the medieval universities,” in M. B. Parkes &amp; A. G. Watson (eds.), <i>Medieval Scribes, Manuscripts and Libraries: Essays presented to N. R. Ker</i> (London: Scolar, 1978), 145–161. Excerpts quoted at <a href="https://www.historyofinformation.com/detail.php?id=244">History of Information</a>.</li>
+    <li>L. J. Bataillon, B. G. Guyot, R. H. Rouse (eds.), <i>La production du livre universitaire au moyen âge: exemplar et pecia</i> (Paris: CNRS, 1988), including H. V. Shooner, “La production du livre par la pecia.” Summarised in the <a href="https://bbf.enssib.fr/consulter/bbf-1989-02-0221-005">BBF review</a> (copying rate, four-day pieces, the “industrial production” remark, the 1270–1350 peak).</li>
+    <li>R. H. Rouse &amp; M. A. Rouse, <i>Manuscripts and their Makers: Commercial Book Producers in Medieval Paris 1200–1500</i> (Turnhout: Harvey Miller, 2000), and <i>Authentic Witnesses</i> (Notre Dame, 1991).</li>
+    <li>G. Murano, <i>Opere diffuse per exemplar e pecia</i> (Turnhout: Brepols, 2005).</li>
+    <li>A. J. Ray, <a href="https://discovery.ucl.ac.uk/id/eprint/1492764/"><i>The Pecia System and its Use</i></a> (PhD thesis, UCL, 2015). Prints both Paris lists in full. All prices and piece counts in the table come from it, as do the margin notes quoted above and the Oxford discussion.</li>
+    <li>H. Denifle &amp; E. Chatelain (eds.), <i>Chartularium Universitatis Parisiensis</i> (1889–97): statute of 1275 at I, 532–534; list of 1275 (misdated 1286) as I no. 530; list of 1304 as II no. 642.</li>
+    <li>L. Thorndike, <i>University Records and Life in the Middle Ages</i> (New York: Columbia, 1944). English translation of the <a href="https://medieval.ucdavis.edu/120B/Regulation.html">Paris 1275 statute</a>. Bologna statutes of 1317–1347, rubric xix, from C. Malagola (ed.), <i>Statuti delle università e dei collegi dello studio bolognese</i> (1888), pp. 20–21, in the English translation <a href="https://medieval.ucdavis.edu/120B/Student.html">posted by UC Davis</a>.</li>
+    <li>Commissio Leonina, <a href="https://www.commissio-leonina.org/2014/08/chronologie-essentielle">“Chronologie essentielle”</a> (1906 study, Saffrey on interchangeable pieces, Dondaine 1961 on the failure of the genealogical method), and the Leonine <i>Quaestiones disputatae de malo</i>, <i>Opera omnia</i> vol. 23, English summary (28 pieces, editing “strictly by pecia”).</li>
+    <li>Bodleian Libraries, <a href="https://hab.bodleian.ox.ac.uk/en/blog/blog-post-32">“A Date in Paris”</a>, on the pecia notes in MS Laud Misc. 281.</li>
+  </ul>
+</section>
+</main>
+
+<footer>Made as a single static page: no libraries, no tracking, and every sound is synthesised in the browser. View source; the simulator is plain JavaScript near the bottom.</footer>
+
+<div class="tip" id="tip"></div>
+
+<script>
+"use strict";
+/* ---------- data: Paris taxation lists (via Ray 2015, Appendix II) ---------- */
+const TAX = [
+  {year:1275,title:"Moralia in Job",author:"Gregory the Great",pieces:100,price:96},
+  {year:1275,title:"De sacramentis",author:"Hugh of St Victor",pieces:40,price:36},
+  {year:1275,title:"De Emmanuele",author:"Richard of St Victor",pieces:16,price:16},
+  {year:1275,title:"Catena super Mattheum",author:"Thomas Aquinas",pieces:57,price:36,both:"catena"},
+  {year:1275,title:"Summa theologiae, Secunda secundae",author:"Thomas Aquinas",pieces:82,price:48,both:"iiaiiae"},
+  {year:1275,title:"Legenda aurea",author:"Jacopo da Varazze",pieces:90,price:36,both:"legenda"},
+  {year:1304,title:"Catena super Mattheum",author:"Thomas Aquinas",pieces:57,price:48,both:"catena"},
+  {year:1304,title:"Catena super Marcum",author:"Thomas Aquinas",pieces:20,price:17},
+  {year:1304,title:"Catena super Lucam",author:"Thomas Aquinas",pieces:40,price:42},
+  {year:1304,title:"Catena super Iohannem",author:"Thomas Aquinas",pieces:47,price:42},
+  {year:1304,title:"In primo Sententiarum",author:"Thomas Aquinas",pieces:38,price:29},
+  {year:1304,title:"In secundo Sententiarum",author:"Thomas Aquinas",pieces:47,price:34},
+  {year:1304,title:"In tertio Sententiarum",author:"Thomas Aquinas",pieces:50,price:34},
+  {year:1304,title:"In quarto Sententiarum",author:"Thomas Aquinas",pieces:93,price:69},
+  {year:1304,title:"Summa theologiae, Prima secundae",author:"Thomas Aquinas",pieces:60,price:46,note:"listed as 70"},
+  {year:1304,title:"Summa theologiae, Secunda secundae",author:"Thomas Aquinas",pieces:82,price:66,both:"iiaiiae"},
+  {year:1304,title:"Summa theologiae, Tertia pars",author:"Thomas Aquinas",pieces:54,price:44,note:"listed as 55"},
+  {year:1304,title:"Legenda aurea",author:"Jacopo da Varazze",pieces:95,price:48,both:"legenda"},
+  {year:1304,title:"Sententia libri Metaphysicorum",author:"Thomas Aquinas",pieces:53,price:36},
+  {year:1304,title:"Sententia libri Physicorum",author:"Thomas Aquinas",pieces:40,price:26},
+  {year:1304,title:"Sententia libri Ethicorum",author:"Thomas Aquinas",pieces:38,price:30},
+  {year:1304,title:"Sententia libri De caelo et mundo",author:"Thomas Aquinas",pieces:18,price:12},
+  {year:1304,title:"Sententia libri De anima",author:"Thomas Aquinas",pieces:19,price:8},
+  {year:1304,title:"Sententia libri Politicorum",author:"Thomas Aquinas",pieces:14,price:9,note:"listed as 12"},
+  {year:1304,title:"Summa Posteriorum",author:"Thomas Aquinas",pieces:17,price:12},
+  {year:1304,title:"Sententia libri De causis",author:"Thomas Aquinas",pieces:7,price:5},
+  {year:1304,title:"Expositio libri Peryermenias",author:"Thomas Aquinas",pieces:7,price:5},
+];
+const fmtMoney = d => { const s=Math.floor(d/12), r=Math.round(d-s*12); return (s?s+"s":"")+(s&&r?" ":"")+(r||!s?r+"d":""); };
+const workLabel = t => `${t.title} (${t.year}, ${t.pieces} pcs)`;
+const $ = id => document.getElementById(id);
+
+/* ---------- 1. bottleneck calculator ---------- */
+(function(){
+  const sel=$("pbWork");
+  TAX.forEach((t,i)=>sel.add(new Option(workLabel(t),i)));
+  sel.value=15;
+  function upd(){
+    const t=TAX[sel.value], rate=+$("pbRate").value;
+    $("pbRateV").textContent=rate.toFixed(2);
+    const leaves=t.pieces*4, days=leaves/rate;
+    $("pbPieces").textContent=t.pieces;
+    $("pbLeaves").textContent=leaves;
+    $("pbDays").textContent=Math.round(days)+" days";
+    $("pbYear").textContent=(300/days).toFixed(2);
+  }
+  sel.oninput=upd; $("pbRate").oninput=upd; upd();
+})();
+
+/* ---------- 3. the simulator ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+
+function simulate(p){
+  const rnd=mulberry32(p.seed), {K,S,E}=p;
+  const pieces=[];
+  for(let e=0;e<E;e++){ pieces.push([]); for(let k=0;k<K;k++) pieces[e].push({e,k,freeAt:0,version:0,damaged:false,discoverAt:Infinity,loans:0}); }
+  const loans=[], repairs=[];
+  let corruptLoans=0, denounced=0, caughtByInspection=0;
+  const nextFeast=t=>(Math.floor(t/7)+1)*7;
+
+  // Lend one piece to a scribe who is ready at time t. Returns the loan.
+  function lend(pc,s,t){
+    let start=Math.max(t,pc.freeAt);
+    if(pc.damaged && pc.discoverAt<=start){            // found before this loan: repair first
+      const rs=Math.max(pc.discoverAt,pc.freeAt), re=rs+p.repair;
+      repairs.push({e:pc.e,k:pc.k,start:rs,end:re});
+      if(pc.byInspection) caughtByInspection++;
+      pc.version++; pc.damaged=false; pc.discoverAt=Infinity; pc.freeAt=re;
+      start=Math.max(t,re);
+    }
+    const dur=p.d*(1+p.jitter*(2*rnd()-1)), end=start+dur;
+    const loan={s,e:pc.e,k:pc.k,start,end,version:pc.version,corrupt:pc.damaged};
+    loans.push(loan); pc.loans++;
+    let noticed=false;
+    if(loan.corrupt){ corruptLoans++; noticed=rnd()<p.notice; if(noticed) denounced++; }
+    if(!pc.damaged && rnd()<p.wear){ pc.damaged=true; pc.byInspection=false; }
+    if(pc.damaged){
+      if(noticed && end<pc.discoverAt){ pc.discoverAt=end; pc.byInspection=false; }
+      if(p.inspect && nextFeast(end)<pc.discoverAt){ pc.discoverAt=nextFeast(end); pc.byInspection=true; }
+    }
+    pc.freeAt=end;
+    return loan;
+  }
+
+  const scribes=[];
+  for(let s=0;s<S;s++) scribes.push({s,arrive:p.arrive*rnd(),t:0,todo:new Set([...Array(K).keys()]),copy:new Array(K),busy:0,done:0});
+  scribes.sort((a,b)=>a.arrive-b.arrive).forEach((x,i)=>{x.s=i;x.t=x.arrive;});
+
+  const eff=(pc,t)=>Math.max(t,pc.freeAt);
+  while(true){
+    let sc=null; for(const x of scribes) if(x.todo.size && (!sc||x.t<sc.t)) sc=x;
+    if(!sc) break;
+    if(p.mode==="whole"){
+      let best=0,bt=Infinity;
+      for(let e=0;e<E;e++){ const m=Math.max(sc.t,...pieces[e].map(pc=>pc.freeAt)); if(m<bt){bt=m;best=e;} }
+      let t=bt;
+      for(let k=0;k<K;k++){ const L=lend(pieces[best][k],sc.s,t); sc.copy[k]=L; sc.busy+=L.end-L.start; t=L.end; }
+      for(const pc of pieces[best]) pc.freeAt=Math.max(pc.freeAt,t);
+      sc.todo.clear(); sc.t=t; sc.done=t;
+      continue;
+    }
+    let pick=null,pt=Infinity;
+    const cand = p.mode==="inorder" ? [Math.min(...sc.todo)] : [...sc.todo].sort((a,b)=>a-b);
+    search: for(const k of cand) for(let e=0;e<E;e++){ const v=eff(pieces[e][k],sc.t); if(v<pt-1e-9){pt=v;pick=pieces[e][k]; if(v<=sc.t) break search;} }
+    const L=lend(pick,sc.s,sc.t);
+    sc.copy[pick.k]=L; sc.busy+=L.end-L.start; sc.todo.delete(pick.k); sc.t=L.end; if(!sc.todo.size) sc.done=L.end;
+  }
+
+  const makespan=Math.max(...scribes.map(x=>x.done));
+  const waiting=scribes.reduce((a,x)=>a+(x.done-x.arrive-x.busy),0);
+  // peak number of pieces simultaneously out
+  const ev=[]; loans.forEach(l=>{ev.push([l.start,1]);ev.push([l.end,-1]);});
+  ev.sort((a,b)=>a[0]-b[0]||a[1]-b[1]); let cur=0,peak=0; ev.forEach(([,d])=>{cur+=d;peak=Math.max(peak,cur);});
+  // pieces on which the finished copies disagree
+  let disagree=0, maxVer=0;
+  for(let k=0;k<K;k++){
+    const seen=new Set(scribes.map(x=>{const L=x.copy[k]; maxVer=Math.max(maxVer,L.version); return L.e+":"+L.version+(L.corrupt?"x":"");}));
+    if(seen.size>1) disagree++;
+  }
+  const byPiece=pieces.map(row=>row.map(()=>({loans:[],repairs:[]})));
+  loans.forEach(l=>byPiece[l.e][l.k].loans.push(l)); repairs.forEach(r=>byPiece[r.e][r.k].repairs.push(r));
+  return {p,loans,repairs,byPiece,scribes,makespan,waiting,peak,disagree,maxVer,corruptLoans,denounced,caughtByInspection,
+          meanDone:scribes.reduce((a,x)=>a+x.done-x.arrive,0)/S};
+}
+
+/* palette */
+const pieceColor=(k,K)=>`hsl(${(k*137.508)%360} 42% ${52+((k*7)%3)*6}%)`;
+const VER=["#d8c7a0","#2f4f8f","#a8321e","#3d7a4a","#6b3f87","#b48a2c"];
+const VERN=["α","β","γ","δ","ε","ζ"];
+
+const ui={mode:"inorder",seed:7,t:1,playing:false,res:null};
+const workSel=$("sWork");
+TAX.forEach((t,i)=>workSel.add(new Option(workLabel(t)+" · "+fmtMoney(t.price),i)));
+workSel.add(new Option("Aquinas, De malo (Leonine ed.: 28 pcs)", "demalo"));
+workSel.value=15;
+function syncK(){ const v=workSel.value; $("sK").value = v==="demalo" ? 28 : TAX[v].pieces; }
+syncK();
+
+function params(){
+  return {K:+$("sK").value,S:+$("sS").value,d:+$("sD").value,jitter:+$("sJ").value,arrive:+$("sA").value,
+          E:+$("sE").value,wear:+$("sW").value,notice:+$("sN").value,repair:+$("sR").value,
+          inspect:$("sInsp").checked,mode:ui.mode,seed:ui.seed};
+}
+function labels(p){
+  $("sKv").textContent=p.K; $("sSv").textContent=p.S; $("sDv").textContent=p.d;
+  $("sJv").textContent="±"+Math.round(p.jitter*100)+"%"; $("sAv").textContent=p.arrive;
+  $("sEv").textContent=p.E; $("sWv").textContent=(p.wear*100).toFixed(1)+"%";
+  $("sNv").textContent=Math.round(p.notice*100)+"%"; $("sRv").textContent=p.repair;
+}
+function fee(){ const v=workSel.value; if(v==="demalo") return null; const t=TAX[v]; return t.pieces===+$("sK").value ? t.price : null; }
+
+function run(){
+  const p=params(); labels(p);
+  const r=simulate(p), base=simulate({...p,mode:"whole"});
+  r.base=base; ui.res=r;
+  const f=fee();
+  const stat=(v,l,hl)=>`<div class="stat${hl?" hl":""}"><div class="v">${v}</div><div class="l">${l}</div></div>`;
+  const speed = p.mode==="whole" ? "–" : (base.makespan/r.makespan).toFixed(1)+"×";
+  $("sStats").innerHTML=
+    stat(Math.round(r.makespan)+" d","until the last of "+p.S+" copies is finished",1)+
+    stat(Math.round(base.makespan)+" d","same scribes, lending the exemplar as a bound book")+
+    stat(speed,"speed-up from cutting it into pieces",p.mode!=="whole")+
+    stat(Math.round(r.meanDone)+" d","average time from arrival to finished copy")+
+    stat(Math.round(r.waiting)+" d","scribe-days spent waiting for pieces")+
+    stat(r.peak+" / "+p.K*p.E,"most pieces out on loan at once")+
+    stat(r.corruptLoans,"times a damaged piece was copied")+
+    stat(r.disagree+" / "+p.K,"pieces on which the finished copies disagree")+
+    stat(f!=null?fmtMoney(f*p.S):"?","stationer’s rent at the Paris fixed fee"+(f!=null?" ("+fmtMoney(f)+" × "+p.S+")":" (no list price for this piece count)"))+
+    (p.inspect?stat((r.denounced*10)+"s","Bologna fines: "+r.denounced+" corrupt pieces denounced × 10s; "+r.caughtByInspection+" repairs prompted by inspection"):"");
+  // formula
+  $("fK").textContent=p.K; $("fS").textContent=p.S; $("fD").textContent=p.d;
+  $("fP").textContent=Math.round((p.K+p.S-1)*p.d); $("fB").textContent=Math.round(p.S*p.K*p.d);
+  // version legend
+  $("verLegend").innerHTML=VER.slice(0,Math.max(1,r.maxVer+1)).map((c,i)=>`<span><span class="sw" style="background:${c}"></span>${VERN[i]} ${i?"after repair "+i:"original text"}</span>`).join("")+
+    `<span><span class="sw" style="background:#1b1410"></span>copied from damaged piece</span>`+(p.E>1?`<span>exemplar copy 2+ drawn lighter</span>`:"");
+  $("mssCap").textContent = r.disagree
+    ? `An editor would treat ${r.disagree} of the ${p.K} pieces as separate problems: the copies carry different texts there. Inside each piece, though, the copies are siblings, not a family tree.`
+    : `Every copy carries the same text in every piece: no damage got through. Raise the wear to make the exemplar age.`;
+  if(!ui.playing) ui.t=1;
+  draw();
+  if(p.mode==="inorder"&&p.E===1&&p.arrive===0&&p.jitter===0&&r.repairs.length===0&&Math.abs(r.makespan-(p.K+p.S-1)*p.d)<1e-6&&typeof ach==="function"&&ui.ready) ach("qed");
+}
+
+/* drawing */
+function setupCanvas(c,h){
+  const dpr=window.devicePixelRatio||1, w=c.clientWidth;
+  c.style.height=h+"px"; c.width=Math.round(w*dpr); c.height=Math.round(h*dpr);
+  const g=c.getContext("2d"); g.setTransform(dpr,0,0,dpr,0,0); return [g,w,h];
+}
+let hatch=null;
+function hatchPattern(g){
+  const c=document.createElement("canvas"); c.width=c.height=6; const h=c.getContext("2d");
+  h.fillStyle="#fffaf0"; h.fillRect(0,0,6,6); h.strokeStyle="#1b1410"; h.lineWidth=1.6;
+  h.beginPath(); h.moveTo(0,6); h.lineTo(6,0); h.stroke(); return g.createPattern(c,"repeat");
+}
+function draw(){
+  const r=ui.res; if(!r) return; const p=r.p;
+  const T=ui.t*r.makespan;
+  $("tScrub").value=Math.round(ui.t*1000); $("tLabel").textContent="day "+Math.round(T)+" / "+Math.round(r.makespan);
+  // gantt
+  const rowH=Math.max(4,Math.min(16,Math.floor(320/p.S))), L=34, top=16;
+  const [g,w,h]=setupCanvas($("gantt"),top+rowH*p.S+22);
+  hatch=hatchPattern(g);
+  const X=t=>L+(w-L-8)*t/r.makespan;
+  g.font="10px ui-monospace,monospace"; g.fillStyle="#5a4a3a"; g.textBaseline="middle";
+  const step=r.makespan>400?100:r.makespan>150?50:r.makespan>60?20:10;
+  for(let d=0;d<=r.makespan;d+=step){ g.fillStyle="rgba(90,74,58,.12)"; g.fillRect(X(d),top,1,rowH*p.S); g.fillStyle="#5a4a3a"; g.fillText(d,X(d)-4,top+rowH*p.S+11); }
+  r.scribes.forEach(x=>{
+    if(rowH>=8){ g.fillStyle="#5a4a3a"; g.fillText("#"+(x.s+1),2,top+x.s*rowH+rowH/2); }
+    g.fillStyle="rgba(90,74,58,.35)"; g.fillRect(X(x.arrive),top+x.s*rowH+rowH/2-0.5,X(x.done)-X(x.arrive),1);
+  });
+  for(const l of r.loans){
+    if(l.start>T) continue;
+    const x0=X(l.start), x1=X(Math.min(l.end,T)), y=top+l.s*rowH+0.5;
+    g.fillStyle=l.corrupt?hatch:pieceColor(l.k,p.K);
+    g.fillRect(x0,y,Math.max(1,x1-x0-0.6),rowH-1.5);
+  }
+  if(ui.t<1){ g.fillStyle="#a8321e"; g.fillRect(X(T),top-6,1.5,rowH*p.S+8); }
+  g.fillStyle="#5a4a3a"; g.fillText("scribe",2,7); g.textAlign="right"; g.fillText("days →",w-8,7); g.textAlign="left";
+
+  // shelf
+  const cols=Math.min(p.K,20), rows=Math.ceil(p.K/cols), cell=Math.floor(Math.min(28,($("shelf").clientWidth-10)/cols));
+  const sh=(rows*cell+14)*p.E+4;
+  const [s,sw]=setupCanvas($("shelf"),sh);
+  const maxLoans=p.S;
+  for(let e=0;e<p.E;e++){
+    const oy=e*(rows*cell+14)+2;
+    s.font="10px ui-monospace,monospace"; s.fillStyle="#5a4a3a"; s.textBaseline="top";
+    if(p.E>1) s.fillText("exemplar "+(e+1),2,oy);
+    for(let k=0;k<p.K;k++){
+      const cx=2+(k%cols)*cell, cy=oy+12+Math.floor(k/cols)*cell;
+      let state="shop", n=0;
+      const bp=r.byPiece[e][k];
+      for(const l of bp.loans){ if(l.start<=T) n++; if(l.start<=T&&T<l.end) state="out"; }
+      for(const rp of bp.repairs) if(rp.start<=T&&T<rp.end) state="repair";
+      s.fillStyle= state==="out"?"#b98c5a":state==="repair"?"#6d6a66":"#fffaf0";
+      s.fillRect(cx,cy,cell-3,cell-3);
+      s.strokeStyle=`rgba(42,32,24,${0.15+0.85*Math.min(1,n/maxLoans)})`; s.lineWidth=1.5; s.strokeRect(cx+.5,cy+.5,cell-4,cell-4);
+      if(cell>=18){ s.fillStyle=state==="shop"?"#5a4a3a":"#fff"; s.font="9px ui-monospace,monospace"; s.fillText(k+1,cx+3,cy+3); }
+    }
+  }
+  // manuscripts
+  const mcw=Math.max(2,($("mss").clientWidth-36)/p.K), mrh=Math.max(3,Math.min(12,Math.floor(240/p.S)));
+  const [m,mw]=setupCanvas($("mss"),mrh*p.S+14);
+  m.font="10px ui-monospace,monospace"; m.fillStyle="#5a4a3a"; m.textBaseline="middle";
+  r.scribes.forEach(x=>{
+    if(mrh>=9){ m.fillStyle="#5a4a3a"; m.fillText("#"+(x.s+1),2,x.s*mrh+mrh/2+12); }
+    for(let k=0;k<p.K;k++){
+      const L=x.copy[k]; if(!L||L.end>T) continue;
+      m.fillStyle=L.corrupt?"#1b1410":VER[Math.min(L.version,VER.length-1)];
+      m.globalAlpha=L.e>0?0.6:1;
+      m.fillRect(32+k*mcw,x.s*mrh+12,Math.max(1,mcw-(mcw>4?1:0)),mrh-1);
+      m.globalAlpha=1;
+    }
+  });
+  m.fillStyle="#5a4a3a"; m.fillText("copy",2,5); m.textAlign="right"; m.fillText("piece 1 … "+p.K+" →",mw-4,5); m.textAlign="left";
+}
+
+/* tooltips on gantt */
+const tip=$("tip");
+$("gantt").addEventListener("mousemove",ev=>{
+  const r=ui.res; if(!r) return; const c=ev.currentTarget, b=c.getBoundingClientRect(), p=r.p;
+  const rowH=Math.max(4,Math.min(16,Math.floor(320/p.S))), L=34, top=16;
+  const x=ev.clientX-b.left, y=ev.clientY-b.top, s=Math.floor((y-top)/rowH), t=(x-L)/(b.width-L-8)*r.makespan;
+  const l=r.loans.find(l=>l.s===s&&l.start<=t&&t<=l.end);
+  if(!l){tip.style.display="none";return;}
+  tip.style.display="block"; tip.style.left=(ev.clientX+12)+"px"; tip.style.top=(ev.clientY+12)+"px";
+  tip.textContent=`Scribe #${s+1} · piece ${l.k+1}${p.E>1?" (exemplar "+(l.e+1)+")":""} · day ${l.start.toFixed(1)}–${l.end.toFixed(1)} · text ${VERN[Math.min(l.version,5)]}${l.corrupt?" · DAMAGED piece":""}`;
+});
+$("gantt").addEventListener("mouseleave",()=>tip.style.display="none");
+
+/* controls */
+["sK","sS","sD","sJ","sA","sE","sW","sN","sR","sInsp"].forEach(id=>$(id).addEventListener("input",run));
+workSel.addEventListener("input",()=>{syncK();run();});
+$("sMode").addEventListener("click",ev=>{const b=ev.target.closest("button"); if(!b) return; ui.mode=b.dataset.v; [...$("sMode").children].forEach(x=>x.setAttribute("aria-pressed",x===b)); run();});
+$("sSeed").onclick=()=>{ui.seed=(Math.random()*1e9)|0; run();};
+$("tScrub").addEventListener("input",ev=>{ui.playing=false;$("sPlay").textContent="▶ play";ui.t=ev.target.value/1000;draw();});
+$("sPlay").onclick=()=>{
+  if(ui.playing){ui.playing=false;$("sPlay").textContent="▶ play";return;}
+  ui.playing=true; $("sPlay").textContent="❚❚ pause"; if(ui.t>=1) ui.t=0;
+  let last=performance.now();
+  const tick=now=>{ if(!ui.playing) return; ui.t=Math.min(1,ui.t+(now-last)/9000); last=now; draw();
+    if(ui.t>=1){ui.playing=false;$("sPlay").textContent="▶ play";return;} requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+};
+window.addEventListener("resize",()=>{draw();drawStars();});
+run(); ui.ready=true;
+
+/* ---------- 4. taxation table ---------- */
+(function(){
+  const tb=document.querySelector("#tax tbody"); let key="year",dir=1;
+  function render(){
+    const rows=TAX.map(t=>({...t,ppp:t.price/t.pieces})).sort((a,b)=>{const x=a[key],y=b[key]; return (typeof x==="string"?x.localeCompare(y):x-y)*dir || a.year-b.year;});
+    tb.innerHTML=rows.map(t=>`<tr data-both="${t.both||""}"><td><span class="yr y${t.year}">${t.year}</span></td><td><i>${t.title}</i></td><td>${t.author}</td><td class="n">${t.pieces}${t.note?` <span class="unit">[${t.note}]</span>`:""}</td><td class="n">${fmtMoney(t.price)}</td><td class="n">${t.ppp.toFixed(2)}</td></tr>`).join("");
+  }
+  document.querySelectorAll("#tax th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; dir = key===k?-dir:1; key=k; render();});
+  tb.addEventListener("mouseover",ev=>{const tr=ev.target.closest("tr"); const b=tr&&tr.dataset.both; tb.querySelectorAll("tr").forEach(x=>x.classList.toggle("hot",!!b&&x.dataset.both===b));});
+  tb.addEventListener("mouseleave",()=>tb.querySelectorAll("tr").forEach(x=>x.classList.remove("hot")));
+  render();
+})();
+
+/* ---------- 5. manuscript leaf ---------- */
+(function(){
+  const leaf=$("leaf");
+  $("trim").addEventListener("input",ev=>{
+    const mm=+ev.target.value; $("trimV").textContent=mm+" mm"; if(mm>=17&&typeof ach==="function") ach("trim");
+    $("trimBar").style.width=(mm/32*24)+"%";
+  });
+  $("markStyle").addEventListener("click",ev=>{
+    const b=ev.target.closest("button"); if(!b) return;
+    [...$("markStyle").children].forEach(x=>x.setAttribute("aria-pressed",x===b));
+    const paris=b.dataset.v==="paris";
+    $("mParis").style.opacity=paris?1:0; $("mBolo").style.opacity=paris?0:1;
+    $("mParis").style.pointerEvents=paris?"auto":"none"; $("mBolo").style.pointerEvents=paris?"none":"auto";
+  });
+  function placeMarks(){
+    const r=$("newPiece").getClientRects()[0], top=r.top-leaf.getBoundingClientRect().top;
+    $("mParis").style.top=(top-1)+"px"; $("mBolo").style.top=(top-1)+"px";
+  }
+  placeMarks(); window.addEventListener("resize",placeMarks);
+  if(document.fonts) document.fonts.ready.then(placeMarks);
+  leaf.querySelectorAll(".mark").forEach(m=>{
+    m.addEventListener("mousemove",ev=>{tip.style.display="block";tip.style.left=(ev.clientX+12)+"px";tip.style.top=(ev.clientY+12)+"px";tip.textContent=m.dataset.tip;});
+    m.addEventListener("mouseleave",()=>tip.style.display="none");
+  });
+})();
+
+/* ---------- 6. chain vs star ---------- */
+function drawStars(){
+  const NS="http://www.w3.org/2000/svg";
+  const node=(g,x,y,n,root)=>{
+    const c=document.createElementNS(NS,"circle"); c.setAttribute("cx",x); c.setAttribute("cy",y); c.setAttribute("r",root?15:12);
+    c.setAttribute("fill",root?"#2f4f8f":`rgb(${168+Math.min(60,n*4)},${Math.max(40,200-n*16)},${Math.max(30,150-n*12)})`); g.appendChild(c);
+    const t=document.createElementNS(NS,"text"); t.setAttribute("x",x); t.setAttribute("y",y+4); t.setAttribute("text-anchor","middle");
+    t.setAttribute("font-size","11"); t.setAttribute("font-family","monospace"); t.setAttribute("fill","#fff"); t.textContent=root?"ex":n; g.appendChild(t);
+  };
+  const line=(g,a,b,c,d)=>{const l=document.createElementNS(NS,"line"); l.setAttribute("x1",a);l.setAttribute("y1",b);l.setAttribute("x2",c);l.setAttribute("y2",d);l.setAttribute("stroke","#8a7760");l.setAttribute("stroke-width","1.4"); g.appendChild(l);};
+  const ch=$("chain"), st=$("star"); ch.innerHTML=""; st.innerHTML="";
+  const pts=[[40,50],[95,80],[150,110],[205,140],[260,165]];
+  const side=[[95,80,150,50],[150,110,95,140],[205,140,260,110]];
+  pts.forEach((p,i)=>{ if(i) line(ch,pts[i-1][0],pts[i-1][1],p[0],p[1]); });
+  side.forEach(([a,b,c,d])=>line(ch,a,b,c,d));
+  pts.forEach((p,i)=>node(ch,p[0],p[1],i*2,i===0));
+  side.forEach(([a,b,c,d],i)=>node(ch,c,d,(i+1)*2+2,false));
+  const cx=150,cy=105,R=68,n=10;
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2; line(st,cx,cy,cx+R*Math.cos(a),cy+R*Math.sin(a));}
+  node(st,cx,cy,0,true);
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2; node(st,cx+R*Math.cos(a),cy+R*Math.sin(a),2,false);}
+}
+drawStars();
+/* =================== v2: sound, achievements, the shop game, the scribe game =================== */
+
+/* ---------- sound: everything synthesised, nothing downloaded ---------- */
+const SND={on:localStorage.getItem("pecia-sound")!=="off",ctx:null};
+function actx(){ if(!SND.ctx){ const C=window.AudioContext||window.webkitAudioContext; if(!C) return null; SND.ctx=new C(); } if(SND.ctx.state==="suspended") SND.ctx.resume(); return SND.ctx; }
+function tone(f,at,dur,type,gain,f2){
+  const c=actx(); if(!c||!SND.on) return; const t=c.currentTime+at, o=c.createOscillator(), g=c.createGain();
+  o.type=type||"sine"; o.frequency.setValueAtTime(f,t); if(f2) o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(gain||.12,t+.01); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g).connect(c.destination); o.start(t); o.stop(t+dur+.05);
+}
+function noise(at,dur,freq,gain){
+  const c=actx(); if(!c||!SND.on) return; const t=c.currentTime+at, n=Math.floor(c.sampleRate*dur), b=c.createBuffer(1,n,c.sampleRate), d=b.getChannelData(0);
+  for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*(0.6+0.4*Math.sin(i/90));
+  const s=c.createBufferSource(), f=c.createBiquadFilter(), g=c.createGain(); s.buffer=b; f.type="bandpass"; f.frequency.value=freq; f.Q.value=2.5;
+  g.gain.setValueAtTime(gain,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); s.connect(f).connect(g).connect(c.destination); s.start(t);
+}
+const sfx={
+  coin(){ tone(1568,0,.12,"triangle",.09); tone(2349,.05,.22,"triangle",.07); },
+  quill(){ noise(0,.09,3800,.08); noise(.11,.07,4400,.06); noise(.2,.12,3500,.07); },
+  bell(){ [[392,1,2.4],[784,.5,1.8],[988,.3,1.4],[1175,.22,1.2],[1568,.12,.9]].forEach(([f,g,d])=>tone(f,0,d,"sine",.1*g)); },
+  grumble(){ tone(130,0,.32,"sawtooth",.04,92); },
+  fine(){ tone(440,0,.18,"square",.05); tone(330,.18,.18,"square",.05); tone(220,.36,.45,"square",.05,170); },
+  squeak(){ tone(2600,0,.07,"sine",.06,3400); tone(2800,.11,.06,"sine",.05,3600); },
+  aha(){ tone(660,0,.1,"triangle",.08); tone(990,.09,.16,"triangle",.08); },
+  ach(){ [523,659,784,1047].forEach((f,i)=>tone(f,i*.08,.35,"triangle",.07)); },
+  done(){ [392,494,587,784].forEach((f,i)=>tone(f,i*.11,.5,"sine",.07)); },
+};
+
+/* ---------- achievements ---------- */
+const ACH=[
+  ["first","A penny a piece","Rent out your first piece."],
+  ["pipeline","Six pens at once","Have 6 of the 10 pieces out on loan at the same time."],
+  ["explicit","Explicit","A customer finishes a complete copy."],
+  ["inspector","Peciarius at heart","Catch 3 damaged pieces yourself before anyone else does."],
+  ["ista","Ista pecia est falsa et corrupta","Get denounced by a customer. It happens to the best stationers."],
+  ["feast","Nothing to see here, gentlemen","Pass a feast-day inspection from week 2 on with a clean shelf."],
+  ["late","Supplementum","Collect a late fee from someone who kept a piece more than a week."],
+  ["rat","Rodent problem","Hear the squeak."],
+  ["leonine","Leonine-approved","Finish a season with at least 4 copies and no corrupt pieces released."],
+  ["ousted","Ousted from the grace and favour","Get denounced three times in one season."],
+  ["sharp","Sharp-eyed","Score 5 out of 5 as the scribe."],
+  ["qed","Q.E.D.","Make the simulator land exactly on (K+S−1)·d."],
+  ["trim","The binder's revenge","Trim the pecia mark off the leaf."],
+  ["footnote","Footnote enjoyer","Follow a link in the sources."],
+  ["cat","Cattus stationarii","Pet the shop cat."],
+];
+const got=new Set(JSON.parse(localStorage.getItem("pecia-ach")||"[]"));
+const toastEl=$("toast"); let toastT=0;
+function toast(html){ toastEl.innerHTML=html; toastEl.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove("show"),3200); }
+function ach(id){
+  if(got.has(id)) return; got.add(id); localStorage.setItem("pecia-ach",JSON.stringify([...got]));
+  const a=ACH.find(x=>x[0]===id); sfx.ach(); toast(`🏅 <b>${a[1]}</b><br>${a[2]}`); renderAch();
+}
+function renderAch(){
+  $("achBtn").textContent=`🏅 ${got.size}/${ACH.length}`;
+  $("achList").innerHTML=ACH.map(([id,t,d],i)=>`<div class="ach${got.has(id)?" got":""}"><div class="seal">${ROMAN[i]||i+1}</div><div><b>${got.has(id)?t:"? ? ?"}</b><small>${d}</small></div></div>`).join("");
+}
+$("achBtn").onclick=()=>$("achPanel").classList.toggle("open");
+$("sndBtn").onclick=()=>{ SND.on=!SND.on; localStorage.setItem("pecia-sound",SND.on?"on":"off"); $("sndBtn").textContent=SND.on?"🔔 sound on":"🔕 sound off"; if(SND.on) sfx.coin(); };
+$("sndBtn").textContent=SND.on?"🔔 sound on":"🔕 sound off";
+document.querySelectorAll("#sources a").forEach(a=>a.addEventListener("click",()=>ach("footnote")));
+$("cat").style.cursor="pointer"; $("cat").addEventListener("click",()=>{ tone(320,0,.5,"triangle",.05,260); tone(300,.1,.6,"sine",.04,250); toast("🐈 Purr. (Some surviving manuscripts carry inky cat paw prints. Cats and parchment have history.)"); ach("cat"); });
+
+/* ---------- the shop game ---------- */
+const ROMAN=["i","ii","iii","iv","v","vi","vii","viii","ix","x","xi","xii","xiii","xiv","xv"];
+const GW={N:10,fee:8,season:84,dayMs:2000,wear:.12,corrector:2};
+const CAST=[
+  {name:"Guillaume",who:"hired scribe. Fast. Sloppy.",speed:3,notice:.15,patience:3.5,robe:"#7a3b2e",hat:"#a8321e"},
+  {name:"Brother Odo",who:"Dominican. Slow. Sees everything.",speed:5.5,notice:.95,patience:8,friar:true},
+  {name:"Pierre",who:"poor student, copying his own.",speed:4.5,notice:.5,patience:3,robe:"#4a5a3a",hat:"#6b5a3a"},
+  {name:"Jacqueline",who:"professional scribe.",speed:3.5,notice:.7,patience:5,robe:"#2f4f8f",hat:"#d8c7a0",veil:true},
+  {name:"Henry's boy",who:"copying for his master, paid by the day.",speed:4.5,notice:.1,patience:9,robe:"#8a6d3b",hat:"#3d7a4a"},
+  {name:"Roger",who:"English clerk. Taking it home to Oxford.",speed:4,notice:.5,patience:5,robe:"#6b3f87",hat:"#2a2018"},
+  {name:"Nicolas",who:"bachelor of theology in a hurry.",speed:3,notice:.4,patience:2.5,robe:"#3a3a3a",hat:"#a8321e"},
+  {name:"Agnes",who:"scribe. Works by the window light.",speed:4,notice:.6,patience:5,robe:"#9b4d2b",hat:"#2f4f8f",veil:true},
+];
+function figure(c,mood){
+  const mouth = mood==="happy"?"M22 28 Q27 33 32 28":mood==="angry"?"M22 31 Q27 26 32 31":"M23 29 H31";
+  const brows = mood==="angry"?`<path d="M20 19l5 2M34 19l-5 2" stroke="#2a2018" stroke-width="1.4"/>`:"";
+  const robe = c.friar?`<path d="M8 64 Q10 36 27 34 Q44 36 46 64Z" fill="#f4f1ea" stroke="#cfc7b6"/><path d="M8 64 Q9 40 20 36 L27 64Z M46 64 Q45 40 34 36 L27 64Z" fill="#222"/>`
+                      :`<path d="M8 64 Q10 36 27 34 Q44 36 46 64Z" fill="${c.robe}"/>`;
+  const head = c.friar?`<circle cx="27" cy="22" r="12" fill="#f0d2b0"/><path d="M15.5 24 Q15 14 18 12 M38.5 24 Q39 14 36 12" stroke="#6b4a2a" stroke-width="3.4" fill="none" stroke-linecap="round"/>`
+             : c.veil?`<path d="M12 40 Q11 8 27 8 Q43 8 42 40Z" fill="${c.hat}"/><circle cx="27" cy="23" r="10.5" fill="#f0d2b0"/>`
+             :`<circle cx="27" cy="22" r="12" fill="#f0d2b0"/><path d="M13 22 Q13 6 27 7 Q41 6 41 22 Q36 13 27 13 Q18 13 13 22Z" fill="${c.hat}"/><path d="M40 16 q8 4 6 14" stroke="${c.hat}" stroke-width="4" fill="none"/>`;
+  return `<svg viewBox="0 0 54 64" width="46" height="54" aria-hidden="true">${robe}${head}<circle cx="23" cy="23" r="1.4" fill="#2a2018"/><circle cx="31" cy="23" r="1.4" fill="#2a2018"/>${brows}<path d="${mouth}" stroke="#2a2018" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>`;
+}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+let G=null, lastFrame=0, lastRender=0;
+function newGame(){
+  const order=CAST.slice().sort(()=>Math.random()-.5);
+  G={day:0,speed:G?G.speed:1,running:false,over:false,dayInt:0,nextFeast:7,
+    pieces:Array.from({length:GW.N},(_,i)=>({i,state:"shelf",damaged:false,holder:null,until:0,lentDay:0,loans:0,known:false})),
+    scribes:order.map((c,k)=>({id:k,c,arrive:k===0?.3:k===1?1.2:2+Math.random()*28,state:"away",next:0,holding:null,returnAt:0,waitStart:0,mood:"ok",say:"",gone:0,gotBad:false})),
+    basket:[],rent:0,late:0,corr:0,fines:0,reimb:0,copies:0,lost:0,caught:0,denounced:0,corruptOut:0,peak:0,log:[]};
+}
+function log(msg,cls){ G.log.unshift({d:Math.floor(G.day),msg,cls}); G.log.length=Math.min(G.log.length,7); }
+function say(s,msg,mood){ s.say=msg; if(mood) s.mood=mood; }
+const pname=i=>"piece "+ROMAN[i];
+function toCounter(s,msg){ s.state="counter"; s.waitStart=G.day; s.waited=0; s.mood="ok"; say(s,msg); }
+function lend(s){
+  if(!G.running||s.state!=="counter") return;
+  const p=G.pieces[s.next];
+  if(p.state!=="shelf"){ sfx.grumble(); say(s,p.state==="out"?`It's out? With ${G.scribes.find(x=>x.id===p.holder).c.name}? I'll wait…`:p.state==="basket"?"It's right there in your basket!":"At the corrector? Again?","angry"); return "shake"; }
+  p.state="out"; p.holder=s.id; p.lentDay=G.day; p.loans++;
+  s.gotBad=p.damaged; s.holding=p.i; s.state="copying"; s.returnAt=G.day+s.c.speed*(0.8+0.45*Math.random());
+  G.rent+=GW.fee/GW.N; sfx.coin(); setTimeout(sfx.quill,250); ach("first");
+  const out=G.pieces.filter(x=>x.state==="out").length; G.peak=Math.max(G.peak,out); if(out>=6) ach("pipeline");
+}
+function returnPiece(s){
+  const p=G.pieces[s.holding], kept=G.day-p.lentDay; s.holding=null;
+  p.state="basket"; p.holder=null; G.basket.push({i:p.i,since:G.day});
+  if(kept>7){ G.late+=1; ach("late"); log(`${s.c.name} kept ${pname(p.i)} ${Math.floor(kept)} days. Late fee: 1d.`); }
+  let msg=`Here's ${pname(p.i)} back.`;
+  if(s.gotBad){
+    if(Math.random()<s.c.notice){
+      G.fines+=120; G.reimb+=2*GW.fee/GW.N; G.denounced++; sfx.fine(); ach("ista"); if(G.denounced>=3) ach("ousted");
+      msg="“Ista pecia est falsa et corrupta!” I'm reporting this.";
+      log(`${s.c.name} denounces ${pname(p.i)} as corrupt. Fine: 10s (5s to the university, 2s 6d to the peciarii, 2s 6d to ${s.c.name}), plus double the rent back.`,"bad");
+      s.mood="angry";
+    } else { G.corruptOut++; }
+    p.known=false;
+  }
+  if(!p.damaged && Math.random()<GW.wear) p.damaged=true;
+  s.next++;
+  if(s.next>=GW.N){ s.state="done"; s.gone=G.day+1.6; G.copies++; sfx.done(); ach("explicit");
+    say(s,pick(["Explicit hoc totum, pro Christo da mihi potum!","Explicit! My hand will never forgive me.","Finished! Scribere qui nescit nullum putat esse laborem."]),"happy");
+    log(`${s.c.name} finishes a complete copy. Off to the binder.`,"good"); }
+  else { toCounter(s,s.mood==="angry"?msg:`${msg} Now ${pname(s.next)}, please.`); if(s.mood==="angry") s.mood="ok"; }
+}
+function check(pi){
+  const bi=G.basket.findIndex(x=>x.i===pi); const b=G.basket[bi]; if(!b) return; const p=G.pieces[b.i]; G.basket.splice(bi,1);
+  if(p.damaged){ p.state="repair"; p.until=G.day+3; G.corr+=GW.corrector; G.caught++; sfx.aha(); if(G.caught>=3) ach("inspector");
+    log(`You find ${pick(["a torn corner","an ink blot over three lines","a smudged column","a missing line, scraped away"])} on ${pname(b.i)}. Off to the corrector (2d, 3 days).`,"good"); }
+  else { p.state="shelf"; sfx.quill(); }
+}
+function shelve(pi){ const bi=G.basket.findIndex(x=>x.i===pi); const b=G.basket[bi]; if(!b) return; G.basket.splice(bi,1); G.pieces[b.i].state="shelf"; sfx.quill(); }
+function feast(){
+  sfx.bell(); const ban=$("gFeastBanner"); ban.classList.add("show"); setTimeout(()=>ban.classList.remove("show"),1800);
+  const found=G.pieces.filter(p=>p.damaged&&(p.state==="shelf"||p.state==="basket"));
+  found.forEach(p=>{ G.basket=G.basket.filter(b=>b.i!==p.i); p.state="repair"; p.until=G.day+3; G.corr+=GW.corrector; });
+  const away=G.pieces.filter(p=>p.state==="out").length;
+  if(found.length) log(`Feast day. The peciarii find ${found.length} bad piece${found.length>1?"s":""} (${found.map(p=>ROMAN[p.i]).join(", ")}) and send ${found.length>1?"them":"it"} to the corrector at your expense. ${away} piece${away===1?" was":"s were"} out on loan and escaped inspection.`,"bad");
+  else { log(`Feast day. The peciarii inspect your shelf and find nothing wrong. ${away?`(${away} pieces were out on loan. Lucky.)`:""}`,"good"); if(G.day>=13) ach("feast"); }
+}
+function step(dt){
+  G.day+=dt;
+  const d=G.day;
+  for(const s of G.scribes){
+    if(s.state==="away"&&d>=s.arrive) toCounter(s,pick(["Good morrow! Piece i, if you please.","Is this where the De sensu is? Piece i.","My master sent me. Piece i, quickly."]));
+    else if(s.state==="copying"&&d>=s.returnAt) returnPiece(s);
+    else if(s.state==="counter"&&(s.waited+=dt*(["shelf","basket"].includes(G.pieces[s.next].state)?1:.35))>s.c.patience){ s.state="left"; s.gone=d+1.6; G.lost++; sfx.grumble();
+      say(s,pick(["That's it. I'm going to the stationer across the street.","I have a lecture at Saint-Jacques. Never mind!","Unbelievable. Good day."]),"angry");
+      log(`${s.c.name} gives up waiting for ${pname(s.next)} and leaves with an unfinished copy.`,"bad"); }
+  }
+  for(const p of G.pieces) if(p.state==="repair"&&d>=p.until){ p.state="shelf"; p.damaged=false; log(`${pname(p.i)} is back from the corrector, freshly patched. (Its text is now not quite the original. Ask any Leonine editor.)`); }
+  for(let i=G.basket.length-1;i>=0;i--) if(d-G.basket[i].since>2.5){ const p=G.pieces[G.basket[i].i]; G.basket.splice(i,1); p.state="shelf"; log(`Colin shelves ${pname(p.i)} without looking.`); }
+  while(d>=G.nextFeast){ feast(); G.nextFeast+=7; }
+  while(G.dayInt<Math.floor(d)){ G.dayInt++;
+    if(Math.random()<.035){ const sh=G.pieces.filter(p=>p.state==="shelf"&&!p.damaged); if(sh.length){ pick(sh).damaged=true; sfx.squeak(); ach("rat"); log("A small squeak from the shelf. Probably nothing.","bad"); } } }
+  if(d>=GW.season) endGame();
+}
+function money(x){ const neg=x<0; x=Math.abs(x); const s=Math.floor(x/12), d=x-s*12; return (neg?"−":"")+(s?s+"s ":"")+(d%1?d.toFixed(1):d.toFixed(0))+"d"; }
+function render(){
+  const d=G.day, wk=Math.floor(d/7)+1;
+  $("gDay").textContent=`Day ${Math.floor(d)} · week ${Math.min(12,wk)} of 12`;
+  $("gFeast").textContent=`feast day in ${Math.max(0,Math.ceil(G.nextFeast-d))}`;
+  $("gSeason").innerHTML=`<i style="width:${Math.min(100,d/GW.season*100)}%"></i>`+Array.from({length:11},(_,i)=>`<s style="left:${(i+1)*7/GW.season*100}%"></s>`).join("");
+  const vis=G.scribes.filter(s=>s.state==="counter"||((s.state==="done"||s.state==="left")&&d<s.gone));
+  const ctr=$("gCounter"), keep=new Set(vis.map(s=>String(s.id)));
+  [...ctr.children].forEach(el=>{ if(!keep.has(el.dataset.id)) el.remove(); });
+  vis.forEach(s=>{
+    const p=G.pieces[s.next], waiting=s.state==="counter", frac=waiting?Math.max(0,1-s.waited/s.c.patience):0;
+    const mood=waiting&&frac<.35?"angry":s.mood;
+    const btn=waiting?(p.state==="shelf"?`<button class="give" data-s="${s.id}">hand over ${pname(s.next)}</button>`
+      :`<button class="give" data-s="${s.id}" disabled>${pname(s.next)}: ${p.state==="out"?"out on loan":p.state==="basket"?"in the basket":"at the corrector"}</button>`):"";
+    const html=`<div class="top">${figure(s.c,mood)}<div><div class="nm">${s.c.name}</div><div class="who">${s.c.who}</div></div></div>
+      <div class="say">${s.say}</div>${waiting?`<div class="pat"><i></i></div>`:""}${btn}`;
+    let el=ctr.querySelector(`.cust[data-id="${s.id}"]`);
+    if(!el){ el=document.createElement("div"); el.className="cust"; el.dataset.id=s.id; ctr.appendChild(el); }
+    if(el._h!==html){ el.innerHTML=html; el._h=html; }
+    el.classList.toggle("angry",mood==="angry"); el.classList.toggle("leaving",!waiting);
+    const bar=el.querySelector(".pat i"); if(bar) bar.style.width=(frac*100)+"%";
+  });
+  let empty=ctr.querySelector(".empty"); if(!vis.length&&!empty){ ctr.insertAdjacentHTML("beforeend",`<p class="note empty" data-id="empty" style="margin:0">Nobody at the counter. The cat approves.</p>`); }
+  if(vis.length&&empty) empty.remove();
+  const copying=G.scribes.filter(s=>s.state==="copying").length, coming=G.scribes.filter(s=>s.state==="away").length;
+  $("gStreet").textContent=`${copying} copying at home · ${coming} yet to discover your shop`;
+  $("gShelf").innerHTML=G.pieces.map(p=>{
+    const holder=p.state==="out"?G.scribes.find(s=>s.id===p.holder):null;
+    const sub=p.state==="shelf"?`${p.loans} loan${p.loans===1?"":"s"}`:p.state==="out"?`with ${holder.c.name}<br>back ~day ${Math.ceil(holder.returnAt)}`:p.state==="basket"?"in basket":`corrector<br>~day ${Math.ceil(p.until)}`;
+    return `<div class="pc ${p.state}"><div class="lines"></div>${ROMAN[p.i]}<small>${sub}</small></div>`;}).join("");
+  const bk=$("gBasket"), bkeep=new Set(G.basket.map(b=>String(b.i)));
+  [...bk.children].forEach(el=>{ if(!bkeep.has(el.dataset.id)) el.remove(); });
+  G.basket.forEach(b=>{ let el=bk.querySelector(`.bitem[data-id="${b.i}"]`);
+    if(!el){ bk.insertAdjacentHTML("beforeend",`<div class="bitem" data-id="${b.i}">${ROMAN[b.i]}<div class="auto"><i></i></div><button data-chk="${b.i}">🔍 check</button><button class="ghost" data-shv="${b.i}">shelve</button></div>`); el=bk.lastElementChild; }
+    el.querySelector(".auto i").style.width=Math.max(0,100-(d-b.since)/2.5*100)+"%"; });
+  if(!G.basket.length&&!bk.querySelector(".empty")) bk.insertAdjacentHTML("beforeend",`<p class="note empty" data-id="empty" style="margin:0">Empty.</p>`);
+  if(G.basket.length){ const e=bk.querySelector(".empty"); if(e) e.remove(); }
+  const net=G.rent+G.late-G.corr-G.fines-G.reimb;
+  $("gLedger").innerHTML=`<div><span>rent (8d per full set, pro rata)</span><span>${money(G.rent)}</span></div>
+    <div><span>late fees</span><span>${money(G.late)}</span></div>
+    <div class="neg"><span>corrector</span><span>${money(-G.corr)}</span></div>
+    <div class="neg"><span>fines (${G.denounced} × 10s) + refunds</span><span>${money(-G.fines-G.reimb)}</span></div>
+    <div class="tot ${net<0?"neg":""}"><span>net</span><span>${money(net)}</span></div>
+    <div style="margin-top:6px"><span>copies finished</span><span>${G.copies}</span></div>
+    <div><span>customers lost</span><span>${G.lost}</span></div>
+    <div><span>damaged pieces caught by you</span><span>${G.caught}</span></div>
+    <div title="You don't know this. The Leonine Commission will."><span>corrupt pieces now in someone's copy 🤫</span><span>${G.corruptOut}</span></div>`;
+  const lh=G.log.map((l,k)=>`<li class="${l.cls||""}${k?" old":""}"><span class="d">day ${l.d}</span>${l.msg}</li>`).join(""); if($("gLog")._h!==lh){ $("gLog").innerHTML=lh; $("gLog")._h=lh; }
+}
+function endGame(){
+  G.running=false; G.over=true; G.day=GW.season; render();
+  const net=G.rent+G.late-G.corr-G.fines-G.reimb;
+  let rank, note;
+  if(G.denounced>=3){ rank="Ousted from the grace and favour of the university."; note="The 1275 statute's exact threat: masters and scholars are forbidden to do business with you."; }
+  else if(G.copies>=4&&G.corruptOut===0){ rank="Sworn stationer, spotless."; note="The Leonine Commission thanks you, seven centuries early."; ach("leonine"); }
+  else if(G.copies>=5){ rank="Respectable sworn stationer."; note=G.corruptOut?`Though ${G.corruptOut} corrupt piece${G.corruptOut>1?"s":""} slipped into circulation. Future editors will sigh.`:"Solid work."; }
+  else if(G.lost>=3){ rank="Your customers now prefer the shop across the street."; note="Parallelism only helps if someone hands over the pieces."; }
+  else { rank="Apprentice-grade."; note="Colin has been eyeing your job."; }
+  const still=G.scribes.filter(s=>s.state==="copying"||s.state==="counter").length;
+  $("gOverlay").innerHTML=`<div class="inner"><div class="kicker">End of season · day ${GW.season}</div><h3>${rank}</h3><p>${note}</p>
+    <table><tr><td>complete copies</td><td class="n">${G.copies}</td></tr><tr><td>still copying</td><td class="n">${still}</td></tr>
+    <tr><td>customers lost</td><td class="n">${G.lost}</td></tr><tr><td>most pieces out at once</td><td class="n">${G.peak} / 10</td></tr>
+    <tr><td>denounced</td><td class="n">${G.denounced}</td></tr><tr><td>corrupt pieces released</td><td class="n">${G.corruptOut}</td></tr>
+    <tr><td>net takings</td><td class="n">${money(net)}</td></tr></table>
+    ${G.denounced?`<p class="note">Rent for a whole season came to ${money(G.rent)}. One denunciation costs 120d. The statute was a deterrent, not a business model.</p>`:""}
+    <p class="colo">Explicit hoc totum, pro Christo da mihi potum.<br><span class="note">(“That's the lot. For Christ's sake, give me a drink.” A stock scribe's colophon.)</span></p>
+    <button class="cta" id="gAgain" style="border:0">Another season ▸</button></div>`;
+  $("gOverlay").classList.remove("hidden"); $("gAgain").onclick=startGame; sfx.done();
+}
+function startGame(){ newGame(); G.running=true; $("gOverlay").classList.add("hidden"); $("gPause").textContent="❚❚ pause"; actx(); sfx.bell(); log("You unbar the shutters. The rue is busy. Somewhere a master is lecturing on the Sentences.");
+  lastFrame=performance.now(); render(); requestAnimationFrame(loop); }
+function loop(now){
+  if(!G.running) { lastFrame=now; return; }
+  const dt=Math.min(.25,(now-lastFrame)/GW.dayMs*G.speed); lastFrame=now; step(dt);
+  if(now-lastRender>120||!G.running){ render(); lastRender=now; }
+  if(G.running) requestAnimationFrame(loop);
+}
+$("gStart").onclick=startGame;
+$("gPause").onclick=()=>{ if(!G||G.over) return; G.running=!G.running; $("gPause").textContent=G.running?"❚❚ pause":"▶ resume"; if(G.running){ lastFrame=performance.now(); requestAnimationFrame(loop);} };
+$("gSpeed").addEventListener("click",ev=>{ const b=ev.target.closest("button"); if(!b||!G) return; G.speed=+b.dataset.v; [...$("gSpeed").children].forEach(x=>x.setAttribute("aria-pressed",x===b)); });
+$("shop").addEventListener("pointerdown",ev=>{
+  if(!G||!G.running) return; const t=ev.target.closest("button"); if(!t) return;
+  if(t.dataset.s){ const s=G.scribes.find(x=>x.id===+t.dataset.s); if(lend(s)==="shake"){ render(); const el=document.querySelector(`.cust[data-id="${s.id}"]`); if(el) el.classList.add("shake"); return; } }
+  else if(t.dataset.chk) check(+t.dataset.chk);
+  else if(t.dataset.shv) shelve(+t.dataset.shv);
+  else return;
+  render();
+});
+newGame(); render();
+
+/* ---------- the scribe game ---------- */
+const SPOT=[
+  {ref:"Ad ea enim que supra rationem sunt homo non debet conari",bad:"Ad ea enim que supra rationem sunt homo nunc debet conari",hit:["nunc"],
+   expl:"<b>Minim confusion.</b> Gothic book hands build <i>n, u, m, i</i> from identical short strokes, and both <i>non</i> and <i>nunc</i> were usually abbreviated. One misread stroke turns “man should not strive” into “man should now strive.” The Leonine editors note Aquinas himself sometimes forgot or doubled negations."},
+  {ref:"Sed ea que rationi subduntur sufficienter traduntur in philosophicis disciplinis",bad:"Sed ea que rationi subduntur sufficienter traduntur in philosophicis philosophicis disciplinis",hit:["philosophicis#2"],
+   expl:"<b>Dittography.</b> The eye goes back to the exemplar, lands on the word it just copied, and writes it again."},
+  {ref:"doctrina non potest esse nisi de ente, nichil enim scitur nisi uerum, quod cum ente conuertitur",bad:"doctrina non potest esse nisi de ente conuertitur",hit:["ente","conuertitur"],
+   expl:"<b>Eye-skip (saut du même au même).</b> The scribe's eye jumps from the first <i>ente</i> to the second and a whole clause disappears. Repeated words are traps."},
+  {ref:"esse doctrinam quandam secundum reuelationem diuinam preter philosophicas disciplinas",bad:"esse doctrinam quandam secundum rationem diuinam preter philosophicas disciplinas",hit:["rationem"],
+   expl:"<b>A guess over a damaged spot.</b> The worn piece showed <i>r…ionem</i> and the scribe filled in a word that fits. Unfortunately it reverses the point of the whole article (revelation, not reason). This is why the peciarii existed."},
+  {ref:"homo ordinatur ad Deum sicut ad quendam finem qui comprehensionem rationis excedit",bad:"homo ordinatur ad Deum sicut ad quendam fenum qui comprehensionem rationis excedit",hit:["fenum"],
+   expl:"<b>Worn letters.</b> <i>finem</i> (end, goal) became <i>fenum</i>: hay. Man is ordered to God as to a certain hay that exceeds the grasp of reason. Somewhere a corrector is weeping."},
+];
+const SP={i:0,score:0,t0:0,raf:0,done:true};
+function spWords(s,cls){ const seen={}; return s.split(" ").map(w=>{ const k=w.replace(/[.,]/g,""); seen[k]=(seen[k]||0)+1; const id=seen[k]>1?k+"#"+seen[k]:k; return `<span class="${cls}" data-w="${id}">${w}</span>`; }).join(" "); }
+function spRound(){
+  const r=SPOT[SP.i]; SP.done=false; $("spRound").textContent=`round ${SP.i+1} / ${SPOT.length}`; $("spScore").textContent=`score ${SP.score}`;
+  $("spRef").textContent=r.ref; $("spBad").innerHTML=spWords(r.bad,"w"); $("spExpl").innerHTML=""; $("spGo").classList.add("hidden");
+  SP.t0=performance.now(); cancelAnimationFrame(SP.raf);
+  const tick=now=>{ if(SP.done) return; const f=1-(now-SP.t0)/15000; $("spTimer").style.width=Math.max(0,f*100)+"%"; if(f<=0) spEnd(false); else SP.raf=requestAnimationFrame(tick); };
+  SP.raf=requestAnimationFrame(tick);
+}
+function spEnd(ok){
+  SP.done=true; const r=SPOT[SP.i];
+  if(ok){ SP.score++; sfx.aha(); } else { sfx.grumble(); $("spBad").querySelectorAll(".w").forEach(w=>{ if(r.hit.includes(w.dataset.w)) w.classList.add("show"); }); }
+  $("spScore").textContent=`score ${SP.score}`;
+  $("spExpl").innerHTML=(ok?"✓ ":"✗ Out of candle. ")+r.expl;
+  SP.i++;
+  if(SP.i<SPOT.length){ $("spGo").textContent="▸ next piece"; }
+  else { $("spGo").textContent="▸ play again"; $("spExpl").innerHTML+=`<p><b>Final: ${SP.score} / ${SPOT.length}.</b> ${SP.score===5?"The peciarii would like a word about a job.":SP.score>=3?"A decent corrector.":"Every copy you make will keep an editor in work."}</p>`; if(SP.score===5) ach("sharp"); SP.i=0; SP.score=-0; SP.reset=true; }
+  $("spGo").classList.remove("hidden");
+}
+$("spGo").onclick=()=>{ actx(); if(SP.reset){ SP.reset=false; SP.score=0; } spRound(); };
+$("spBad").addEventListener("pointerdown",ev=>{
+  const w=ev.target.closest(".w"); if(!w||SP.done) return;
+  if(SPOT[SP.i].hit.includes(w.dataset.w)){ w.classList.add("hit"); spEnd(true); }
+  else { w.classList.remove("miss"); void w.offsetWidth; w.classList.add("miss"); SP.t0-=2000; sfx.grumble(); }
+});
+renderAch();
+</script>
+</body>
+</html>
