@@ -135,7 +135,9 @@ const careerTimeline = [
   </head>
 
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">
+      Skip to content
+    </a>
 
     <div class="ambient-field" aria-hidden="true">
       <svg
@@ -166,9 +168,7 @@ const careerTimeline = [
           aria-hidden="true"
           focusable="false"
         >
-          <path
-            d="M-65 599C184 490 303 716 534 581C766 445 674 184 961 137C1211 96 1298 332 1466 270"
-          ></path>
+          <path d="M-65 599C184 490 303 716 534 581C766 445 674 184 961 137C1211 96 1298 332 1466 270"></path>
           <circle cx="530" cy="583" r="4"></circle>
           <circle cx="959" cy="138" r="4"></circle>
         </svg>
@@ -181,7 +181,8 @@ const careerTimeline = [
         </h1>
 
         <p class="hero-coordinate">
-          West Orange, New Jersey<br />
+          West Orange, New Jersey
+          <br />
           <span>40.80° N · 74.24° W</span>
         </p>
 
@@ -199,14 +200,17 @@ const careerTimeline = [
         </div>
 
         <p class="field-note">
-          A study in distributed intelligence<br />
+          A study in distributed intelligence
+          <br />
           <span>Explore · connect · adapt</span>
         </p>
       </section>
 
       <section id="about" class="section about" aria-labelledby="about-title">
         <header class="section-heading about-heading">
-          <p class="eyebrow"><span>01</span> Depth, then range</p>
+          <p class="eyebrow">
+            <span>01</span> Depth, then range
+          </p>
           <h2 id="about-title">Ideas should move through the whole system.</h2>
         </header>
 
@@ -246,7 +250,9 @@ const careerTimeline = [
 
       <section id="path" class="section proof" aria-labelledby="proof-title">
         <header class="section-heading proof-heading">
-          <p class="eyebrow"><span>02</span> The path so far</p>
+          <p class="eyebrow">
+            <span>02</span> The path so far
+          </p>
           <h2 id="proof-title">Built in layers.</h2>
           <p>
             Physical intuition, then economic reasoning, then data engineering,
@@ -256,21 +262,19 @@ const careerTimeline = [
         </header>
 
         <ol class="career-timeline">
-          {
-            careerTimeline.map((step, index) => (
-              <li class="career-step">
-                <p class="career-period">{step.period}</p>
-                <span class="career-node" aria-hidden="true" />
-                <article>
-                  <p class="career-index">
-                    Current {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </article>
-              </li>
-            ))
-          }
+          {careerTimeline.map((step, index) => (
+            <li class="career-step">
+              <p class="career-period">{step.period}</p>
+              <span class="career-node" aria-hidden="true" />
+              <article>
+                <p class="career-index">
+                  Current {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </article>
+            </li>
+          ))}
         </ol>
       </section>
 
@@ -280,7 +284,9 @@ const careerTimeline = [
         aria-labelledby="thesis-title"
       >
         <header class="section-heading thesis-heading">
-          <p class="eyebrow"><span>03</span> Working thesis</p>
+          <p class="eyebrow">
+            <span>03</span> Working thesis
+          </p>
           <h2 id="thesis-title">What I Value in my Work</h2>
         </header>
 
@@ -292,15 +298,15 @@ const careerTimeline = [
             aria-hidden="true"
             focusable="false"
           >
-            <path
-              d="M114-20C171 165 727 41 768 263C813 507 244 406 217 646C191 882 784 737 748 1017C724 1201 353 1110 354 1303"
-            ></path>
+            <path d="M114-20C171 165 727 41 768 263C813 507 244 406 217 646C191 882 784 737 748 1017C724 1201 353 1110 354 1303"></path>
           </svg>
 
           <ol>
             <li>
               <article>
-                <p class="thesis-number">01 <span aria-hidden="true"></span></p>
+                <p class="thesis-number">
+                  01 <span aria-hidden="true"></span>
+                </p>
                 <h3>Teams that Value Ownership</h3>
                 <p>
                   Teams and individuals that identify problems and own the work
@@ -310,7 +316,9 @@ const careerTimeline = [
             </li>
             <li>
               <article>
-                <p class="thesis-number">02 <span aria-hidden="true"></span></p>
+                <p class="thesis-number">
+                  02 <span aria-hidden="true"></span>
+                </p>
                 <h3>Impact &amp; Mission</h3>
                 <p>
                   I want to work with people who are trying to improve the
@@ -320,7 +328,9 @@ const careerTimeline = [
             </li>
             <li>
               <article>
-                <p class="thesis-number">03 <span aria-hidden="true"></span></p>
+                <p class="thesis-number">
+                  03 <span aria-hidden="true"></span>
+                </p>
                 <h3>Colleagues with Depth and Range</h3>
                 <p>
                   I value colleagues I can learn from—people who challenge one
@@ -331,7 +341,9 @@ const careerTimeline = [
             </li>
             <li>
               <article>
-                <p class="thesis-number">04 <span aria-hidden="true"></span></p>
+                <p class="thesis-number">
+                  04 <span aria-hidden="true"></span>
+                </p>
                 <h3>Pragmatic AI</h3>
                 <p>
                   I have built AI tools inside production applications,
@@ -351,7 +363,9 @@ const careerTimeline = [
         aria-labelledby="routes-title"
       >
         <header class="section-heading routes-heading">
-          <p class="eyebrow"><span>04</span> Continue outward</p>
+          <p class="eyebrow">
+            <span>04</span> Continue outward
+          </p>
           <h2 id="routes-title">Choose a current.</h2>
         </header>
 
@@ -359,26 +373,32 @@ const careerTimeline = [
           <a href="/writing/">
             <span class="route-number">01</span>
             <span class="route-name">Writing</span>
-            <span class="route-detail"
-              >Notes on engineering, data, AI, and leadership.</span
-            >
-            <span class="route-arrow" aria-hidden="true">↗</span>
+            <span class="route-detail">
+              Notes on engineering, data, AI, and leadership.
+            </span>
+            <span class="route-arrow" aria-hidden="true">
+              ↗
+            </span>
           </a>
           <a href="/resume/">
             <span class="route-number">02</span>
             <span class="route-name">Résumé</span>
-            <span class="route-detail"
-              >Experience, education, and my full working history.</span
-            >
-            <span class="route-arrow" aria-hidden="true">↗</span>
+            <span class="route-detail">
+              Experience, education, and my full working history.
+            </span>
+            <span class="route-arrow" aria-hidden="true">
+              ↗
+            </span>
           </a>
           <a href="/contact/">
             <span class="route-number">03</span>
             <span class="route-name">Contact</span>
-            <span class="route-detail"
-              >If this sounds like a team you are building, start here.</span
-            >
-            <span class="route-arrow" aria-hidden="true">↗</span>
+            <span class="route-detail">
+              If this sounds like a team you are building, start here.
+            </span>
+            <span class="route-arrow" aria-hidden="true">
+              ↗
+            </span>
           </a>
         </nav>
       </section>
@@ -395,13 +415,17 @@ const careerTimeline = [
         <a
           href="https://github.com/joe5saia/"
           target="_blank"
-          rel="noopener noreferrer">GitHub</a
+          rel="noopener noreferrer"
         >
+          GitHub
+        </a>
         <a
           href="https://www.linkedin.com/in/joe-saia/"
           target="_blank"
-          rel="noopener noreferrer">LinkedIn</a
+          rel="noopener noreferrer"
         >
+          LinkedIn
+        </a>
       </div>
 
       <p class="copyright">© {currentYear} Joe Saia</p>

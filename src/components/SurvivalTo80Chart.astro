@@ -80,13 +80,9 @@ function createPath(probabilities: number[], chart: ChartVariant): string {
 }
 ---
 
-<figure
-  class="not-prose my-12 border-y border-border bg-surface-raised/40 py-6 sm:py-8"
->
+<figure class="not-prose my-12 border-y border-border bg-surface-raised/40 py-6 sm:py-8">
   <figcaption>
-    <p
-      class="mb-2 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-accent"
-    >
+    <p class="mb-2 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-accent">
       Data study
     </p>
     <h2 class="font-serif text-2xl font-normal text-text-heading sm:text-3xl">
@@ -99,141 +95,138 @@ function createPath(probabilities: number[], chart: ChartVariant): string {
     </p>
   </figcaption>
 
-  {
-    variants.map((chart) => (
-      <svg
-        aria-labelledby={`${chart.id}-title ${chart.id}-description`}
-        class={`${chart.className} mt-6 h-auto`}
-        height={chart.height}
-        role="img"
-        viewBox={`0 0 ${chart.width} ${chart.height}`}
-        width={chart.width}
-      >
-        <title id={`${chart.id}-title`}>
+  {variants.map((chart) => (
+    <svg
+      aria-labelledby={`${chart.id}-title ${chart.id}-description`}
+      class={`${chart.className} mt-6 h-auto`}
+      height={chart.height}
+      role="img"
+      viewBox={`0 0 ${chart.width} ${chart.height}`}
+      width={chart.width}
+    >
+      <title id={`${chart.id}-title`}>
           Probability of reaching age 80 by age already reached and birth cohort
         </title>
-        <desc id={`${chart.id}-description`}>
-          Ten rising lines show birth cohorts from 1900 through 2020. The 1900
-          cohort begins at about 27 percent at birth, the 1940 cohort at about
-          52 percent, and the projected 2020 cohort at about 72 percent. Every
-          line reaches 100 percent at age 80.
-        </desc>
+      <desc id={`${chart.id}-description`}>
+        Ten rising lines show birth cohorts from 1900 through 2020. The 1900
+        cohort begins at about 27 percent at birth, the 1940 cohort at about 52
+        percent, and the projected 2020 cohort at about 72 percent. Every line
+        reaches 100 percent at age 80.
+      </desc>
 
-        {chart.yTicks.map((tick) => (
-          <g>
-            <line
-              class="stroke-border"
-              stroke-width="1"
-              x1={chart.margin.left}
-              x2={chart.width - chart.margin.right}
-              y1={yPosition(tick, chart)}
-              y2={yPosition(tick, chart)}
-            />
-            <text
-              class="fill-text-muted text-xs"
-              dominant-baseline="middle"
-              text-anchor="end"
-              x={chart.margin.left - 10}
-              y={yPosition(tick, chart)}
-            >
-              {tick}%
-            </text>
-          </g>
-        ))}
-
-        {chart.xTicks.map((tick) => (
-          <g>
-            <line
-              class="stroke-border"
-              stroke-width="1"
-              x1={xPosition(tick, chart)}
-              x2={xPosition(tick, chart)}
-              y1={chart.margin.top}
-              y2={chart.height - chart.margin.bottom}
-            />
-            <text
-              class="fill-text-muted text-xs"
-              text-anchor="middle"
-              x={xPosition(tick, chart)}
-              y={chart.height - chart.margin.bottom + 23}
-            >
-              {tick}
-            </text>
-          </g>
-        ))}
-
-        {series.map((cohort, index) => (
-          <path
-            d={createPath(cohort.probabilities, chart)}
-            fill="none"
-            stroke={palette[index]}
-            stroke-dasharray={cohort.cohort >= 1960 ? "7 5" : undefined}
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width={cohort.cohort === 2020 ? 2.75 : 2}
-            vector-effect="non-scaling-stroke"
+      {chart.yTicks.map((tick) => (
+        <g>
+          <line
+            class="stroke-border"
+            stroke-width="1"
+            x1={chart.margin.left}
+            x2={chart.width - chart.margin.right}
+            y1={yPosition(tick, chart)}
+            y2={yPosition(tick, chart)}
           />
-        ))}
+          <text
+            class="fill-text-muted text-xs"
+            dominant-baseline="middle"
+            text-anchor="end"
+            x={chart.margin.left - 10}
+            y={yPosition(tick, chart)}
+          >
+            {tick}%
+          </text>
+        </g>
+      ))}
 
-        <text
-          class="fill-text-secondary text-xs font-medium"
-          text-anchor="middle"
-          x={(chart.margin.left + chart.width - chart.margin.right) / 2}
-          y={chart.height - 7}
-        >
-          Age already reached
-        </text>
-        <text
-          class="fill-text-secondary text-xs font-medium"
-          text-anchor="middle"
-          transform={`rotate(-90 15 ${(chart.margin.top + chart.height - chart.margin.bottom) / 2})`}
-          x="15"
-          y={(chart.margin.top + chart.height - chart.margin.bottom) / 2}
-        >
-          Chance of reaching 80
-        </text>
-      </svg>
-    ))
-  }
+      {chart.xTicks.map((tick) => (
+        <g>
+          <line
+            class="stroke-border"
+            stroke-width="1"
+            x1={xPosition(tick, chart)}
+            x2={xPosition(tick, chart)}
+            y1={chart.margin.top}
+            y2={chart.height - chart.margin.bottom}
+          />
+          <text
+            class="fill-text-muted text-xs"
+            text-anchor="middle"
+            x={xPosition(tick, chart)}
+            y={chart.height - chart.margin.bottom + 23}
+          >
+            {tick}
+          </text>
+        </g>
+      ))}
+
+      {series.map((cohort, index) => (
+        <path
+          d={createPath(cohort.probabilities, chart)}
+          fill="none"
+          stroke={palette[index]}
+          stroke-dasharray={cohort.cohort >= 1960 ? "7 5" : undefined}
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width={cohort.cohort === 2020 ? 2.75 : 2}
+          vector-effect="non-scaling-stroke"
+        />
+      ))}
+
+      <text
+        class="fill-text-secondary text-xs font-medium"
+        text-anchor="middle"
+        x={(chart.margin.left + chart.width - chart.margin.right) / 2}
+        y={chart.height - 7}
+      >
+        Age already reached
+      </text>
+      <text
+        class="fill-text-secondary text-xs font-medium"
+        text-anchor="middle"
+        transform={`rotate(-90 15 ${(chart.margin.top + chart.height - chart.margin.bottom) / 2})`}
+        x="15"
+        y={(chart.margin.top + chart.height - chart.margin.bottom) / 2}
+      >
+        Chance of reaching 80
+      </text>
+    </svg>
+  ))}
 
   <ul
     aria-label="Birth cohorts"
     class="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-text-secondary sm:grid-cols-5"
   >
-    {
-      series.map((cohort, index) => (
-        <li class="flex items-center gap-2">
-          <svg aria-hidden="true" height="8" viewBox="0 0 30 8" width="30">
-            <line
-              stroke={palette[index]}
-              stroke-dasharray={cohort.cohort >= 1960 ? "7 5" : undefined}
-              stroke-linecap="round"
-              stroke-width={cohort.cohort === 2020 ? 2.75 : 2}
-              x1="1"
-              x2="29"
-              y1="4"
-              y2="4"
-            />
-          </svg>
-          <span>{cohort.cohort}</span>
-        </li>
-      ))
-    }
+    {series.map((cohort, index) => (
+      <li class="flex items-center gap-2">
+        <svg aria-hidden="true" height="8" viewBox="0 0 30 8" width="30">
+          <line
+            stroke={palette[index]}
+            stroke-dasharray={cohort.cohort >= 1960 ? "7 5" : undefined}
+            stroke-linecap="round"
+            stroke-width={cohort.cohort === 2020 ? 2.75 : 2}
+            x1="1"
+            x2="29"
+            y1="4"
+            y2="4"
+          />
+        </svg>
+        <span>{cohort.cohort}</span>
+      </li>
+    ))}
   </ul>
 
-  <div
-    class="mt-5 space-y-2 border-t border-border pt-4 text-xs leading-relaxed text-text-muted"
-  >
+  <div class="mt-5 space-y-2 border-t border-border pt-4 text-xs leading-relaxed text-text-muted">
     <p>
       Solid lines: cohorts that reached 80 by 2023. Dashed lines: cohorts whose
       results require projected future mortality.
     </p>
     <p>
-      Source: <a
+      Source:{" "}
+      <a
         class="text-accent underline decoration-accent/40 underline-offset-2 hover:text-accent-hover"
         href="https://www.ssa.gov/OACT/Downloadables/CY/index.html"
-        >2026 Social Security Trustees cohort life tables</a
-      >, Alternative II. Male and female tables are combined using SSA's
+      >
+        2026 Social Security Trustees cohort life tables
+      </a>
+      , Alternative II. Male and female tables are combined using SSA's
       1,050-to-1,000 birth weighting.
     </p>
   </div>
@@ -246,20 +239,20 @@ function createPath(probabilities: number[], chart: ChartVariant): string {
       <thead>
         <tr>
           <th scope="col">Birth cohort</th>
-          {tableAges.map((age) => <th scope="col">Age {age}</th>)}
+          {tableAges.map((age) => (
+            <th scope="col">Age {age}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {
-          series.map((cohort) => (
-            <tr>
-              <th scope="row">{cohort.cohort}</th>
-              {tableAges.map((age) => (
-                <td>{cohort.probabilities[age].toFixed(1)} percent</td>
-              ))}
-            </tr>
-          ))
-        }
+        {series.map((cohort) => (
+          <tr>
+            <th scope="row">{cohort.cohort}</th>
+            {tableAges.map((age) => (
+              <td>{cohort.probabilities[age].toFixed(1)} percent</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   </div>

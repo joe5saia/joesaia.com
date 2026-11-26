@@ -52,58 +52,56 @@ const classes = [
 ];
 ---
 
-{
-  href ? (
-    <a
-      id={id}
-      class:list={classes}
-      href={isDisabled ? undefined : href}
-      target={target}
-      rel={safeRel}
-      download={isDisabled ? undefined : download}
-      aria-label={ariaLabel}
-      aria-disabled={isDisabled ? "true" : undefined}
-      aria-busy={loading ? "true" : undefined}
-      tabindex={isDisabled ? -1 : undefined}
-      data-loading={loading ? "true" : undefined}
-    >
-      <span class="ds-button__label">
-        <slot />
+{href ? (
+  <a
+    id={id}
+    class:list={classes}
+    href={isDisabled ? undefined : href}
+    target={target}
+    rel={safeRel}
+    download={isDisabled ? undefined : download}
+    aria-label={ariaLabel}
+    aria-disabled={isDisabled ? "true" : undefined}
+    aria-busy={loading ? "true" : undefined}
+    tabindex={isDisabled ? -1 : undefined}
+    data-loading={loading ? "true" : undefined}
+  >
+    <span class="ds-button__label">
+      <slot />
+    </span>
+    {hasIcon && (
+      <span class="ds-button__icon" aria-hidden="true">
+        <slot name="icon" />
       </span>
-      {hasIcon && (
-        <span class="ds-button__icon" aria-hidden="true">
-          <slot name="icon" />
-        </span>
-      )}
-      {loading && <span class="ds-button__loader" aria-hidden="true" />}
-      {loading && <span class="ds-button__sr-only">{loadingLabel}</span>}
-    </a>
-  ) : (
-    <button
-      id={id}
-      class:list={classes}
-      type={type}
-      name={name}
-      value={value}
-      form={form}
-      disabled={isDisabled}
-      aria-label={ariaLabel}
-      aria-busy={loading ? "true" : undefined}
-      data-loading={loading ? "true" : undefined}
-    >
-      <span class="ds-button__label">
-        <slot />
+    )}
+    {loading && <span class="ds-button__loader" aria-hidden="true" />}
+    {loading && <span class="ds-button__sr-only">{loadingLabel}</span>}
+  </a>
+) : (
+  <button
+    id={id}
+    class:list={classes}
+    type={type}
+    name={name}
+    value={value}
+    form={form}
+    disabled={isDisabled}
+    aria-label={ariaLabel}
+    aria-busy={loading ? "true" : undefined}
+    data-loading={loading ? "true" : undefined}
+  >
+    <span class="ds-button__label">
+      <slot />
+    </span>
+    {hasIcon && (
+      <span class="ds-button__icon" aria-hidden="true">
+        <slot name="icon" />
       </span>
-      {hasIcon && (
-        <span class="ds-button__icon" aria-hidden="true">
-          <slot name="icon" />
-        </span>
-      )}
-      {loading && <span class="ds-button__loader" aria-hidden="true" />}
-      {loading && <span class="ds-button__sr-only">{loadingLabel}</span>}
-    </button>
-  )
-}
+    )}
+    {loading && <span class="ds-button__loader" aria-hidden="true" />}
+    {loading && <span class="ds-button__sr-only">{loadingLabel}</span>}
+  </button>
+)}
 
 <style>
   .ds-button {

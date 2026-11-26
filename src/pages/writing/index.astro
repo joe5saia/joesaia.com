@@ -20,7 +20,9 @@ const posts = (
   <section class="page-intro" aria-labelledby="writing-title">
     <Eyebrow index="03">Field notes</Eyebrow>
     <div>
-      <h1 class="page-title" id="writing-title">Writing</h1>
+      <h1 class="page-title" id="writing-title">
+        Writing
+      </h1>
       <p class="page-dek">
         Notes on technical leadership, data systems, applied AI, and the work of
         building organizations that can take on difficult problems.
@@ -28,35 +30,33 @@ const posts = (
     </div>
   </section>
 
-  {
-    posts.length > 0 ? (
-      <section class="writing-ledger" aria-labelledby="archive-title">
-        <div class="ledger-heading">
-          <h2 id="archive-title">The archive</h2>
-          <p>
-            {posts.length.toString().padStart(2, "0")}{" "}
-            {posts.length === 1 ? "entry" : "entries"}
-          </p>
-        </div>
-        <ol class="post-list">
-          {posts.map((post, index) => (
-            <li>
-              <PostCard
-                title={post.data.title}
-                date={post.data.date}
-                summary={post.data.summary}
-                slug={post.id}
-                featured={post.data.featured}
-                index={index + 1}
-              />
-            </li>
-          ))}
-        </ol>
-      </section>
-    ) : (
-      <p class="empty-state">No posts yet. Check back soon.</p>
-    )
-  }
+  {posts.length > 0 ? (
+    <section class="writing-ledger" aria-labelledby="archive-title">
+      <div class="ledger-heading">
+        <h2 id="archive-title">The archive</h2>
+        <p>
+          {posts.length.toString().padStart(2, "0")}{" "}
+          {posts.length === 1 ? "entry" : "entries"}
+        </p>
+      </div>
+      <ol class="post-list">
+        {posts.map((post, index) => (
+          <li>
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              summary={post.data.summary}
+              slug={post.id}
+              featured={post.data.featured}
+              index={index + 1}
+            />
+          </li>
+        ))}
+      </ol>
+    </section>
+  ) : (
+    <p class="empty-state">No posts yet. Check back soon.</p>
+  )}
 </BaseLayout>
 
 <style>

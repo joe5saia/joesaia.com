@@ -46,9 +46,7 @@ const assets = [
         Internal review page
       </p>
       <div class="space-y-3">
-        <h1
-          class="text-4xl font-bold tracking-tight text-text-heading sm:text-5xl"
-        >
+        <h1 class="text-4xl font-bold tracking-tight text-text-heading sm:text-5xl">
           Brand asset review
         </h1>
         <p class="max-w-2xl text-lg leading-relaxed text-text-secondary">
@@ -56,9 +54,7 @@ const assets = [
           unlinked, excluded from search indexing, and omitted from the sitemap.
         </p>
       </div>
-      <dl
-        class="flex flex-wrap gap-x-8 gap-y-3 border-y border-border py-4 text-sm"
-      >
+      <dl class="flex flex-wrap gap-x-8 gap-y-3 border-y border-border py-4 text-sm">
         <div>
           <dt class="text-text-muted">Assets</dt>
           <dd class="mt-1 font-medium text-text-heading">{assets.length}</dd>
@@ -86,14 +82,13 @@ const assets = [
           Default link preview
         </h2>
         <p class="leading-relaxed text-text-secondary">
-          <code class="text-text-primary">social-card.png</code> is the image currently
-          sent to Open Graph and X/Twitter for every page, including articles.
+          <code class="text-text-primary">social-card.png</code> is the image
+          currently sent to Open Graph and X/Twitter for every page, including
+          articles.
         </p>
       </div>
 
-      <figure
-        class="overflow-hidden rounded-xl border border-border bg-surface-raised"
-      >
+      <figure class="overflow-hidden rounded-xl border border-border bg-surface-raised">
         <img
           src="/social-card.png"
           alt="Joe Saia social card with a mahogany library and sitting chair"
@@ -101,9 +96,7 @@ const assets = [
           height="630"
           class="block aspect-[1200/630] w-full"
         />
-        <figcaption
-          class="flex flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-4 text-sm"
-        >
+        <figcaption class="flex flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-4 text-sm">
           <span class="text-text-secondary">Production PNG · 1.91:1</span>
           <a
             class="font-medium text-accent hover:text-accent-hover"
@@ -116,9 +109,7 @@ const assets = [
       </figure>
 
       <div class="grid gap-6 md:grid-cols-2">
-        <figure
-          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
-        >
+        <figure class="overflow-hidden rounded-xl border border-border bg-surface-raised">
           <div class="border-b border-border bg-white p-3">
             <img
               src="/social-card.png"
@@ -127,9 +118,7 @@ const assets = [
               height="630"
               class="aspect-[1.91/1] w-full object-cover"
             />
-            <div
-              class="space-y-1 border border-t-0 border-gray-200 bg-white p-4 font-sans"
-            >
+            <div class="space-y-1 border border-t-0 border-gray-200 bg-white p-4 font-sans">
               <p class="text-xs uppercase tracking-wide text-gray-500">
                 joesaia.com
               </p>
@@ -145,13 +134,9 @@ const assets = [
           </figcaption>
         </figure>
 
-        <figure
-          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
-        >
+        <figure class="overflow-hidden rounded-xl border border-border bg-surface-raised">
           <div class="flex justify-center bg-white p-3">
-            <div
-              class="w-full max-w-[18rem] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm"
-            >
+            <div class="w-full max-w-[18rem] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
               <img
                 src="/social-card.png"
                 alt="Square-cropped social card preview"
@@ -271,9 +256,7 @@ const assets = [
       </div>
 
       <div class="grid gap-8 lg:grid-cols-2">
-        <article
-          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
-        >
+        <article class="overflow-hidden rounded-xl border border-border bg-surface-raised">
           <div class="grid grid-cols-2 gap-px bg-border">
             <img
               src={headshot.src}
@@ -298,12 +281,8 @@ const assets = [
           </div>
         </article>
 
-        <article
-          class="overflow-hidden rounded-xl border border-border bg-surface-raised"
-        >
-          <div
-            class="flex h-[26rem] items-start justify-center overflow-auto bg-surface-overlay p-4"
-          >
+        <article class="overflow-hidden rounded-xl border border-border bg-surface-raised">
+          <div class="flex h-[26rem] items-start justify-center overflow-auto bg-surface-overlay p-4">
             <img
               src={articleImage.src}
               alt="I made this meme from the article of the same name"
@@ -340,32 +319,30 @@ const assets = [
 
       <div class="overflow-hidden rounded-xl border border-border">
         <div class="divide-y divide-border">
-          {
-            assets.map((asset) => (
-              <article class="grid gap-4 bg-surface-raised p-5 sm:grid-cols-[64px_1fr] sm:items-center">
-                <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded border border-border bg-surface-overlay">
-                  <img
-                    src={asset.path}
-                    alt=""
-                    class="h-full w-full object-contain"
-                    loading="lazy"
-                  />
+          {assets.map((asset) => (
+            <article class="grid gap-4 bg-surface-raised p-5 sm:grid-cols-[64px_1fr] sm:items-center">
+              <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded border border-border bg-surface-overlay">
+                <img
+                  src={asset.path}
+                  alt=""
+                  class="h-full w-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div class="grid gap-2 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+                <div>
+                  <h3 class="font-medium text-text-heading">{asset.name}</h3>
+                  <p class="mt-1 break-all font-mono text-xs text-text-muted">
+                    {asset.displayPath ?? asset.path}
+                  </p>
                 </div>
-                <div class="grid gap-2 lg:grid-cols-[1fr_1.3fr] lg:items-center">
-                  <div>
-                    <h3 class="font-medium text-text-heading">{asset.name}</h3>
-                    <p class="mt-1 break-all font-mono text-xs text-text-muted">
-                      {asset.displayPath ?? asset.path}
-                    </p>
-                  </div>
-                  <div>
-                    <p class="text-sm text-text-primary">{asset.usage}</p>
-                    <p class="mt-1 text-xs text-text-muted">{asset.details}</p>
-                  </div>
+                <div>
+                  <p class="text-sm text-text-primary">{asset.usage}</p>
+                  <p class="mt-1 text-xs text-text-muted">{asset.details}</p>
                 </div>
-              </article>
-            ))
-          }
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

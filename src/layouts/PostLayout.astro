@@ -44,7 +44,9 @@ const articleJsonLd = {
 >
   <Fragment slot="head">
     <meta property="article:published_time" content={date.toISOString()} />
-    {tags?.map((tag: string) => <meta property="article:tag" content={tag} />)}
+    {tags?.map((tag: string) => (
+      <meta property="article:tag" content={tag} />
+    ))}
     <script
       is:inline
       type="application/ld+json"
@@ -61,29 +63,25 @@ const articleJsonLd = {
       <div class="article-meta">
         <p>Field note</p>
         <time datetime={date.toISOString()}>
-          {
-            date.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })
-          }
+          {date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          })}
         </time>
       </div>
 
       <div class="article-heading">
         <h1>{title}</h1>
         {visualization && <p class="article-summary">{summary}</p>}
-        {
-          tags && tags.length > 0 && (
-            <div class="article-tags" aria-label="Topics">
-              {tags.map((tag: string) => (
-                <Badge>{tag}</Badge>
-              ))}
-            </div>
-          )
-        }
+        {tags && tags.length > 0 && (
+          <div class="article-tags" aria-label="Topics">
+            {tags.map((tag: string) => (
+              <Badge>{tag}</Badge>
+            ))}
+          </div>
+        )}
       </div>
     </header>
 

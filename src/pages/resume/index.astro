@@ -123,7 +123,9 @@ const skills = [
   <section class="page-intro" aria-labelledby="resume-title">
     <Eyebrow index="04">Career record</Eyebrow>
     <div>
-      <h1 class="page-title" id="resume-title">Résumé</h1>
+      <h1 class="page-title" id="resume-title">
+        Résumé
+      </h1>
       <p class="page-dek">
         Engineering leader and PhD economist who builds AI-native engineering
         organizations. I have shipped production AI agents in healthcare and
@@ -161,10 +163,18 @@ const skills = [
     <aside class="resume-index">
       <p>On this page</p>
       <nav aria-label="Résumé sections">
-        <a href="#achievements"><span>01</span> Key achievements</a>
-        <a href="#experience"><span>02</span> Experience</a>
-        <a href="#education"><span>03</span> Education</a>
-        <a href="#skills"><span>04</span> Skills</a>
+        <a href="#achievements">
+          <span>01</span> Key achievements
+        </a>
+        <a href="#experience">
+          <span>02</span> Experience
+        </a>
+        <a href="#education">
+          <span>03</span> Education
+        </a>
+        <a href="#skills">
+          <span>04</span> Skills
+        </a>
       </nav>
     </aside>
 
@@ -179,7 +189,9 @@ const skills = [
           <h2 id="achievements-title">Key Achievements</h2>
         </header>
         <ul class="achievements-list">
-          {achievements.map((achievement) => <li>{achievement}</li>)}
+          {achievements.map((achievement) => (
+            <li>{achievement}</li>
+          ))}
         </ul>
       </section>
 
@@ -194,27 +206,25 @@ const skills = [
         </header>
 
         <ol class="experience-list">
-          {
-            experience.map((role) => (
-              <li>
-                <article class="career-entry">
-                  <p class="entry-dates">{role.dates}</p>
-                  <div class="entry-copy">
-                    <p class="entry-company">{role.company}</p>
-                    <h3>{role.title}</h3>
-                    <ul>
-                      {role.highlights.map((highlight) => (
-                        <li>
-                          <span aria-hidden="true">—</span>
-                          <p>{highlight}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </li>
-            ))
-          }
+          {experience.map((role) => (
+            <li>
+              <article class="career-entry">
+                <p class="entry-dates">{role.dates}</p>
+                <div class="entry-copy">
+                  <p class="entry-company">{role.company}</p>
+                  <h3>{role.title}</h3>
+                  <ul>
+                    {role.highlights.map((highlight) => (
+                      <li>
+                        <span aria-hidden="true">—</span>
+                        <p>{highlight}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            </li>
+          ))}
         </ol>
       </section>
 
@@ -229,17 +239,15 @@ const skills = [
         </header>
 
         <ol class="education-list">
-          {
-            education.map((item) => (
-              <li>
-                <p class="entry-dates">{item.dates}</p>
-                <div>
-                  <h3>{item.degree}</h3>
-                  <p>{item.school}</p>
-                </div>
-              </li>
-            ))
-          }
+          {education.map((item) => (
+            <li>
+              <p class="entry-dates">{item.dates}</p>
+              <div>
+                <h3>{item.degree}</h3>
+                <p>{item.school}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </section>
 
@@ -254,14 +262,12 @@ const skills = [
         </header>
 
         <dl class="skills-list">
-          {
-            skills.map((skill) => (
-              <div>
-                <dt>{skill.label}</dt>
-                <dd>{skill.value}</dd>
-              </div>
-            ))
-          }
+          {skills.map((skill) => (
+            <div>
+              <dt>{skill.label}</dt>
+              <dd>{skill.value}</dd>
+            </div>
+          ))}
         </dl>
       </section>
     </div>

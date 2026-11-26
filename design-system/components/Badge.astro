@@ -13,25 +13,23 @@ const hasContent = Astro.slots.has("default");
 const hasIcon = Astro.slots.has("icon");
 ---
 
-{
-  hasContent && (
-    <span
-      class:list={[
-        "ds-badge",
-        `ds-badge--${tone}`,
-        `ds-badge--${size}`,
-        className,
-      ]}
-    >
-      {hasIcon && (
-        <span class="ds-badge__icon" aria-hidden="true">
-          <slot name="icon" />
-        </span>
-      )}
-      <slot />
-    </span>
-  )
-}
+{hasContent && (
+  <span
+    class:list={[
+      "ds-badge",
+      `ds-badge--${tone}`,
+      `ds-badge--${size}`,
+      className,
+    ]}
+  >
+    {hasIcon && (
+      <span class="ds-badge__icon" aria-hidden="true">
+        <slot name="icon" />
+      </span>
+    )}
+    <slot />
+  </span>
+)}
 
 <style>
   .ds-badge {

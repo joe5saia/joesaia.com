@@ -86,11 +86,21 @@ const spacing = [
   </header>
 
   <nav class="ds-catalog__nav" aria-label="Design system sections">
-    <a href="#color"><span>01</span> Color</a>
-    <a href="#type"><span>02</span> Type</a>
-    <a href="#layout"><span>03</span> Layout</a>
-    <a href="#components"><span>04</span> Components</a>
-    <a href="#content"><span>05</span> Content</a>
+    <a href="#color">
+      <span>01</span> Color
+    </a>
+    <a href="#type">
+      <span>02</span> Type
+    </a>
+    <a href="#layout">
+      <span>03</span> Layout
+    </a>
+    <a href="#components">
+      <span>04</span> Components
+    </a>
+    <a href="#content">
+      <span>05</span> Content
+    </a>
   </nav>
 
   <section class="ds-section" id="color" aria-labelledby="color-title">
@@ -106,22 +116,20 @@ const spacing = [
     </header>
 
     <ul class="ds-swatches" aria-label="Color tokens">
-      {
-        colors.map((color) => (
-          <li>
-            <div
-              class="ds-swatch"
-              style={`--swatch-color: var(${color.token})`}
-              aria-hidden="true"
-            />
-            <div>
-              <h3>{color.name}</h3>
-              <code>{color.token}</code>
-              <span>{color.value}</span>
-            </div>
-          </li>
-        ))
-      }
+      {colors.map((color) => (
+        <li>
+          <div
+            class="ds-swatch"
+            style={`--swatch-color: var(${color.token})`}
+            aria-hidden="true"
+          />
+          <div>
+            <h3>{color.name}</h3>
+            <code>{color.token}</code>
+            <span>{color.value}</span>
+          </div>
+        </li>
+      ))}
     </ul>
   </section>
 
@@ -183,18 +191,16 @@ const spacing = [
           <span>4px base</span>
         </div>
         <ol>
-          {
-            spacing.map(([label, value, token]) => (
-              <li>
-                <span>{label}</span>
-                <div
-                  style={`--spacing-width: var(${token})`}
-                  aria-hidden="true"
-                />
-                <code>{value}</code>
-              </li>
-            ))
-          }
+          {spacing.map(([label, value, token]) => (
+            <li>
+              <span>{label}</span>
+              <div
+                style={`--spacing-width: var(${token})`}
+                aria-hidden="true"
+              />
+              <code>{value}</code>
+            </li>
+          ))}
         </ol>
       </article>
 
@@ -204,12 +210,23 @@ const spacing = [
           <span>Collapses by content</span>
         </div>
         <div class="ds-grid-visual" aria-hidden="true">
-          {Array.from({ length: 12 }).map(() => <span />)}
+          {Array.from({ length: 12 }).map(() => (
+            <span />
+          ))}
         </div>
         <dl>
-          <div><dt>Page</dt><dd>92rem</dd></div>
-          <div><dt>Content</dt><dd>78rem</dd></div>
-          <div><dt>Reading</dt><dd>43rem</dd></div>
+          <div>
+            <dt>Page</dt>
+            <dd>92rem</dd>
+          </div>
+          <div>
+            <dt>Content</dt>
+            <dd>78rem</dd>
+          </div>
+          <div>
+            <dt>Reading</dt>
+            <dd>43rem</dd>
+          </div>
         </dl>
       </article>
     </div>
@@ -306,7 +323,11 @@ const spacing = [
         </header>
         <div class="ds-post-sample">
           <p class="ds-post-number">01</p>
-          <p class="ds-post-meta">Aug 27, 2026<br /><span>Featured</span></p>
+          <p class="ds-post-meta">
+            Aug 27, 2026
+            <br />
+            <span>Featured</span>
+          </p>
           <div>
             <h4>Build the smallest system that clarifies the work.</h4>
             <p>
