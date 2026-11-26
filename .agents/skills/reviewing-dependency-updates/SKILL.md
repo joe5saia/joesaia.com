@@ -68,7 +68,7 @@ npm ci
 
 1. List each updated package with its old version and its new version. Include each transitive package whose version changed in the lockfile.
 2. For each direct update, read the release notes of each version between the old version and the new version. Do not read only the newest notes. For a GitHub Action, read its releases and its `action.yml`.
-3. Record each change that breaks an API, each deprecation, each changed default and each new requirement, for example a Node version (CI uses Node 22, `.agents/setup` installs 22.23.2) or a peer dependency.
+3. Record each change that breaks an API, each deprecation, each changed default and each new requirement, for example a Node version (CI uses Node 22, `.agents/setup` installs 22.23.4) or a peer dependency.
 4. Search the code for the parts that each change touches: `rg <name> src scripts editor tests astro.config.mjs eslint.config.mjs`.
 5. Read the notes of a transitive package when the notes of a direct package refer to them, or when its version moves a large step.
 6. Review each update of a pre-release as a major update. A pre-release can break an API in an update that semver calls a patch.
