@@ -1,0 +1,50 @@
+# Weekly version updates for every ecosystem in the repository. Minor and patch
+# updates of an ecosystem arrive together in one pull request; each major update
+# gets its own. Opening one starts an Amp orb that reviews, fixes and lands it
+# (.agents/skills/reviewing-dependency-updates/SKILL.md).
+version: 2
+
+updates:
+  # The Astro site: package.json and package-lock.json at the root.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/New_York
+    # npm has no minimum release age, so the cooldown is the only delay before a
+    # new release reaches the lockfile.
+    cooldown:
+      default-days: 3
+    groups:
+      non-major:
+        update-types: [minor, patch]
+
+  # The Rust quality model compiled to public/wasm/quality-model.wasm. It has no
+  # third-party crates today; this entry covers any that it adds.
+  - package-ecosystem: cargo
+    directory: /wasm/quality-model
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/New_York
+    # Cargo has no minimum release age, so the cooldown is the only delay.
+    cooldown:
+      default-days: 3
+    groups:
+      non-major:
+        update-types: [minor, patch]
+
+  # The workflows (and any composite action), pinned to commit SHAs.
+  - package-ecosystem: github-actions
+    directories: [/, /.github/actions/*]
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/New_York
+    groups:
+      non-major:
+        update-types: [minor, patch]
