@@ -12,12 +12,10 @@ const { metrics } = Astro.props;
 ---
 
 <dl class="grid grid-cols-1 gap-6 py-6 border-y border-border">
-  {
-    metrics.map((metric) => (
-      <div class="text-center">
-        <dd class="text-2xl font-semibold text-text-heading">{metric.value}</dd>
-        <dt class="text-sm text-text-secondary mt-1">{metric.label}</dt>
-      </div>
-    ))
-  }
+  {metrics.map((metric) => (
+    <div class="text-center">
+      <dd class="text-2xl font-semibold text-text-heading">{metric.value}</dd>
+      <dt class="text-sm text-text-secondary mt-1">{metric.label}</dt>
+    </div>
+  ))}
 </dl>

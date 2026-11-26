@@ -38,10 +38,14 @@ button otherwise.
 ```astro
 <Button href="/writing/" variant="primary">
   Browse writing
-  <span slot="icon" aria-hidden="true">→</span>
+  <span slot="icon" aria-hidden="true">
+    →
+  </span>
 </Button>
 
-<Button type="submit" loading={isSaving}>Save changes</Button>
+<Button type="submit" loading={isSaving}>
+  Save changes
+</Button>
 ```
 
 Use primary once per decision group. Use secondary for adjacent alternatives and

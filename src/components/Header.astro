@@ -19,18 +19,16 @@ const isCurrent = (href: string) =>
     </a>
 
     <ul class="header-nav">
-      {
-        navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={isCurrent(item.href) ? "page" : undefined}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
     </ul>
   </nav>
 </header>
